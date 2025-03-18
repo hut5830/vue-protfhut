@@ -9,6 +9,18 @@
 
 <script setup lang="ts">
 
+async function getCongrat() {
+    await $fetch('https://port-hut.onrender.com/portfolio/mySelf', {
+        method:'POST'
+    })
+    .then((res) => {
+        console.log(res)
+    })
+}
+
+onMounted(() => {
+    getCongrat()  
+})
 </script>
 
 <style scoped>
