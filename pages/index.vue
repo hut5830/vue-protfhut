@@ -17,82 +17,115 @@
             </a-col>
         </a-row>
 
-
-        <a-row>
-            <a-col :xs="24" :sm="24" :md="24" :lg="5" :xl="5" class="shadow-xl">
+        <a-row class="justify-center">
+            <a-col :xs="24" :sm="24" :md="24" :lg="5" :xl="5" class="shadow-xl"
+                :class="{ 'fade-in-connect': dataMyself.length > 0 }">
                 <a-layout-sider :class="{ 'fade-in-image': activeApple, 'fade-out-image': !activeApple }" width="100%">
                     <div class="img">
+                        <div v-if="activeApple"
+                            class="fade-in-active-profile z-[2] absolute top-[-80px] left-[-70px] animate-pulse w-full h-full flex items-center justify-center">
+                            <CheckCircleFilled class="text-green-500 bg-green-500 text-3xl"
+                                style="border-radius: 100%;" />
+                        </div>
                         <img src="/image/436464547_25506951142252229_7027954772834418892_n.jpg" class="img-profile"
                             alt="User Image" />
                     </div>
-                    <div class="pt-2 m-5">
+                    <div class="m-5">
                         <a-input-group compact>
-                            <a-button style="width: 100%;" type="primary" :class="{ 'bg-green-600': dataMyself.length > 0 }"
-                                :loading="isLoading"
+                            <a-button style="width: 100%;" type="primary"
+                                :class="{ 'bg-green-600': dataMyself.length > 0 }" :loading="isLoading"
                                 @click="activeApple = true; getCongrat()">{{
-                                    dataMyself.length > 0 ? 'เชื่อมต่อสำเร็จ' : 'เชื่อมต่อ..' }}</a-button>
+                                dataMyself.length > 0 ? 'เชื่อมต่อสำเร็จ' : 'เชื่อมต่อ..' }}</a-button>
                         </a-input-group>
+                    </div>
+
+                    <a-row :gutter="[0, 15]" class="m-5" v-if="isLoading === true && dataMyself.length == 0">
+                        <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                            <a-skeleton active />
+                        </a-col>
+                        <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                            <a-skeleton active />
+                        </a-col>
+                        <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                            <a-skeleton active />
+                        </a-col>
+                    </a-row>
+
+                    <div class="m-5" :class="{ 'fade-in-myself': dataMyself.length > 0 }">
                         <div v-for="dm in dataMyself">
                             <legend class="px-2 pt-5">My Profile</legend>
-                        <div>
-                            <a-tag color="green" class="m-1">Fullstack Develops</a-tag>
-                            <a-tag color="red" class="m-1">API</a-tag>
-                            <a-tag color="blue" class="m-1">Frontend</a-tag>
-                            <a-tag color="orange" class="m-1">Backend</a-tag>
-                            <a-tag color="cyan" class="m-1">SQL</a-tag>
-                        </div>
-                        <a-divider v-if="dataMyself.length > 0" class="mt-5">ข้อมูลส่วนตัว</a-divider>
-                        <a-row :gutter="[10, 10]">
-                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                <UserOutlined class="text-purple-500" />&nbsp; ชื่อผู้ใช้: <span class="text-gray-700">
-                                    {{ dm.Username }}
-                                </span>
-                            </a-col>
-                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                <IdcardOutlined class="text-orange-500" />&nbsp; ชื่อจริง: <span class="text-gray-700">
-                                    {{ dm.Firstname }} {{ dm.Lastname }}
-                                </span>
-                            </a-col>
-                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                <SmileOutlined class="text-yellow-500" />&nbsp; ชื่อเล่น: <span class="text-gray-700">
-                                    {{ dm.Nickname }}
-                                </span>
-                            </a-col>
-                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                <CalendarOutlined class="text-blue-500" />&nbsp; วันเกิด: <span class="text-gray-700">
-                                    {{ new Date(dm.BirthDay).toLocaleDateString('en-GB') }}
-                                </span>
-                            </a-col>
-                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                <CreditCardOutlined class="text-green-500" />&nbsp; บัตรประชาชน: <span
-                                    class="text-gray-700">
-                                    {{ dm.IDCard }}
-                                </span>
-                            </a-col>
-                        </a-row>
-                        <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">ติดต่อ</a-divider>
-                        <a-row :gutter="[10, 10]">
-                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                <PhoneOutlined class="text-blue-500" />&nbsp; เบอร์โทร: <span class="text-gray-700">
-                                    {{ dm.Phone }}
-                                </span>
-                            </a-col>
-                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                <MessageOutlined class="text-green-500" />&nbsp; ไอดีไลน์: <span class="text-gray-700">
-                                    {{ dm.Line }}
-                                </span>
-                            </a-col>
-                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                <MailOutlined class="text-red-500" />&nbsp; อีเมล: <span class="text-gray-700">
-                                    {{ dm.Email }}
-                                </span>
-                            </a-col>
-                        </a-row>
+                            <div>
+                                <a-tag color="green" class="m-1">Fullstack Develops</a-tag>
+                                <a-tag color="red" class="m-1">API</a-tag>
+                                <a-tag color="blue" class="m-1">Frontend</a-tag>
+                                <a-tag color="orange" class="m-1">Backend</a-tag>
+                                <a-tag color="cyan" class="m-1">SQL</a-tag>
+                            </div>
+                            <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">ภาษาที่ใช้ในการพัฒนา</a-divider>
+                            <div>
+                                <a-tag color="black" class="m-1 !text-yellow-300">Java Script</a-tag>
+                                <a-tag color="black" class="m-1 !text-blue-200">Type Script</a-tag>
+                            </div>
+                            <a-divider v-if="dataMyself.length > 0" class="mt-5">ข้อมูลส่วนตัว</a-divider>
+                            <a-row :gutter="[10, 10]">
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                    <UserOutlined class="text-purple-500" />&nbsp; ชื่อผู้ใช้: <span
+                                        class="text-gray-700">
+                                        {{ dm.Username }}
+                                    </span>
+                                </a-col>
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                    <IdcardOutlined class="text-orange-500" />&nbsp; ชื่อจริง: <span
+                                        class="text-gray-700">
+                                        {{ dm.Firstname }} {{ dm.Lastname }}
+                                    </span>
+                                </a-col>
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                    <SmileOutlined class="text-yellow-500" />&nbsp; ชื่อเล่น: <span
+                                        class="text-gray-700">
+                                        {{ dm.Nickname }}
+                                    </span>
+                                </a-col>
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                    <CalendarOutlined class="text-blue-500" />&nbsp; วันเกิด: <span
+                                        class="text-gray-700">
+                                        {{ new Date(dm.BirthDay).toLocaleDateString('en-GB') }}
+                                    </span>
+                                </a-col>
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                    <CreditCardOutlined class="text-green-500" />&nbsp; บัตรประชาชน: <span
+                                        class="text-gray-700">
+                                        {{ dm.IDCard }}
+                                    </span>
+                                </a-col>
+                            </a-row>
+                            <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">ติดต่อ</a-divider>
+                            <a-row :gutter="[10, 10]">
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                    <PhoneOutlined class="text-blue-500" />&nbsp; เบอร์โทร: <span class="text-gray-700">
+                                        {{ dm.Phone }}
+                                    </span>
+                                </a-col>
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                    <MessageOutlined class="text-green-500" />&nbsp; ไอดีไลน์: <span
+                                        class="text-gray-700">
+                                        {{ dm.Line }}
+                                    </span>
+                                </a-col>
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                    <MailOutlined class="text-red-500" />&nbsp; อีเมล:
+                                    <a class="text-blue-700" href="mailto:{{ dm.Email }}">
+                                        {{ dm.Email }}
+                                    </a>
+                                </a-col>
+                            </a-row>
                         </div>
                     </div>
                 </a-layout-sider>
             </a-col>
-            <a-col :xs="24" :sm="24" :md="19" :lg="19" :xl="19">
+
+            <a-col v-if="dataMyself.length > 0" :xs="24" :sm="24" :md="19" :lg="19" :xl="19"
+                :class="{ 'fade-in-myprogram': dataMyself.length > 0 }">
                 <a-row v-if="dataMyselfProgram.length > 0">
                     <a-col v-for="dmp in dataMyselfProgram" :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
                         <div class="p-2">
@@ -111,6 +144,7 @@
                         </div>
                     </a-col>
                 </a-row>
+
                 <a-row :gutter="[0, 15]" class="m-5" v-else-if="dataMyselfProgram.length == 0 && activeApple">
                     <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                         <a-skeleton active />
@@ -120,9 +154,9 @@
                     </a-col>
                 </a-row>
 
-                <a-divider v-if="moreDetail > 0" class="mt-5">Detail More</a-divider>
+                <a-divider v-if="moreDetail > 0">ข้อมูลระบบ</a-divider>
 
-                <div v-for="dmp in dataMyselfProgram" :key="dmp.ID_Auto" class="p-2">
+                <div v-for="dmp, i in dataMyselfProgram" :key="dmp.ID_Auto">
                     <a-row v-if="moreDetail == dmp.ID_Auto" class="detail-more-fadein">
                         <a-col :xs="24" :sm="12" :md="12" :lg="10" :xl="10" style="align-content: center;">
                             <div class="img-program-detail-main">
@@ -131,14 +165,14 @@
                         </a-col>
                         <a-col :xs="24" :sm="12" :md="12" :lg="14" :xl="14">
                             <h1 class="text-xl font-bold flex items-center">
-                                {{ dmp.Program_Name }}
+                                เว็บไซต์: {{ dmp.Program_Name }}
                                 <CheckCircleFilled class="text-green-500 ml-2" />
                             </h1>
                             <span>
-                                {{ dmp.Program_Description }}
+                                <p style="text-indent: 2em;">{{ dmp.Program_Description }}</p>
                             </span>
                             <div>
-                                <a-divider v-if="moreDetail > 0" class="mt-5">Skill More</a-divider>
+                                <a-divider v-if="moreDetail > 0" class="mt-5">ส่วนเสริมที่ใช้ในระบบ</a-divider>
 
                                 <div class="p-2" v-if="moreDetail > 0">
                                     <a-collapse v-model:activeKey="activeKey">
@@ -161,7 +195,7 @@
 
                 </div>
 
-                <a-divider class="mt-5"></a-divider>
+                <!-- <a-divider v-if="dataMyTimeLine" class="mt-5"></a-divider> -->
 
                 <div>
                     <a-row>
@@ -188,6 +222,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { CheckCircleFilled, StarOutlined } from '@ant-design/icons-vue';
+import { message } from 'ant-design-vue';
 
 const dataMyself = ref<any>([])
 const dataMyselfProgram = ref<any>([])
@@ -196,7 +231,7 @@ const Username = ref<string>('Hut5830')
 const activeKey = ref<string>('0')
 const PinCode = ref<string>('')
 const displayText = ref('');
-const message = 'ยินดีต้อนรับสู่ Portfolio ของ Tatchakorn...';
+const intervalMessage = 'ยินดีต้อนรับสู่ Portfolio ของ Tatchakorn...';
 const activeApple = ref<boolean>(false)
 const isLoading = ref<boolean>(false)
 const moreDetail = ref<number>(0)
@@ -220,6 +255,7 @@ async function getCongrat() {
             await getProgram(PinCode.value);
             await getDetail(PinCode.value);
         }
+        message.success('เชื่อมต่อโปรไฟล์สำเร็จ!');
     })
 }
 async function getProgram(PinCode: string) {
@@ -256,9 +292,9 @@ const handleCardClick = (PinCode: string, id: number) => {
 onMounted(() => {
     let i = 0;
     const interval = setInterval(() => {
-        displayText.value += message[i];
+        displayText.value += intervalMessage[i];
         i++;
-        if (i >= message.length) clearInterval(interval);
+        if (i >= intervalMessage.length) clearInterval(interval);
     }, 100); // speed
 })
 </script>
@@ -337,6 +373,10 @@ onMounted(() => {
     height: 100%;
 }
 
+.fade-in-active-profile {
+    animation: fadeIn 1.5s ease-in-out;
+}
+
 :deep(.ant-card-head) {
     background: linear-gradient(to right, rgb(63, 63, 63), rgb(75, 134, 75)) !important;
     color: white !important;
@@ -395,5 +435,57 @@ onMounted(() => {
     50% {
         border-color: transparent
     }
+}
+
+.fade-in-myself {
+    animation: fadeInTopDown 1s ease-in-out;
+    opacity: 1;
+}
+
+.fade-in-myprogram {
+    animation: fadeInLeft 2s ease-in-out;
+    opacity: 1;
+}
+
+@keyframes fadeInTopDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fade-in-connect {
+    animation: fadeConnect 1s ease-in-out;
+    opacity: 1;
+}
+
+@keyframes fadeConnect {
+    0% {
+        opacity: 1;
+        transform: translateX(190%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+    
 }
 </style>
