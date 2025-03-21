@@ -9,68 +9,90 @@
                     <template #subTitle>
                         <span class="text-sm typing-text">{{ displayText }}</span>
                     </template>
-                    <template #tags>
-                        <a-tag color="green">Fullstack Develops</a-tag>
-                    </template>
                     <template #avatar>
-                        <a-avatar size="large" icon="user" />
+                        <img src="https://cdn-icons-png.flaticon.com/512/2210/2210153.png" alt="Avatar"
+                            class="img-headbar" />
                     </template>
                 </a-page-header>
             </a-col>
         </a-row>
 
-        <a-divider class="mt-5">Website Develops</a-divider>
 
         <a-row>
-            <a-col :xs="24" :sm="24" :md="24" :lg="4" :xl="4" class="shadow-xl">
+            <a-col :xs="24" :sm="24" :md="24" :lg="5" :xl="5" class="shadow-xl">
                 <a-layout-sider :class="{ 'fade-in-image': activeApple, 'fade-out-image': !activeApple }" width="100%">
                     <div class="img">
                         <img src="/image/436464547_25506951142252229_7027954772834418892_n.jpg" class="img-profile"
                             alt="User Image" />
                     </div>
-                    <div class="pt-2">
+                    <div class="pt-2 m-5">
                         <a-input-group compact>
-                            <a-input style="width: 60%;" placeholder="Basic usage" @keyup.enter="getCongrat()"
-                                v-model:value="Username" />
-                            <a-button style="width: 40%;" type="primary"
-                                @click="activeApple = true; getCongrat()">Connect</a-button>
+                            <a-button style="width: 100%;" type="primary" :class="{ 'bg-green-600': dataMyself.length > 0 }"
+                                :loading="isLoading"
+                                @click="activeApple = true; getCongrat()">{{
+                                    dataMyself.length > 0 ? 'เชื่อมต่อสำเร็จ' : 'เชื่อมต่อ..' }}</a-button>
                         </a-input-group>
-                        <fieldset v-if="dataMyself.length > 0" class="border p-2">
-                            <legend class="px-2">My Profile</legend>
-                            <p>
-                                <a-tag color="green" class="m-1">Fullstack Develops</a-tag>
-                                <a-tag color="red" class="m-1">API</a-tag>
-                                <a-tag color="blue" class="m-1">Frontend</a-tag>
-                                <a-tag color="orange" class="m-1">Backend</a-tag>
-                                <a-tag color="cyan" class="m-1">SQL</a-tag>
-                            </p>
-                            <p v-for="dm in dataMyself">
-                                {{ dm }}
-                                <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">ติดต่อ</a-divider>
-                                <a-row>
-                                    <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                        <PhoneOutlined class="text-blue-500" />&nbsp; เบอร์โทร: <span class="text-gray-700">
-                                            {{ dm.Phone }}
-                                        </span>
-                                    </a-col>
-                                    <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                        <MessageOutlined class="text-green-500" />&nbsp; ไอดีไลน์: <span
-                                            class="text-gray-700">
-                                            {{ dm.Line }}
-                                        </span>
-                                    </a-col>
-                                    <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                        <MailOutlined class="text-red-500" />&nbsp; อีเมล: <span class="text-gray-700">
-                                            {{ dm.Email }}
-                                        </span>
-                                    </a-col>
-                                </a-row>
-                            </p>
-                        </fieldset>
+                        <div v-for="dm in dataMyself">
+                            <legend class="px-2 pt-5">My Profile</legend>
+                        <div>
+                            <a-tag color="green" class="m-1">Fullstack Develops</a-tag>
+                            <a-tag color="red" class="m-1">API</a-tag>
+                            <a-tag color="blue" class="m-1">Frontend</a-tag>
+                            <a-tag color="orange" class="m-1">Backend</a-tag>
+                            <a-tag color="cyan" class="m-1">SQL</a-tag>
+                        </div>
+                        <a-divider v-if="dataMyself.length > 0" class="mt-5">ข้อมูลส่วนตัว</a-divider>
+                        <a-row :gutter="[10, 10]">
+                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                <UserOutlined class="text-purple-500" />&nbsp; ชื่อผู้ใช้: <span class="text-gray-700">
+                                    {{ dm.Username }}
+                                </span>
+                            </a-col>
+                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                <IdcardOutlined class="text-orange-500" />&nbsp; ชื่อจริง: <span class="text-gray-700">
+                                    {{ dm.Firstname }} {{ dm.Lastname }}
+                                </span>
+                            </a-col>
+                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                <SmileOutlined class="text-yellow-500" />&nbsp; ชื่อเล่น: <span class="text-gray-700">
+                                    {{ dm.Nickname }}
+                                </span>
+                            </a-col>
+                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                <CalendarOutlined class="text-blue-500" />&nbsp; วันเกิด: <span class="text-gray-700">
+                                    {{ new Date(dm.BirthDay).toLocaleDateString('en-GB') }}
+                                </span>
+                            </a-col>
+                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                <CreditCardOutlined class="text-green-500" />&nbsp; บัตรประชาชน: <span
+                                    class="text-gray-700">
+                                    {{ dm.IDCard }}
+                                </span>
+                            </a-col>
+                        </a-row>
+                        <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">ติดต่อ</a-divider>
+                        <a-row :gutter="[10, 10]">
+                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                <PhoneOutlined class="text-blue-500" />&nbsp; เบอร์โทร: <span class="text-gray-700">
+                                    {{ dm.Phone }}
+                                </span>
+                            </a-col>
+                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                <MessageOutlined class="text-green-500" />&nbsp; ไอดีไลน์: <span class="text-gray-700">
+                                    {{ dm.Line }}
+                                </span>
+                            </a-col>
+                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                <MailOutlined class="text-red-500" />&nbsp; อีเมล: <span class="text-gray-700">
+                                    {{ dm.Email }}
+                                </span>
+                            </a-col>
+                        </a-row>
+                        </div>
                     </div>
                 </a-layout-sider>
             </a-col>
-            <a-col :xs="24" :sm="24" :md="20" :lg="20" :xl="20">
+            <a-col :xs="24" :sm="24" :md="19" :lg="19" :xl="19">
                 <a-row v-if="dataMyselfProgram.length > 0">
                     <a-col v-for="dmp in dataMyselfProgram" :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
                         <div class="p-2">
@@ -89,7 +111,7 @@
                         </div>
                     </a-col>
                 </a-row>
-                <a-row v-else-if="dataMyselfProgram.length == 0 && activeApple">
+                <a-row :gutter="[0, 15]" class="m-5" v-else-if="dataMyselfProgram.length == 0 && activeApple">
                     <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                         <a-skeleton active />
                     </a-col>
@@ -134,6 +156,26 @@
                                     </a-collapse>
                                 </div>
                             </div>
+                        </a-col>
+                    </a-row>
+
+                </div>
+
+                <a-divider class="mt-5"></a-divider>
+
+                <div>
+                    <a-row>
+                        <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                            <a-timeline>
+                                <a-timeline-item v-for="(event, index) in dataMyselfDetail" :key="index"
+                                    v-if="moreDetail">
+                                    <template #dot>
+                                        <CheckCircleFilled class="text-green-500" />
+                                    </template>
+                                    <h3 class="font-bold">{{ event.User_Detail }}</h3>
+                                    <p>{{ event.User_Description }}</p>
+                                </a-timeline-item>
+                            </a-timeline>
                         </a-col>
                     </a-row>
                 </div>
@@ -248,6 +290,12 @@ onMounted(() => {
     overflow: hidden;
 }
 
+.img-headbar {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+}
+
 .img {
     display: flex;
     justify-content: center;
@@ -256,6 +304,7 @@ onMounted(() => {
     /* ปรับขนาดตามต้องการ */
     position: relative;
     overflow: hidden;
+    margin-top: 15px;
 }
 
 .img-program-detail-main {
