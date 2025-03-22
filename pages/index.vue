@@ -39,9 +39,9 @@
 
             <a-col :xs="24" :sm="24" :md="24" :lg="5" :xl="5" class="shadow-xl"
                 :class="{ 'fade-in-connect': dataMyself.length > 0 }">
-                <a-layout-sider class="dark:text-white" style="border-right: 2px solid aliceblue;
+                <a-layout-sider class="dark:text-white hover:bg-lime-900" style="border-right: 2px solid aliceblue;
                     border-top-right-radius:5%;"
-                    :class="{ 'fade-in-image': activeApple, 'fade-out-image': !activeApple }" width="100%">
+                    :class="{ 'fade-in-image': activeApple, 'fade-out-image bg-lime-950': !activeApple }" width="100%">
                     <div class="img">
                         <div v-if="activeApple"
                             class="fade-in-active-profile z-[2] absolute top-[-80px] left-[-70px] animate-pulse w-full h-full flex items-center justify-center">
@@ -51,12 +51,19 @@
                         <img src="/image/436464547_25506951142252229_7027954772834418892_n.jpg" class="img-profile"
                             alt="User Image" />
                     </div>
+                    <p class="text-white text-center text-2xl font-bold">
+                        Tatchakorn Chomyong
+                    </p>
+                    <p class="text-center">
+                        <LoginOutlined /> {{ dataMyself.length > 0 ? 'เชื่อมต่อโปรไฟล์แล้ว' : 'เชื่อมต่อโปรไฟล์' }}
+                    </p>
+
                     <div class="m-5">
                         <a-input-group compact>
                             <a-button style="width: 100%;" type="primary"
                                 :class="{ 'bg-green-600': dataMyself.length > 0 }" :loading="isLoading"
-                                @click="activeApple = true; getCongrat()">{{
-                                dataMyself.length > 0 ? 'เชื่อมต่อสำเร็จ (Reconnect..)' : 'เชื่อมต่อ..' }}</a-button>
+                                @click="activeApple = true; getCongrat()">
+                                {{ dataMyself.length > 0 ? 'เชื่อมต่อสำเร็จ (Reconnect..)' : 'เชื่อมต่อ..' }}</a-button>
                         </a-input-group>
                     </div>
 
@@ -176,17 +183,19 @@
 
                             <a-row :gutter="[10, 10]">
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <PhoneOutlined class="text-blue-500" />&nbsp; เบอร์โทร: <span>
+                                    <PhoneOutlined class="text-blue-500" />&nbsp; เบอร์โทร: &nbsp;
+                                    <a :href="`tel:${dm.Phone}`" class="text-blue-500">
                                         {{ dm.Phone }}
-                                    </span>
+                                    </a>
                                 </a-col>
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <MessageOutlined class="text-green-500" />&nbsp; ไอดีไลน์: <span>
+                                    <MessageOutlined class="text-green-500" />&nbsp; ไอดีไลน์: &nbsp;
+                                    <a :href="`https://line.me/ti/p/~${dm.Line}`" target="_blank" class="text-blue-500">
                                         {{ dm.Line }}
-                                    </span>
+                                    </a>
                                 </a-col>
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <MailOutlined class="text-red-500" />&nbsp; อีเมล:
+                                    <MailOutlined class="text-red-500" />&nbsp; อีเมล: &nbsp;
                                     <a class="text-blue-500" href="mailto:{{ dm.Email }}">
                                         {{ dm.Email }}
                                     </a>
@@ -200,9 +209,10 @@
                             <a-row>
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24"
                                     class="flex justify-left items-left">
+                                    <FilePdfOutlined class="text-red-500" />&nbsp; เปิด: &nbsp;
                                     <a href="https://drive.google.com/file/d/1g9vF_agYfRR7j3m3KKKkexK5euMXMHmr/view?usp=sharing"
                                         target="_blank" class="text-red-500">
-                                        <FilePdfOutlined /> เปิด Resume (PDF)
+                                        Resume (PDF)
                                     </a>
                                 </a-col>
                             </a-row>
@@ -219,7 +229,7 @@
                         <div class="p-2">
                             <a-card
                                 @click="isLoading = true; moreDetail = dmp.ID_Auto; handleCardClick(PinCode, dmp.ID_Auto)"
-                                class="shadow-md edit-card" style="border-right: 3px solid #ff000070;" hoverable>
+                                class="shadow-md edit-card" style="border-right: 5px solid #ff0000a3;" hoverable>
                                 <template #title>
                                     <div class="card-title justify-items-center">
                                         <img :src="dmp.Program_Image" class="w-32 my-2 mr-2"
