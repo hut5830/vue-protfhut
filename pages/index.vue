@@ -35,7 +35,7 @@
                     </template>
                 </a-page-header>
             </a-col>
-            
+
             <a-col :xs="24" :sm="24" :md="24" :lg="5" :xl="5" class="shadow-xl"
                 :class="{ 'fade-in-connect': dataMyself.length > 0 }">
                 <a-layout-sider :class="{ 'fade-in-image': activeApple, 'fade-out-image': !activeApple }" width="100%">
@@ -77,14 +77,64 @@
                                 <a-tag color="red" class="m-1">API</a-tag>
                                 <a-tag color="blue" class="m-1">Frontend</a-tag>
                                 <a-tag color="orange" class="m-1">Backend</a-tag>
-                                <a-tag color="cyan" class="m-1">SQL</a-tag>
+                                <a-tag color="cyan" class="m-1">MySQL</a-tag>
                             </div>
-                            <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">ภาษาที่ใช้ในการพัฒนา</a-divider>
+                            <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
+                                <span class="text-sm">Framework&UI ที่ใช้ในการพัฒนา</span>
+                            </a-divider>
+                            <a-tag color="green" class="m-1">
+                                Nuxt.JS
+                            </a-tag>
+                            <a-tag color="green" class="m-1">
+                                Nuxt UI
+                            </a-tag>
+                            <br />
+                            <a-tag color="blue" class="m-1">
+                                Vue.JS
+                            </a-tag>
+                            <a-tag color="blue" class="m-1">
+                                Vuetify 2 & 3
+                            </a-tag>
+                            <a-tag color="red" class="m-1">
+                                Ant Design
+                            </a-tag>
+                            <a-tag color="blue" class="m-1">
+                                Tailwind CSS
+                            </a-tag>
+                            <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
+                                <span class="text-sm">ภาษาที่ใช้ในการพัฒนา (FrontEnd)</span>
+                            </a-divider>
                             <div>
-                                <a-tag color="black" class="m-1 !text-yellow-300">Java Script</a-tag>
-                                <a-tag color="black" class="m-1 !text-blue-200">Type Script</a-tag>
+                                <a-tag color="black" class="m-1 !text-white">
+                                    <CodeOutlined /> HTML
+                                </a-tag>
+                                <a-tag color="black" class="m-1 !text-white">
+                                    <CodeOutlined /> CSS
+                                </a-tag>
+                                <a-tag color="black" class="m-1 !text-yellow-300">
+                                    <CodeOutlined /> Java Script
+                                </a-tag>
+                                <a-tag color="black" class="m-1 !text-blue-200">
+                                    <CodeOutlined /> Type Script
+                                </a-tag>
                             </div>
-                            <a-divider v-if="dataMyself.length > 0" class="mt-5">ข้อมูลส่วนตัว</a-divider>
+                            <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
+                                <span class="text-sm">ภาษาที่ใช้ในการพัฒนา (BackEnd)</span>
+                            </a-divider>
+                            <div>
+                                <a-tag color="black" class="m-1 !text-yellow-300">
+                                    <CodeOutlined /> Java Script
+                                </a-tag>
+                                <a-tag color="black" class="m-1 !text-blue-200">
+                                    <CodeOutlined /> Type Script
+                                </a-tag>
+                                <a-tag color="black" class="m-1 !text-red-200">
+                                    <DatabaseOutlined /> SQL
+                                </a-tag>
+                            </div>
+                            <a-divider v-if="dataMyself.length > 0" class="mt-5">
+                                <span class="text-sm">ข้อมูลส่วนตัว</span>
+                            </a-divider>
                             <a-row :gutter="[10, 10]">
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
                                     <UserOutlined class="text-purple-500" />&nbsp; ชื่อผู้ใช้: <span
