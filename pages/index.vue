@@ -37,7 +37,7 @@
                 </a-page-header>
             </a-col>
 
-            <a-col :xs="24" :sm="24" :md="24" :lg="5" :xl="5" class="shadow-2xl"
+            <a-col :xs="24" :sm="24" :md="9" :lg="5" :xl="5" class="shadow-2xl"
                 :class="{ 'fade-in-connect': dataMyself.length > 0 }" style="border-right: 2px solid aliceblue;
                     border-top-right-radius:5%;">
                 <a-layout-sider class="dark:text-white"
@@ -222,7 +222,7 @@
                 </a-layout-sider>
             </a-col>
 
-            <a-col v-if="dataMyself.length > 0" :xs="24" :sm="24" :md="19" :lg="19" :xl="19"
+            <a-col v-if="dataMyself.length > 0" :xs="24" :sm="24" :md="15" :lg="19" :xl="19"
                 :class="{ 'fade-in-myprogram': dataMyself.length > 0 }">
                 <a-row v-if="dataMyselfProgram.length > 0">
                     <a-col v-for="dmp in dataMyselfProgram" :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
@@ -335,26 +335,27 @@
             </a-col>
         </a-row>
 
-
-        <a-col v-if="isHidden" :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="text-center">
-            <footer class="py-5 bg-gray-800 text-white">
-                <div>
-                    <p class="text-sm">© {{ new Date().getFullYear() }} Tatchakorn Chomyong Portfolio.</p>
-                    <p class="text-sm">
-                        Built with <a href="https://vuejs.org/" target="_blank" class="text-blue-400">Vue.js</a>
-                        and <a href="https://antdv.com/" target="_blank" class="text-blue-400">Ant Design Vue</a>.
-                        <span class="text-sm">
-                            Frontend deployed on <a href="https://vercel.com/" target="_blank"
-                                class="text-blue-400">Vercel</a>,
-                            Backend API deployed on <a href="https://render.com/" target="_blank"
-                                class="text-blue-400">Render</a>,
-                            Database powered by <a href="https://www.pingcap.com/tidb/" target="_blank"
-                                class="text-blue-400">TiDB</a>.
-                        </span>
-                    </p>
-                </div>
-            </footer>
-        </a-col>
+        <a-row v-if="isHidden">
+            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="text-center">
+                <footer class="py-5 bg-gray-800 text-white">
+                    <div>
+                        <p class="text-sm">© {{ new Date().getFullYear() }} Tatchakorn Chomyong Portfolio.</p>
+                        <p class="text-sm">
+                            Built with <a href="https://vuejs.org/" target="_blank" class="text-blue-400">Vue.js</a>
+                            and <a href="https://antdv.com/" target="_blank" class="text-blue-400">Ant Design Vue</a>.
+                            <span class="text-sm">
+                                Frontend deployed on <a href="https://vercel.com/" target="_blank"
+                                    class="text-blue-400">Vercel</a>,
+                                Backend API deployed on <a href="https://render.com/" target="_blank"
+                                    class="text-blue-400">Render</a>,
+                                Database powered by <a href="https://www.pingcap.com/tidb/" target="_blank"
+                                    class="text-blue-400">TiDB</a>.
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </a-col>
+        </a-row>
         <Analytics />
         <Loading :isLoading="isLoading" />
     </div>
