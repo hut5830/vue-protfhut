@@ -53,7 +53,7 @@
                             <a-button style="width: 100%;" type="primary"
                                 :class="{ 'bg-green-600': dataMyself.length > 0 }" :loading="isLoading"
                                 @click="activeApple = true; getCongrat()">{{
-                                    dataMyself.length > 0 ? 'เชื่อมต่อสำเร็จ' : 'เชื่อมต่อ..' }}</a-button>
+                                    dataMyself.length > 0 ? 'เชื่อมต่อสำเร็จ (Reconnect..)' : 'เชื่อมต่อ..' }}</a-button>
                         </a-input-group>
                     </div>
 
@@ -72,6 +72,46 @@
                     <div class="m-5" :class="{ 'fade-in-myself': dataMyself.length > 0 }">
                         <div v-for="dm in dataMyself">
                             <legend class="px-2 pt-5">My Profile</legend>
+                            <a-divider v-if="dataMyself.length > 0" class="mt-5">
+                                <span class="text-sm">ข้อมูลส่วนตัว</span>
+                            </a-divider>
+                            <a-row :gutter="[10, 10]">
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                    <UserOutlined class="text-purple-500" />&nbsp; ชื่อผู้ใช้: <span
+                                        class="text-gray-700">
+                                        {{ dm.Username }}
+                                    </span>
+                                </a-col>
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                    <IdcardOutlined class="text-orange-500" />&nbsp; ชื่อจริง: <span
+                                        class="text-gray-700">
+                                        {{ dm.Firstname }} {{ dm.Lastname }}
+                                    </span>
+                                </a-col>
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                    <SmileOutlined class="text-yellow-500" />&nbsp; ชื่อเล่น: <span
+                                        class="text-gray-700">
+                                        {{ dm.Nickname }}
+                                    </span>
+                                </a-col>
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                    <CalendarOutlined class="text-blue-500" />&nbsp; วันเกิด: <span
+                                        class="text-gray-700">
+                                        {{ new Date(dm.BirthDay).toLocaleDateString('en-GB') }}
+                                    </span>
+                                </a-col>
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                    <CreditCardOutlined class="text-green-500" />&nbsp; บัตรประชาชน: <span
+                                        class="text-gray-700">
+                                        {{ dm.IDCard }}
+                                    </span>
+                                </a-col>
+                            </a-row>
+
+                            <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
+                                <span class="text-sm">พื้นฐานความสามารถ</span>
+                            </a-divider>
+
                             <div>
                                 <a-tag color="green" class="m-1">Fullstack Develops</a-tag>
                                 <a-tag color="red" class="m-1">API</a-tag>
@@ -132,42 +172,9 @@
                                     <DatabaseOutlined /> SQL
                                 </a-tag>
                             </div>
-                            <a-divider v-if="dataMyself.length > 0" class="mt-5">
-                                <span class="text-sm">ข้อมูลส่วนตัว</span>
-                            </a-divider>
-                            <a-row :gutter="[10, 10]">
-                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <UserOutlined class="text-purple-500" />&nbsp; ชื่อผู้ใช้: <span
-                                        class="text-gray-700">
-                                        {{ dm.Username }}
-                                    </span>
-                                </a-col>
-                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <IdcardOutlined class="text-orange-500" />&nbsp; ชื่อจริง: <span
-                                        class="text-gray-700">
-                                        {{ dm.Firstname }} {{ dm.Lastname }}
-                                    </span>
-                                </a-col>
-                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <SmileOutlined class="text-yellow-500" />&nbsp; ชื่อเล่น: <span
-                                        class="text-gray-700">
-                                        {{ dm.Nickname }}
-                                    </span>
-                                </a-col>
-                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <CalendarOutlined class="text-blue-500" />&nbsp; วันเกิด: <span
-                                        class="text-gray-700">
-                                        {{ new Date(dm.BirthDay).toLocaleDateString('en-GB') }}
-                                    </span>
-                                </a-col>
-                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <CreditCardOutlined class="text-green-500" />&nbsp; บัตรประชาชน: <span
-                                        class="text-gray-700">
-                                        {{ dm.IDCard }}
-                                    </span>
-                                </a-col>
-                            </a-row>
+
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">ติดต่อ</a-divider>
+
                             <a-row :gutter="[10, 10]">
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
                                     <PhoneOutlined class="text-blue-500" />&nbsp; เบอร์โทร: <span class="text-gray-700">
@@ -187,6 +194,19 @@
                                     </a>
                                 </a-col>
                             </a-row>
+
+                            <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">Resume</a-divider>
+
+                            <a-row>
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24"
+                                    class="flex justify-left items-left">
+                                    <a href="https://drive.google.com/file/d/1g9vF_agYfRR7j3m3KKKkexK5euMXMHmr/view?usp=sharing"
+                                        target="_blank" class="text-red-500">
+                                        <FilePdfOutlined /> เปิด Resume (PDF)
+                                    </a>
+                                </a-col>
+                            </a-row>
+
                         </div>
                     </div>
                 </a-layout-sider>
@@ -260,7 +280,6 @@
                             </div>
                         </a-col>
                     </a-row>
-
                 </div>
 
                 <!-- <a-divider v-if="moreDetail > 0" class="mt-5"></a-divider> -->
@@ -293,6 +312,28 @@
                 </div> -->
             </a-col>
         </a-row>
+
+        <a-row class="mt-5"></a-row>
+
+        <a-col v-if="isHidden" :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="text-center fade-in-connect">
+            <footer class="py-5 bg-gray-800 text-white">
+                <div>
+                    <p class="text-sm">© {{ new Date().getFullYear() }} Tatchakorn Chomyong Portfolio.</p>
+                    <p class="text-sm">
+                        Built with <a href="https://vuejs.org/" target="_blank" class="text-blue-400">Vue.js</a>
+                        and <a href="https://antdv.com/" target="_blank" class="text-blue-400">Ant Design Vue</a>.
+                        <span class="text-sm">
+                            Frontend deployed on <a href="https://vercel.com/" target="_blank"
+                                class="text-blue-400">Vercel</a>,
+                            Backend API deployed on <a href="https://render.com/" target="_blank"
+                                class="text-blue-400">Render</a>,
+                            Database powered by <a href="https://www.pingcap.com/tidb/" target="_blank"
+                                class="text-blue-400">TiDB</a>.
+                        </span>
+                    </p>
+                </div>
+            </footer>
+        </a-col>
         <Loading :isLoading="isLoading" />
     </div>
 </template>
