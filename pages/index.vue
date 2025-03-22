@@ -45,8 +45,8 @@
                             <CheckCircleFilled class="text-green-500 bg-green-500 text-3xl"
                                 style="border-radius: 100%;" />
                         </div>
-                        <!-- <img src="/image/436464547_25506951142252229_7027954772834418892_n.jpg" class="img-profile"
-                            alt="User Image" /> -->
+                        <img src="/image/436464547_25506951142252229_7027954772834418892_n.jpg" class="img-profile"
+                            alt="User Image" />
                     </div>
                     <div class="m-5">
                         <a-input-group compact>
