@@ -1,8 +1,8 @@
 <template>
     <div>
-        <a-row class="shadow-md">
+        <a-row :class="{ 'shadow-md': dataMyself.length > 0, 'fadein-to-header': dataMyself.length == 0 }">
             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                <a-page-header>
+                <a-page-header v-if="dataMyself.length > 0">
                     <template #title>
                         <h1 class="text-2xl font-bold">{{ `Portfolio` }}</h1>
                     </template>
@@ -14,10 +14,28 @@
                             class="img-headbar" />
                     </template>
                 </a-page-header>
+                <a-page-header v-else class="pt-[6.75rem]">
+
+                </a-page-header>
             </a-col>
         </a-row>
 
         <a-row class="justify-center">
+            <a-col :xs="24" :sm="24" :md="24" :lg="15" :xl="15" v-if="!isHidden">
+                <a-page-header style="align-content: center;width: 100%;" :class="{ 'hidden': isHidden }">
+                    <template #title>
+                        <h1 class="text-2xl font-bold">{{ `Portfolio` }}</h1>
+                    </template>
+                    <template #subTitle>
+                        <span class="text-sm typing-text">{{ displayText }}</span>
+                    </template>
+                    <template #avatar>
+                        <img @animationend="hideElement" src="https://cdn-icons-png.flaticon.com/512/2210/2210153.png"
+                            alt="Avatar" class="img-headbars" :class="{ 'fadeout-to-header': dataMyself.length > 0 }" />
+                    </template>
+                </a-page-header>
+            </a-col>
+            
             <a-col :xs="24" :sm="24" :md="24" :lg="5" :xl="5" class="shadow-xl"
                 :class="{ 'fade-in-connect': dataMyself.length > 0 }">
                 <a-layout-sider :class="{ 'fade-in-image': activeApple, 'fade-out-image': !activeApple }" width="100%">
@@ -27,15 +45,15 @@
                             <CheckCircleFilled class="text-green-500 bg-green-500 text-3xl"
                                 style="border-radius: 100%;" />
                         </div>
-                        <img src="/image/436464547_25506951142252229_7027954772834418892_n.jpg" class="img-profile"
-                            alt="User Image" />
+                        <!-- <img src="/image/436464547_25506951142252229_7027954772834418892_n.jpg" class="img-profile"
+                            alt="User Image" /> -->
                     </div>
                     <div class="m-5">
                         <a-input-group compact>
                             <a-button style="width: 100%;" type="primary"
                                 :class="{ 'bg-green-600': dataMyself.length > 0 }" :loading="isLoading"
                                 @click="activeApple = true; getCongrat()">{{
-                                dataMyself.length > 0 ? 'เชื่อมต่อสำเร็จ' : 'เชื่อมต่อ..' }}</a-button>
+                                    dataMyself.length > 0 ? 'เชื่อมต่อสำเร็จ' : 'เชื่อมต่อ..' }}</a-button>
                         </a-input-group>
                     </div>
 
@@ -195,9 +213,19 @@
 
                 </div>
 
-                <!-- <a-divider v-if="dataMyTimeLine" class="mt-5"></a-divider> -->
+                <!-- <a-divider v-if="moreDetail > 0" class="mt-5"></a-divider> -->
 
-                <div>
+                <!-- <div>
+                    <a-row>
+                        <a-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8" class="flex justify-center items-center">
+                            <h1 class="text-3xl font-bold">this.Resume();</h1>
+                        </a-col>
+                        <a-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16" class="flex justify-center">
+                            <img src="/image/pdf-svgrepo-com.png" class="resume-pdf" alt="User Image" />
+                        </a-col>
+                    </a-row>
+                </div> -->
+                <!-- <div>
                     <a-row>
                         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                             <a-timeline>
@@ -212,7 +240,7 @@
                             </a-timeline>
                         </a-col>
                     </a-row>
-                </div>
+                </div> -->
             </a-col>
         </a-row>
         <Loading :isLoading="isLoading" />
@@ -235,6 +263,8 @@ const intervalMessage = 'ยินดีต้อนรับสู่ Portfolio
 const activeApple = ref<boolean>(false)
 const isLoading = ref<boolean>(false)
 const moreDetail = ref<number>(0)
+const isHidden = ref(false);
+
 
 async function getCongrat() {
     isLoading.value = true
@@ -288,7 +318,9 @@ const handleCardClick = (PinCode: string, id: number) => {
         });
     })
 }
-
+function hideElement() {
+    isHidden.value = true;
+}
 onMounted(() => {
     let i = 0;
     const interval = setInterval(() => {
@@ -332,6 +364,37 @@ onMounted(() => {
     border-radius: 50%;
 }
 
+.img-headbars {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+}
+
+.fadein-to-header {
+    animation: fadeIn 0.7s ease-in-out;
+}
+
+.fadeout-to-header {
+    width: 15rem;
+    height: 15rem;
+    animation: fadeOut 0.5s ease-in-out;
+}
+
+@keyframes transtoheader {
+    0% {
+        transform: translateY(70%);
+        width: 16%;
+        height: 30%;
+        left: 11%;
+    }
+
+    100% {
+        transform: translateY(-0%);
+        width: 5.5%;
+        height: 12%;
+    }
+}
+
 .img {
     display: flex;
     justify-content: center;
@@ -373,6 +436,11 @@ onMounted(() => {
     height: 100%;
 }
 
+.resume-pdf {
+    width: 200px;
+    height: 200px;
+}
+
 .fade-in-active-profile {
     animation: fadeIn 1.5s ease-in-out;
 }
@@ -404,11 +472,11 @@ onMounted(() => {
 
 @keyframes fadeOut {
     from {
-        opacity: 0;
+        opacity: 1;
     }
 
     to {
-        opacity: 1;
+        opacity: 0;
     }
 }
 
@@ -479,13 +547,13 @@ onMounted(() => {
 @keyframes fadeConnect {
     0% {
         opacity: 1;
-        transform: translateX(190%);
+        transform: translateX(340%);
     }
 
     100% {
         opacity: 1;
         transform: translateX(0%);
     }
-    
+
 }
 </style>
