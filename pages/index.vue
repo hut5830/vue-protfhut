@@ -2,12 +2,13 @@
     <div>
         <a-row :class="{ 'shadow-md': dataMyself.length > 0, 'fadein-to-header': dataMyself.length == 0 }">
             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                <a-page-header v-if="dataMyself.length > 0">
+                <a-page-header v-if="dataMyself.length > 0" style="border-bottom: 2px solid aliceblue;
+                border-bottom-right-radius: 15%;">
                     <template #title>
-                        <h1 class="text-2xl font-bold">{{ `Portfolio` }}</h1>
+                        <h1 class="text-2xl font-bold dark:text-white">{{ `Portfolio` }}</h1>
                     </template>
                     <template #subTitle>
-                        <span class="text-sm typing-text">{{ displayText }}</span>
+                        <span class="text-sm typing-text dark:text-white">{{ displayText }}</span>
                     </template>
                     <template #avatar>
                         <img src="https://cdn-icons-png.flaticon.com/512/2210/2210153.png" alt="Avatar"
@@ -24,10 +25,10 @@
             <a-col :xs="24" :sm="24" :md="24" :lg="15" :xl="15" v-if="!isHidden">
                 <a-page-header style="align-content: center;width: 100%;" :class="{ 'hidden': isHidden }">
                     <template #title>
-                        <h1 class="text-2xl font-bold">{{ `Portfolio` }}</h1>
+                        <h1 class="text-2xl font-bold dark:text-white">{{ `Portfolio` }}</h1>
                     </template>
                     <template #subTitle>
-                        <span class="text-sm typing-text">{{ displayText }}</span>
+                        <span class="text-sm typing-text dark:text-white">{{ displayText }}</span>
                     </template>
                     <template #avatar>
                         <img @animationend="hideElement" src="https://cdn-icons-png.flaticon.com/512/2210/2210153.png"
@@ -38,7 +39,9 @@
 
             <a-col :xs="24" :sm="24" :md="24" :lg="5" :xl="5" class="shadow-xl"
                 :class="{ 'fade-in-connect': dataMyself.length > 0 }">
-                <a-layout-sider :class="{ 'fade-in-image': activeApple, 'fade-out-image': !activeApple }" width="100%">
+                <a-layout-sider class="dark:text-white" style="border-right: 2px solid aliceblue;
+                    border-top-right-radius:5%;"
+                    :class="{ 'fade-in-image': activeApple, 'fade-out-image': !activeApple }" width="100%">
                     <div class="img">
                         <div v-if="activeApple"
                             class="fade-in-active-profile z-[2] absolute top-[-80px] left-[-70px] animate-pulse w-full h-full flex items-center justify-center">
@@ -73,43 +76,38 @@
                         <div v-for="dm in dataMyself">
                             <legend class="px-2 pt-5">My Profile</legend>
                             <a-divider v-if="dataMyself.length > 0" class="mt-5">
-                                <span class="text-sm">ข้อมูลส่วนตัว</span>
+                                <span class="text-sm dark:text-white">ข้อมูลส่วนตัว</span>
                             </a-divider>
                             <a-row :gutter="[10, 10]">
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <UserOutlined class="text-purple-500" />&nbsp; ชื่อผู้ใช้: <span
-                                        class="text-gray-700">
+                                    <UserOutlined class="text-purple-500" />&nbsp; ชื่อผู้ใช้: <span>
                                         {{ dm.Username }}
                                     </span>
                                 </a-col>
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <IdcardOutlined class="text-orange-500" />&nbsp; ชื่อจริง: <span
-                                        class="text-gray-700">
+                                    <IdcardOutlined class="text-orange-500" />&nbsp; ชื่อจริง: <span>
                                         {{ dm.Firstname }} {{ dm.Lastname }}
                                     </span>
                                 </a-col>
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <SmileOutlined class="text-yellow-500" />&nbsp; ชื่อเล่น: <span
-                                        class="text-gray-700">
+                                    <SmileOutlined class="text-yellow-500" />&nbsp; ชื่อเล่น: <span>
                                         {{ dm.Nickname }}
                                     </span>
                                 </a-col>
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <CalendarOutlined class="text-blue-500" />&nbsp; วันเกิด: <span
-                                        class="text-gray-700">
+                                    <CalendarOutlined class="text-blue-500" />&nbsp; วันเกิด: <span>
                                         {{ new Date(dm.BirthDay).toLocaleDateString('en-GB') }}
                                     </span>
                                 </a-col>
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <CreditCardOutlined class="text-green-500" />&nbsp; บัตรประชาชน: <span
-                                        class="text-gray-700">
+                                    <CreditCardOutlined class="text-green-500" />&nbsp; บัตรประชาชน: <span>
                                         {{ dm.IDCard }}
                                     </span>
                                 </a-col>
                             </a-row>
 
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
-                                <span class="text-sm">พื้นฐานความสามารถ</span>
+                                <span class="text-sm dark:text-white">พื้นฐานความสามารถ</span>
                             </a-divider>
 
                             <div>
@@ -120,7 +118,7 @@
                                 <a-tag color="cyan" class="m-1">MySQL</a-tag>
                             </div>
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
-                                <span class="text-sm">Framework&UI ที่ใช้ในการพัฒนา</span>
+                                <span class="text-sm dark:text-white">Framework&UI ที่ใช้ในการพัฒนา</span>
                             </a-divider>
                             <a-tag color="green" class="m-1">
                                 Nuxt.JS
@@ -142,7 +140,7 @@
                                 Tailwind CSS
                             </a-tag>
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
-                                <span class="text-sm">ภาษาที่ใช้ในการพัฒนา (FrontEnd)</span>
+                                <span class="text-sm dark:text-white">ภาษาที่ใช้ในการพัฒนา (FrontEnd)</span>
                             </a-divider>
                             <div>
                                 <a-tag color="black" class="m-1 !text-white">
@@ -159,7 +157,7 @@
                                 </a-tag>
                             </div>
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
-                                <span class="text-sm">ภาษาที่ใช้ในการพัฒนา (BackEnd)</span>
+                                <span class="text-sm dark:text-white">ภาษาที่ใช้ในการพัฒนา (BackEnd)</span>
                             </a-divider>
                             <div>
                                 <a-tag color="black" class="m-1 !text-yellow-300">
@@ -173,29 +171,31 @@
                                 </a-tag>
                             </div>
 
-                            <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">ติดต่อ</a-divider>
+                            <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
+                                <span class="dark:text-white">ติดต่อ</span></a-divider>
 
                             <a-row :gutter="[10, 10]">
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <PhoneOutlined class="text-blue-500" />&nbsp; เบอร์โทร: <span class="text-gray-700">
+                                    <PhoneOutlined class="text-blue-500" />&nbsp; เบอร์โทร: <span>
                                         {{ dm.Phone }}
                                     </span>
                                 </a-col>
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <MessageOutlined class="text-green-500" />&nbsp; ไอดีไลน์: <span
-                                        class="text-gray-700">
+                                    <MessageOutlined class="text-green-500" />&nbsp; ไอดีไลน์: <span>
                                         {{ dm.Line }}
                                     </span>
                                 </a-col>
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
                                     <MailOutlined class="text-red-500" />&nbsp; อีเมล:
-                                    <a class="text-blue-700" href="mailto:{{ dm.Email }}">
+                                    <a class="text-blue-500" href="mailto:{{ dm.Email }}">
                                         {{ dm.Email }}
                                     </a>
                                 </a-col>
                             </a-row>
 
-                            <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">Resume</a-divider>
+                            <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
+                                <span class="dark:text-white">Resume</span>
+                            </a-divider>
 
                             <a-row>
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24"
@@ -219,15 +219,26 @@
                         <div class="p-2">
                             <a-card
                                 @click="isLoading = true; moreDetail = dmp.ID_Auto; handleCardClick(PinCode, dmp.ID_Auto)"
-                                class="shadow-md edit-card" hoverable>
+                                class="shadow-md edit-card" style="border-right: 3px solid #ff000070;" hoverable>
                                 <template #title>
-                                    <div class="card-title">
-                                        Web {{ dmp.Program_Name }} (<span class="env-production">Production</span>)
+                                    <div class="card-title justify-items-center">
+                                        <img :src="dmp.Program_Image" class="w-32 my-2 mr-2"
+                                            style="border-radius: 50%;" />
                                     </div>
                                 </template>
-                                <div class="edit-card-content">
-                                    {{ dmp.Program_Description }}
-                                </div>
+                                <!-- <template #extra>
+                                    <a-button type="primary" shape="round" size="small">
+                                        ดูรายละเอียด
+                                    </a-button>
+                                </template> -->
+                                <template #default>
+                                    <p class="text-base font-bold">
+                                        Web {{ dmp.Program_Name }}
+                                    </p>
+                                    <span class="edit-card-content mt-5" style="text-indent: 1rem;">
+                                        {{ dmp.Program_Description }}
+                                    </span>
+                                </template>
                             </a-card>
                         </div>
                     </a-col>
@@ -242,10 +253,10 @@
                     </a-col>
                 </a-row>
 
-                <a-divider v-if="moreDetail > 0">ข้อมูลระบบ</a-divider>
+                <a-divider v-if="moreDetail > 0"><span class="dark:text-white">ข้อมูลระบบ</span></a-divider>
 
                 <div v-for="dmp, i in dataMyselfProgram" :key="dmp.ID_Auto">
-                    <a-row v-if="moreDetail == dmp.ID_Auto" class="detail-more-fadein">
+                    <a-row v-if="moreDetail == dmp.ID_Auto" class="detail-more-fadein text-white">
                         <a-col :xs="24" :sm="12" :md="12" :lg="10" :xl="10" style="align-content: center;">
                             <div class="img-program-detail-main">
                                 <img :src="dmp.Program_Image" class="img-program-detail" alt="User Image" />
@@ -260,15 +271,16 @@
                                 <p style="text-indent: 2em;">{{ dmp.Program_Description }}</p>
                             </span>
                             <div>
-                                <a-divider v-if="moreDetail > 0" class="mt-5">ส่วนเสริมที่ใช้ในระบบ</a-divider>
+                                <a-divider v-if="moreDetail > 0" class="mt-5"><span
+                                        class="dark:text-white">ส่วนเสริมที่ใช้ในระบบ</span></a-divider>
 
                                 <div class="p-2" v-if="moreDetail > 0">
-                                    <a-collapse v-model:activeKey="activeKey">
+                                    <a-collapse v-model:activeKey="activeKey" class="dark:bg-gray-500">
                                         <a-collapse-panel v-for="dmd, i in dataMyselfDetail" :key="i">
                                             <template #header>
                                                 <div class="flex items-center">
                                                     <StarOutlined class="text-amber-600" />&nbsp;
-                                                    <span>{{ dmd.User_Detail }}</span>
+                                                    <span class="dark:text-white">{{ dmd.User_Detail }}</span>
                                                 </div>
                                             </template>
                                             <div>
@@ -439,7 +451,9 @@ onMounted(() => {
 
 .edit-card {
     /* background-color: #f0f2f5; */
-    height: 180px;
+    height: 300px;
+    max-height: 300px;
+    overflow: hidden;
 }
 
 .edit-card-content {
@@ -539,8 +553,8 @@ onMounted(() => {
 }
 
 :deep(.ant-card-head) {
-    background: linear-gradient(to right, rgb(63, 63, 63), rgb(75, 134, 75)) !important;
-    color: white !important;
+    /* background: linear-gradient(to right, rgb(63, 63, 63), rgb(75, 134, 75)) !important; */
+    /* color: white !important; */
 }
 
 .detail-more-fadein {

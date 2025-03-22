@@ -1,13 +1,68 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
 
+/* Font ทั่วไป */
 * {
   font-family: 'Prompt', sans-serif !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    font-family: sans-serif;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    padding: 30px;
-    /* background-color: black; */
+  background: linear-gradient(135deg, #001800, #033d0b, #000000);
+  background-size: 300% 300%;
+  animation: bgMove 10s ease infinite;
+  position: relative;
+  min-height: 100vh;
+}
+
+.ant-divider-horizontal.ant-divider-with-text::before,
+.ant-divider-horizontal.ant-divider-with-text::after {
+  border-color: white !important;
+}
+
+
+
+/* Gradient Animation */
+@keyframes bgMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Soft noise overlay */
+html::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://www.transparenttextures.com/patterns/asfalt-light.png'); /* ลาย noise เบาๆ */
+  opacity: 0.04;
+  z-index: 0;
+}
+
+/* Optional subtle particle effect */
+html::after {
+  content: '';
+  position: absolute;
+  background-image: radial-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: particleAnim 30s linear infinite;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+@keyframes particleAnim {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 200px 200px;
+  }
 }
