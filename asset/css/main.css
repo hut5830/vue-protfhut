@@ -9,7 +9,7 @@
 }
 
 html {
-  background: linear-gradient(135deg, #001800, #033d0b, #000000);
+  background: linear-gradient(135deg, #000000, #435846, #234b27);
   background-size: 300% 300%;
   animation: bgMove 10s ease infinite;
   position: relative;
@@ -51,7 +51,7 @@ html::before {
 html::after {
   content: '';
   position: absolute;
-  background-image: radial-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(0, 119, 255, 0.1) 1px, transparent 1px);
   background-size: 40px 40px;
   animation: particleAnim 30s linear infinite;
   opacity: 0.1;
