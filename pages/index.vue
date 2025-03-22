@@ -53,7 +53,7 @@
                             <a-button style="width: 100%;" type="primary"
                                 :class="{ 'bg-green-600': dataMyself.length > 0 }" :loading="isLoading"
                                 @click="activeApple = true; getCongrat()">{{
-                                    dataMyself.length > 0 ? 'เชื่อมต่อสำเร็จ (Reconnect..)' : 'เชื่อมต่อ..' }}</a-button>
+                                dataMyself.length > 0 ? 'เชื่อมต่อสำเร็จ (Reconnect..)' : 'เชื่อมต่อ..' }}</a-button>
                         </a-input-group>
                     </div>
 
@@ -334,12 +334,14 @@
                 </div>
             </footer>
         </a-col>
+        <Analytics />
         <Loading :isLoading="isLoading" />
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { Analytics } from '@vercel/analytics/nuxt';
 import { CheckCircleFilled, StarOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
 
