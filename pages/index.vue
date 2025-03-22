@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a-row :class="{ 'shadow-md': dataMyself.length > 0, 'fadein-to-header': dataMyself.length == 0 }">
+        <a-row :class="{ 'shadow-4xl bg-gray-800': dataMyself.length > 0, 'fadein-to-header': dataMyself.length == 0 }">
             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                 <a-page-header v-if="dataMyself.length > 0" style="border-bottom: 2px solid aliceblue;
                 border-bottom-right-radius: 15%;">
@@ -22,7 +22,7 @@
         </a-row>
 
         <a-row class="justify-center">
-            <a-col :xs="24" :sm="24" :md="24" :lg="15" :xl="15" v-if="!isHidden">
+            <a-col :xs="24" :sm="24" :md="24" :lg="15" :xl="15" v-if="!isHidden" class="hidden sm:block">
                 <a-page-header style="align-content: center;width: 100%;" :class="{ 'hidden': isHidden }">
                     <template #title>
                         <h1 class="text-2xl font-bold dark:text-white">{{ `Portfolio` }}</h1>
@@ -37,11 +37,11 @@
                 </a-page-header>
             </a-col>
 
-            <a-col :xs="24" :sm="24" :md="24" :lg="5" :xl="5" class="shadow-xl"
-                :class="{ 'fade-in-connect': dataMyself.length > 0 }">
-                <a-layout-sider class="dark:text-white hover:bg-lime-900" style="border-right: 2px solid aliceblue;
-                    border-top-right-radius:5%;"
-                    :class="{ 'fade-in-image': activeApple, 'fade-out-image bg-lime-950': !activeApple }" width="100%">
+            <a-col :xs="24" :sm="24" :md="24" :lg="5" :xl="5" class="shadow-2xl"
+                :class="{ 'fade-in-connect': dataMyself.length > 0 }" style="border-right: 2px solid aliceblue;
+                    border-top-right-radius:5%;">
+                <a-layout-sider class="dark:text-white"
+                    :class="{ 'fade-in-image': activeApple, 'fade-out-image bg-blue-000': !activeApple }" width="100%">
                     <div class="img">
                         <div v-if="activeApple"
                             class="fade-in-active-profile z-[2] absolute top-[-80px] left-[-70px] animate-pulse w-full h-full flex items-center justify-center">
@@ -227,20 +227,20 @@
                 <a-row v-if="dataMyselfProgram.length > 0">
                     <a-col v-for="dmp in dataMyselfProgram" :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
                         <div class="p-2">
-                            <a-card
-                                @click="isLoading = true; moreDetail = dmp.ID_Auto; handleCardClick(PinCode, dmp.ID_Auto)"
-                                class="shadow-md edit-card" style="border-right: 5px solid #ff0000a3;" hoverable>
+                            <a-card class="shadow-md edit-card" style="border-top: 5px solid #0064ffa3;" hoverable>
                                 <template #title>
                                     <div class="card-title justify-items-center">
                                         <img :src="dmp.Program_Image" class="w-32 my-2 mr-2"
                                             style="border-radius: 50%;" />
                                     </div>
                                 </template>
-                                <!-- <template #extra>
-                                    <a-button type="primary" shape="round" size="small">
+                                <template #extra>
+                                    <a-button
+                                        @click="isLoading = true; moreDetail = dmp.ID_Auto; handleCardClick(PinCode, dmp.ID_Auto)"
+                                        type="primary" shape="round" size="middle">
                                         ดูรายละเอียด
                                     </a-button>
-                                </template> -->
+                                </template>
                                 <template #default>
                                     <p class="text-base font-bold">
                                         Web {{ dmp.Program_Name }}
@@ -335,9 +335,8 @@
             </a-col>
         </a-row>
 
-        <a-row class="mt-5"></a-row>
 
-        <a-col v-if="isHidden" :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="text-center fade-in-connect">
+        <a-col v-if="isHidden" :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="text-center">
             <footer class="py-5 bg-gray-800 text-white">
                 <div>
                     <p class="text-sm">© {{ new Date().getFullYear() }} Tatchakorn Chomyong Portfolio.</p>

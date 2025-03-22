@@ -9,7 +9,7 @@
 }
 
 html {
-  background: linear-gradient(135deg, #000000, #435846, #234b27);
+  background: linear-gradient(135deg, #293441, #42586d, #23384b);
   background-size: 300% 300%;
   animation: bgMove 10s ease infinite;
   position: relative;
