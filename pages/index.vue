@@ -267,7 +267,7 @@
 
                 <div v-for="dmp, i in dataMyselfProgram" :key="dmp.ID_Auto">
                     <a-row v-if="moreDetail == dmp.ID_Auto" class="detail-more-fadein text-white">
-                        <a-col :xs="24" :sm="12" :md="12" :lg="10" :xl="10" style="align-content: center;">
+                        <a-col :xs="24" :sm="12" :md="12" :lg="10" :xl="10" style="align-content: center;" class="mb-9">
                             <div class="img-program-detail-main">
                                 <img :src="dmp.Program_Image" class="img-program-detail" alt="User Image" />
                             </div>
