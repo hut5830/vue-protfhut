@@ -346,8 +346,8 @@
                             <span class="text-sm">
                                 Frontend deployed on <a href="https://vercel.com/" target="_blank"
                                     class="text-blue-400">Vercel</a>,
-                                Backend API deployed on <a href="https://render.com/" target="_blank"
-                                    class="text-blue-400">Render</a>,
+                                Backend API deployed on <a href="https://www.heroku.com/" target="_blank"
+                                    class="text-blue-400">Heroku</a>,
                                 Database powered by <a href="https://www.pingcap.com/tidb/" target="_blank"
                                     class="text-blue-400">TiDB</a>.
                             </span>
