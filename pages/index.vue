@@ -386,7 +386,7 @@ async function getCongrat() {
     dataMyself.value = []
     dataMyselfProgram.value = []
     dataMyselfDetail.value = []
-    await $fetch(`https://port-hut.onrender.com/portfolio/mySelf`, {
+    await $fetch(`https://product-port-h-d7339c37e106.herokuapp.com/portfolio/mySelf`, {
         method: 'POST',
         body: {
             Username: Username.value
@@ -404,7 +404,7 @@ async function getCongrat() {
     })
 }
 async function getProgram(PinCode: string) {
-    await $fetch(`https://port-hut.onrender.com/portfolio/mySelfPrograms`, {
+    await $fetch(`https://product-port-h-d7339c37e106.herokuapp.com/portfolio/mySelfPrograms`, {
         method: 'POST',
         body: {
             PinCode: PinCode
@@ -414,7 +414,7 @@ async function getProgram(PinCode: string) {
     })
 }
 async function getDetail(PinCode: string, IdMore: number = 1) {
-    await $fetch(`https://port-hut.onrender.com/portfolio/mySelfDetail`, {
+    await $fetch(`https://product-port-h-d7339c37e106.herokuapp.com/portfolio/mySelfDetail`, {
         method: 'POST',
         body: {
             ID_Auto: IdMore,
