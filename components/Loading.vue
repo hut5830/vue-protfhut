@@ -1,9 +1,17 @@
 <template>
     <div>
-        <a-modal :open="isLoading" :closable="false" :centered="true" :footer="null"
-            :maskStyle="{ backgroundColor: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)' }"
-            :bodyStyle="{ backgroundColor: 'transparent', boxShadow: 'none' }"
-            :style="{ backgroundColor: 'transparent', boxShadow: 'none' }" class="custom-loading-modal">
+        <a-modal :open="isLoading" :closable="false" :centered="true" :footer="null" :maskStyle="{
+            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+            backdropFilter: 'blur(10px)',
+            border: 'none',
+        }" :bodyStyle="{
+            backgroundColor: 'transparent',
+            boxShadow: 'none',
+            padding: '20px',
+        }" :style="{
+            backgroundColor: 'transparent',
+            boxShadow: 'none',
+        }" class="loading-modal-profile">
             <div class="loading-container">
                 <div class="spinner"></div>
                 <p class="loading-text">Loading...</p>
@@ -21,46 +29,34 @@ defineProps({
 });
 </script>
 
-<style scoped>
-::v-deep(.custom-loading-modal) .ant-modal-content,
-::v-deep(.custom-loading-modal) .ant-modal,
-::v-deep(.custom-loading-modal) .ant-modal-wrap {
-    background: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
+<style>
+/* Custom modal content to remove background */
+.loading-modal-profile .ant-modal-content {
+    background: transparent;
+    box-shadow: none;
 }
 
-::v-deep(.custom-loading-modal) .ant-modal-header,
-::v-deep(.custom-loading-modal) .ant-modal-footer {
-    display: none !important;
+/* Optional: Remove border */
+.loading-modal-profile .ant-modal {
+    background: transparent;
+    box-shadow: none;
 }
 
-::v-deep(.custom-loading-modal) .ant-modal-body {
-    padding: 0 !important;
-}
-
-/* Loading spinner */
+/* Spinner styling example */
 .loading-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 150px;
+    color: white;
 }
 
 .spinner {
-    width: 60px;
-    height: 60px;
-    border: 6px solid rgba(255, 255, 255, 0.2);
-    border-top: 6px solid #409EFF;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top: 4px solid white;
     border-radius: 50%;
+    width: 40px;
+    height: 40px;
     animation: spin 1s linear infinite;
-}
-
-.loading-text {
-    color: #409EFF;
-    margin-top: 15px;
-    font-weight: 500;
 }
 
 @keyframes spin {
