@@ -224,6 +224,99 @@
 
             <a-col v-if="dataMyself.length > 0" :xs="24" :sm="24" :md="15" :lg="19" :xl="19"
                 :class="{ 'fade-in-myprogram': dataMyself.length > 0 }">
+                <a-row :gutter="[0, 15]" class="m-5 dark:text-white">
+                    <a-col :xs="24" :sm="24" :md="18" :lg="18" :xl="18" class="flex flex-col justify-between">
+                        <template #default>
+                            <p class="text-lg font-bold">
+                                สิ่งที่ชอบในการเขียนโปรแกรม
+                            </p>
+                            <span class="edit-card-content mt-5 text-base" style="text-indent: 1rem;">
+                                สนใจในการพัฒนาเว็บไซต์ และการเขียนโปรแกรมในส่วนของ Fullstack Develops
+                                เพราะชอบการที่จะเรียนรู้สิ่งใหม่ๆ ต้องการความท้าทายในการทำงานที่สนุกกับการทำงานไปด้วย
+                                ชอบการเรียนรู้เกี่ยวกับการเขียนโปรแกรมอยู่เสมอ ชอบการวิเคราะห์ปัญหาและแก้ไขปัญหา
+                                อยากได้โอกาสที่จะได้เรียนรู้และพัฒนาตัวเองให้ดีขึ้น และเติบโตไปพร้อมๆกับองค์กร
+                            </span>
+
+                            <p class="text-lg font-bold pt-12" style="align-self: center;">เครื่องมือในการพัฒนาเว็บไซต์</p>
+                            <a-row :gutter="[0, 0]" class=" justify-center">
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24"
+                                    class="lg:px-4 xl:px-4 md:px-4 sm:px-0 xs:px-0">
+                                    <div
+                                        class="bg-white shadow-md rounded-xl pt-5 flex flex-wrap justify-around items-center space-y-4 md:space-y-0">
+                                        <div class="flex flex-col items-center mx-4">
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/2048px-Visual_Studio_Code_1.35_icon.svg.png"
+                                                class="w-14 h-14 mb-2 rounded-md" />
+                                            <span class="text-sm font-medium mt-1">VS Code</span>
+                                        </div>
+
+                                        <div class="flex flex-col items-center mx-4">
+                                            <img src="https://cpl.thalesgroup.com/sites/default/files/inline-images/microsoft-sql_server.png"
+                                                class="w-16 h-16 mb-2 rounded-md" />
+                                            <span class="text-sm font-medium mt-1">SQL Server</span>
+                                        </div>
+
+                                        <div class="flex flex-col items-center mx-4">
+                                            <img src="https://static-00.iconduck.com/assets.00/heroku-icon-512x144-vka7a0ex.png"
+                                                class="w-36 h-12 mb-2 rounded-md" />
+                                            <span class="text-sm font-medium mt-1">Heroku</span>
+                                        </div>
+
+                                        <div class="flex flex-col items-center mx-4">
+                                            <img src="https://salesforceventures.com/wp-content/uploads/2022/05/Vercel-e1652981744227.png?w=1024"
+                                                class="w-36 h-10 mb-2 rounded-md" />
+                                            <span class="text-sm font-medium mt-1">Vercel</span>
+                                        </div>
+
+                                        <div class="flex flex-col items-center mx-4">
+                                            <img src="https://logos-world.net/wp-content/uploads/2020/11/GitHub-Logo.png"
+                                                class="w-32 h-16 mb-2 rounded-md" />
+                                            <span class="text-sm font-medium mt-1">GitHub</span>
+                                        </div>
+                                    </div>
+                                </a-col>
+                            </a-row>
+                        </template>
+                    </a-col>
+                    <a-col :xs="24" :sm="24" :md="6" :lg="6" :xl="6">
+                        <a-row :gutter="[0, 15]">
+                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                                <a-card class="shadow-md" hoverable>
+                                    <template #title>
+                                        <div class="card-title">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/2210/2210153.png"
+                                                class="w-16 my-2 mr-2" style="border-radius: 50%;" />
+                                            <span class="text-lg font-bold">ไทม์ไลน์งาน</span>
+                                        </div>
+                                    </template>
+                                    <template #extra>
+                                        <a-button type="primary" shape="round" size="middle">
+                                            1 ปี 11 เดือน
+                                        </a-button>
+                                    </template>
+                                    <template #default>
+
+                                        <a-timeline>
+                                            <a-timeline-item v-for="(event, index) in dataTimeLine" :key="index">
+                                                <h3 class="font-bold">{{ event.Year }}</h3>
+                                                <p v-for="(dataSub, indexSub) in event.Program_Success">{{ (indexSub +
+                                                    1) +
+                                                    '. '
+                                                    +
+                                                    dataSub }}</p>
+                                            </a-timeline-item>
+                                        </a-timeline>
+                                    </template>
+                                </a-card>
+
+                            </a-col>
+                        </a-row>
+                    </a-col>
+                </a-row>
+                <a-row :gutter="[0, 15]" class="m-5">
+                    <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                        <a-divider><span class="dark:text-white">โปรแกรมที่เคยพัฒนา</span></a-divider>
+                    </a-col>
+                </a-row>
                 <a-row v-if="dataMyselfProgram.length > 0">
                     <a-col v-for="dmp in dataMyselfProgram" :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
                         <div class="p-2">
@@ -370,6 +463,30 @@ import { message } from 'ant-design-vue';
 const dataMyself = ref<any>([])
 const dataMyselfProgram = ref<any>([])
 const dataMyselfDetail = ref<any>([])
+const dataTimeLine = ref<any>([
+    {
+        Year: 'ปี 2568 - ปัจจุบัน',
+        Program_Of_Year: 'เริ่มต้นการทำงานในปีแรก-ปัจจุบัน (1 ปี 11 เดือน)',
+        Program_Success: [
+            'กฎหมาย คำนวณหนี้สิน'
+        ]
+    },
+    {
+        Year: 'ปี 2567 - 2568',
+        Program_Of_Year: 'เริ่มต้นการทำงานในปีแรก-สอง',
+        Program_Success: [
+            'UserMonitor', 'Waijai ประกันภัย'
+        ]
+    },
+    {
+        Year: 'ปี 2566 - 2567',
+        Program_Of_Year: 'เริ่มต้นการทำงานในปีแรก',
+        Program_Success: [
+            'Tracking', 'JJ Properties'
+        ]
+    }
+
+])
 const Username = ref<string>('Hut5830')
 const activeKey = ref<string>('0')
 const PinCode = ref<string>('')
@@ -386,7 +503,7 @@ async function getCongrat() {
     dataMyself.value = []
     dataMyselfProgram.value = []
     dataMyselfDetail.value = []
-    await $fetch(`https://product-port-h-d7339c37e106.herokuapp.com/portfolio/mySelf`, {
+    await $fetch(`http://localhost:8000/portfolio/mySelf`, {
         method: 'POST',
         body: {
             Username: Username.value
@@ -404,7 +521,7 @@ async function getCongrat() {
     })
 }
 async function getProgram(PinCode: string) {
-    await $fetch(`https://product-port-h-d7339c37e106.herokuapp.com/portfolio/mySelfPrograms`, {
+    await $fetch(`http://localhost:8000/portfolio/mySelfPrograms`, {
         method: 'POST',
         body: {
             PinCode: PinCode
@@ -414,7 +531,7 @@ async function getProgram(PinCode: string) {
     })
 }
 async function getDetail(PinCode: string, IdMore: number = 1) {
-    await $fetch(`https://product-port-h-d7339c37e106.herokuapp.com/portfolio/mySelfDetail`, {
+    await $fetch(`http://localhost:8000/portfolio/mySelfDetail`, {
         method: 'POST',
         body: {
             ID_Auto: IdMore,
