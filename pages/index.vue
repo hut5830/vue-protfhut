@@ -231,10 +231,7 @@
                                 สิ่งที่ชอบในการเขียนโปรแกรม
                             </p>
                             <span class="mt-5 text-base" style="text-indent: 1rem;">
-                                สนใจในการพัฒนาเว็บไซต์ และการเขียนโปรแกรมในส่วนของ Fullstack Develops
-                                เพราะชอบการที่จะเรียนรู้สิ่งใหม่ๆ ต้องการความท้าทายในการทำงานที่สนุกกับการทำงานไปด้วย
-                                ชอบการเรียนรู้เกี่ยวกับการเขียนโปรแกรมอยู่เสมอ ชอบการวิเคราะห์ปัญหาและแก้ไขปัญหา
-                                อยากได้โอกาสที่จะได้เรียนรู้และพัฒนาตัวเองให้ดีขึ้น และเติบโตไปพร้อมๆกับองค์กร
+                                {{ displayTextContain }}
                             </span>
 
 
@@ -382,7 +379,8 @@
 
                 <a-row :gutter="[0, 15]" class="m-5">
                     <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                        <a-divider><span class="dark:text-white">เครื่องมือที่ใช้ในการพัฒนาเว็บไซต์ (สำหรับเว็บไซต์นี้)</span></a-divider>
+                        <a-divider><span class="dark:text-white">เครื่องมือที่ใช้ในการพัฒนาเว็บไซต์
+                                (สำหรับเว็บไซต์นี้)</span></a-divider>
                     </a-col>
                 </a-row>
 
@@ -495,7 +493,9 @@ const Username = ref<string>('Hut5830')
 const activeKey = ref<string>('0')
 const PinCode = ref<string>('')
 const displayText = ref('');
+const displayTextContain = ref('');
 const intervalMessage = 'ยินดีต้อนรับสู่ Portfolio ของ Tatchakorn...';
+const intervalMessageContain = 'สนใจในการพัฒนาเว็บไซต์ และการเขียนโปรแกรมในส่วนของ Fullstack Develops เพราะชอบการที่จะเรียนรู้สิ่งใหม่ๆ ต้องการความท้าทายในการทำงานที่สนุกกับการทำงานไปด้วย ชอบการเรียนรู้เกี่ยวกับการเขียนโปรแกรมอยู่เสมอ ชอบการวิเคราะห์ปัญหาและแก้ไขปัญหา อยากได้โอกาสที่จะได้เรียนรู้และพัฒนาตัวเองให้ดีขึ้น และเติบโตไปพร้อมๆกับองค์กร...';
 const activeApple = ref<boolean>(false)
 const isLoading = ref<boolean>(false)
 const moreDetail = ref<number>(0)
@@ -560,13 +560,25 @@ function hideElement() {
 function winOpen(path: string) {
     window.open(path, '_blank');
 }
-onMounted(() => {
+function setIntervalText() {
     let i = 0;
     const interval = setInterval(() => {
         displayText.value += intervalMessage[i];
         i++;
         if (i >= intervalMessage.length) clearInterval(interval);
     }, 100); // speed
+}
+function setIntervalTextContain() {
+    let i = 0;
+    const interval = setInterval(() => {
+        displayTextContain.value += intervalMessageContain[i];
+        i++;
+        if (i >= intervalMessageContain.length) clearInterval(interval);
+    }, 25); // speed
+}
+onMounted(() => {
+    setIntervalText();
+    setIntervalTextContain();
 })
 </script>
 
