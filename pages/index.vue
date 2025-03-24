@@ -460,6 +460,7 @@ import { Analytics } from '@vercel/analytics/nuxt';
 import { CheckCircleFilled, StarOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
 
+const base_url = useRuntimeConfig().public.apiBaseUrl;
 const dataMyself = ref<any>([])
 const dataMyselfProgram = ref<any>([])
 const dataMyselfDetail = ref<any>([])
@@ -503,7 +504,7 @@ async function getCongrat() {
     dataMyself.value = []
     dataMyselfProgram.value = []
     dataMyselfDetail.value = []
-    await $fetch(`https://product-port-h-d7339c37e106.herokuapp.com/portfolio/mySelf`, {
+    await $fetch(`${base_url}/portfolio/mySelf`, {
         method: 'POST',
         body: {
             Username: Username.value
@@ -521,7 +522,7 @@ async function getCongrat() {
     })
 }
 async function getProgram(PinCode: string) {
-    await $fetch(`https://product-port-h-d7339c37e106.herokuapp.com/portfolio/mySelfPrograms`, {
+    await $fetch(`${base_url}/portfolio/mySelfPrograms`, {
         method: 'POST',
         body: {
             PinCode: PinCode
@@ -531,7 +532,7 @@ async function getProgram(PinCode: string) {
     })
 }
 async function getDetail(PinCode: string, IdMore: number = 1) {
-    await $fetch(`https://product-port-h-d7339c37e106.herokuapp.com/portfolio/mySelfDetail`, {
+    await $fetch(`${base_url}/portfolio/mySelfDetail`, {
         method: 'POST',
         body: {
             ID_Auto: IdMore,
