@@ -382,7 +382,7 @@
 
                 <a-row :gutter="[0, 15]" class="m-5">
                     <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                        <a-divider><span class="dark:text-white">โปรแกรมที่เคยพัฒนา</span></a-divider>
+                        <a-divider><span class="dark:text-white">เครื่องมือที่ใช้ในการพัฒนาเว็บไซต์ (สำหรับเว็บไซต์นี้)</span></a-divider>
                     </a-col>
                 </a-row>
 
@@ -400,6 +400,12 @@
                                 <img src="https://cpl.thalesgroup.com/sites/default/files/inline-images/microsoft-sql_server.png"
                                     class="w-16 h-16 mb-2 rounded-md" />
                                 <span class="text-sm font-medium mt-1">SQL Server</span>
+                            </div>
+
+                            <div class="flex flex-col items-center mx-4">
+                                <img src="https://dbdb.io/media/logos/tidb-logo_preview.png"
+                                    class="w-40 h-16 mb-2 rounded-md" />
+                                <span class="text-sm font-medium mt-1">TiDB</span>
                             </div>
 
                             <div class="flex flex-col items-center mx-4">
