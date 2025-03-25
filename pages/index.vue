@@ -183,20 +183,26 @@
 
                             <a-row :gutter="[10, 10]">
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <PhoneOutlined class="text-blue-500" />&nbsp; เบอร์โทร: &nbsp;
-                                    <a :href="`tel:${dm.Phone}`" class="text-blue-500">
-                                        {{ dm.Phone }}
+                                    <FacebookOutlined class="text-blue-400" />&nbsp; เฟซบุ๊ก: &nbsp;
+                                    <a class="text-blue-400" :href="`https://www.facebook.com/SaHott/`" target="_blank">
+                                        {{ dm.Facebook }}
                                     </a>
                                 </a-col>
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <MessageOutlined class="text-green-500" />&nbsp; ไอดีไลน์: &nbsp;
-                                    <a :href="`https://line.me/ti/p/~${dm.Line}`" target="_blank" class="text-blue-500">
+                                    <MessageOutlined class="text-green-400" />&nbsp; ไอดีไลน์: &nbsp;
+                                    <a :href="`https://line.me/ti/p/~${dm.Line}`" target="_blank" class="text-blue-400">
                                         {{ dm.Line }}
                                     </a>
                                 </a-col>
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
-                                    <MailOutlined class="text-red-500" />&nbsp; อีเมล: &nbsp;
-                                    <a class="text-blue-500" href="mailto:{{ dm.Email }}">
+                                    <PhoneOutlined class="text-blue-400" />&nbsp; เบอร์โทร: &nbsp;
+                                    <a :href="`tel:${dm.Phone}`" class="text-blue-400">
+                                        {{ dm.Phone }}
+                                    </a>
+                                </a-col>
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                    <MailOutlined class="text-red-400" />&nbsp; อีเมล: &nbsp;
+                                    <a class="text-blue-400" href="mailto:{{ dm.Email }}">
                                         {{ dm.Email }}
                                     </a>
                                 </a-col>
@@ -263,8 +269,8 @@
                                 <a-card class="shadow-md" hoverable>
                                     <template #title>
                                         <div class="card-title">
-                                            <img src="https://cdn-icons-png.flaticon.com/512/2210/2210153.png"
-                                                class="w-16 my-2 mr-2" style="border-radius: 50%;" />
+                                            <img src="https://kentac.org.uk/wp-content/uploads/2016/10/calendar-icon-blue_sm.png"
+                                                class="w-24 my-2 mr-2" style="border-radius: 5%;" />
                                             <span class="text-lg font-bold">ไทม์ไลน์งาน</span>
                                         </div>
                                     </template>
