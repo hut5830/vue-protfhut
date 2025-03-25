@@ -245,11 +245,12 @@
                                 </a-col>
                                 <a-col :xs="11" :sm="11" :md="18" :lg="18" :xl="18" class="self-center">
                                     <div class="flex justify-start items-center space-x-3">
-                                        <p>
-                                        <h1 class="dark:text-white text-4xl font-bold space-y-1">RESUME</h1>
-                                        <br />
-                                        <h1 class="dark:text-white text-xl font-bold space-y-1">TATCHAKORN CHOMYONG</h1>
-                                        </p>
+                                        <div>
+                                            <h1 class="dark:text-white text-4xl font-bold space-y-1">RESUME</h1>
+                                            <br />
+                                            <h1 class="dark:text-white text-xl font-bold space-y-1">TATCHAKORN CHOMYONG
+                                            </h1>
+                                        </div>
                                     </div>
                                 </a-col>
                             </a-row>
@@ -379,7 +380,8 @@
 
                 <a-row :gutter="[0, 15]" class="m-5">
                     <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                        <a-divider><span class="dark:text-white">เครื่องมือที่ใช้ในการพัฒนา สำหรับเว็บไซต์นี้)</span></a-divider>
+                        <a-divider><span class="dark:text-white">เครื่องมือที่ใช้ในการพัฒนา
+                                สำหรับเว็บไซต์นี้</span></a-divider>
                     </a-col>
                 </a-row>
 
