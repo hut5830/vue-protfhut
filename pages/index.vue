@@ -355,7 +355,11 @@
                         <a-col :xs="24" :sm="12" :md="12" :lg="14" :xl="14">
                             <h1 class="text-xl font-bold flex items-center">
                                 เว็บไซต์: {{ dmp.Program_Name }}
-                                <CheckCircleFilled class="text-green-500 ml-2" />
+                                <CheckCircleFilled class="text-green-500 ml-2 mr-2" />
+                                <a-button @click="openExam = true; idExamJobs = i;" type="primary" shape="round"
+                                    size="middle">
+                                    ตัวอย่าง
+                                </a-button>
                             </h1>
                             <span>
                                 <p style="text-indent: 2em;">{{ dmp.Program_Description }}</p>
@@ -457,6 +461,28 @@
                 </footer>
             </a-col>
         </a-row>
+
+
+        <a-modal v-model:visible="openExam" width="750px" title="ตัวอย่าง Function" @cancel="openExam = false">
+            <a-row :gutter="[0, 105]">
+                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+
+                    <a-divider class="m-2" />
+
+                    <ExamJobsMaps v-if="idExamJobs === 0" />
+                    <Caldebt v-if="idExamJobs === 1" />
+                    <UserEncrypt v-if="idExamJobs === 2" />
+                    <JJSaleAsset v-if="idExamJobs === 3" />
+                    <WInsurance v-if="idExamJobs === 4" />
+                </a-col>
+            </a-row>
+
+            <template #footer>
+
+            </template>
+        </a-modal>
+
+
         <Analytics />
         <Loading :isLoading="isLoading" />
     </div>
@@ -467,6 +493,11 @@ import { ref, onMounted } from 'vue';
 import { Analytics } from '@vercel/analytics/nuxt';
 import { CheckCircleFilled, StarOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
+import { ExamJobsMaps } from '#components';
+import Caldebt from '~/components/ExamJobs/Caldebt.vue';
+import UserEncrypt from '~/components/ExamJobs/UserEncrypt.vue';
+import JJSaleAsset from '~/components/ExamJobs/JJSaleAsset.vue';
+import WInsurance from '~/components/ExamJobs/WInsurance.vue';
 
 const base_url = useRuntimeConfig().public.apiBaseUrl;
 const dataMyself = ref<any>([])
@@ -507,6 +538,8 @@ const activeApple = ref<boolean>(false)
 const isLoading = ref<boolean>(false)
 const moreDetail = ref<number>(0)
 const isHidden = ref(false);
+const openExam = ref(false);
+const idExamJobs = ref<number>();
 
 
 async function getCongrat() {
