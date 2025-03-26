@@ -386,7 +386,7 @@
 
                 <a-row :gutter="[0, 15]" class="m-5">
                     <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                        <a-divider><span class="dark:text-white">เครื่องมือที่ใช้ในการพัฒนา
+                        <a-divider><span class="dark:text-white">เครื่องมือที่ใช้พัฒนา
                                 สำหรับเว็บไซต์นี้</span></a-divider>
                     </a-col>
                 </a-row>
