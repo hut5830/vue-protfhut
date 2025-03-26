@@ -436,7 +436,7 @@
             </a-col>
         </a-row>
 
-        <a-row v-if="isHidden">
+        <a-row :class="{ 'hidden': !isHidden }">
             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="text-center">
                 <footer class="py-5 bg-gray-800 text-white">
                     <div>
