@@ -216,7 +216,7 @@
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24"
                                     class="flex justify-left items-left">
                                     <FilePdfOutlined class="text-red-500" />&nbsp; เปิด: &nbsp;
-                                    <a href="https://drive.google.com/file/d/1g9vF_agYfRR7j3m3KKKkexK5euMXMHmr/view?usp=sharing"
+                                    <a href="https://drive.google.com/file/d/1RMsJuvjAFWkGqGsUQCiAyXGd0cCVK6vR/view?usp=drive_link"
                                         target="_blank" class="text-red-500">
                                         Resume (PDF)
                                     </a>
@@ -244,7 +244,7 @@
                             <a-row :gutter="[15, 15]" class="pt-5">
                                 <a-col :xs="13" :sm="13" :md="6" :lg="6" :xl="6">
                                     <div class="flex justify-end items-center space-x-3 cursor-pointer"
-                                        @click="winOpen('https://drive.google.com/file/d/1g9vF_agYfRR7j3m3KKKkexK5euMXMHmr/view?usp=sharing')">
+                                        @click="winOpen('https://drive.google.com/file/d/1RMsJuvjAFWkGqGsUQCiAyXGd0cCVK6vR/view?usp=drive_link')">
                                         <img src="https://static-00.iconduck.com/assets.00/pdf-icon-2048x2048-dfwtelfn.png"
                                             class="resume-pdf" alt="PDF Icon" />
                                     </div>
