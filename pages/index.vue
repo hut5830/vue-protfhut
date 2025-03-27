@@ -22,7 +22,7 @@
         </a-row>
 
         <a-row class="justify-center">
-            <a-col :xs="24" :sm="24" :md="24" :lg="15" :xl="15" v-if="!isHidden">
+            <a-col :xs="24" :sm="24" :md="24" :lg="15" :xl="15" v-if="isHidden">
                 <a-page-header style="align-content: center;width: 100%;" :class="{ 'hidden': isHidden }">
                     <template #title>
                         <h1 class="text-2xl font-bold dark:text-white">{{ `Portfolio` }}</h1>
@@ -440,7 +440,7 @@
             </a-col>
         </a-row>
 
-        <a-row v-if="isHidden">
+        <a-row v-if="dataMyself.length > 0">
             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="text-center">
                 <footer class="py-5 bg-gray-800 text-white">
                     <div>
@@ -463,7 +463,7 @@
         </a-row>
 
 
-        <a-modal v-model:visible="openExam" width="750px" title="ตัวอย่าง Function" @cancel="openExam = false">
+        <a-modal v-model:visible="openExam" width="750px" title="Function ตัวอย่างบางส่วน" @cancel="openExam = false">
             <a-row :gutter="[0, 105]">
                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
 
