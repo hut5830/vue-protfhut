@@ -305,7 +305,7 @@
                 </a-row>
 
                 <a-row v-if="dataMyselfProgram.length > 0">
-                    <a-col v-for="dmp in dataMyselfProgram" :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
+                    <a-col v-for="dmp, i in dataMyselfProgram" :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
                         <div class="p-2">
                             <a-card class="shadow-md edit-card" style="border-top: 5px solid #0064ffa3;" hoverable>
                                 <template #title>
@@ -343,10 +343,12 @@
                     </a-col>
                 </a-row>
 
-                <a-divider v-if="moreDetail > 0"><span class="dark:text-white">ข้อมูลระบบ</span></a-divider>
+                <a-divider id="scrollTo" v-if="moreDetail > 0">
+                    <span class="dark:text-white">ข้อมูลระบบ</span>
+                </a-divider>
 
                 <div v-for="dmp, i in dataMyselfProgram" :key="dmp.ID_Auto">
-                    <a-row v-if="moreDetail == dmp.ID_Auto" class="detail-more-fadein text-white">
+                    <a-row v-if="moreDetail == dmp.ID_Auto" class="detail-more-fadein text-white m-3">
                         <a-col :xs="24" :sm="12" :md="12" :lg="10" :xl="10" style="align-content: center;" class="mb-9">
                             <div class="img-program-detail-main">
                                 <img :src="dmp.Program_Image" class="img-program-detail" alt="User Image" />
@@ -586,12 +588,16 @@ async function getDetail(PinCode: string, IdMore: number = 1) {
     })
     isLoading.value = false
 }
-const handleCardClick = (PinCode: string, id: number) => {
-    getDetail(PinCode, id).then(() => {
-        window.scrollBy({
-            top: 400,
-            behavior: 'smooth'
-        });
+const handleCardClick = async (PinCode: string, id: number) => {
+    await getDetail(PinCode, id).then(() => {
+        // const isMobile = window.innerWidth <= 768; // คำสั่งนี้ เอาไว้เช็คขนาดหน้าจอได้
+        const element = document.getElementById(`scrollTo`);
+        if (element) {
+            element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
     })
 }
 function hideElement() {
