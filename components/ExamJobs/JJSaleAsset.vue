@@ -1,6 +1,10 @@
 <template>
     <div>
-        <a-card title="หน้าแสดงข้อมูลทรัพย์" class="mb-4">
+        <a-card class="mb-4">
+            <template #title>
+                <p>หน้าแสดงข้อมูลทรัพย์</p>
+                <p class="pr-2 text-red-500 text-xs" style="text-indent: 10px;">- ข้อมูลจะไม่ถูกเก็บลง Database</p>
+            </template>
             <template #extra>
                 <a-button v-if="typeSubmit === false" type="primary" @click="typeSubmit = !typeSubmit; getData()"
                     style="background-color: chocolate;">แก้ไขราคา</a-button>
