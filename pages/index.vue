@@ -465,7 +465,7 @@
         </a-row>
 
 
-        <a-modal v-model:visible="openExam" width="750px" title="Function ตัวอย่างบางส่วน" @cancel="openExam = false">
+        <a-modal v-model:visible="openExam" width="750px" title="***แสดงเป็นข้อมูลประกอบ ให้เห็นการทำงานบางส่วนของระบบ*** (ข้อมูลเพื่อประกอบเท่านั้น)" @cancel="openExam = false">
             <a-row :gutter="[0, 105]">
                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
 
@@ -479,13 +479,11 @@
                 </a-col>
             </a-row>
 
-            <template #footer>
-
-            </template>
+            <template #footer></template>
         </a-modal>
 
-
         <Analytics />
+        <NotiBasic v-if="activeApple && dataMyself.length > 0" />
         <Loading :isLoading="isLoading" />
     </div>
 </template>
@@ -563,7 +561,7 @@ async function getCongrat() {
             await getProgram(PinCode.value);
             await getDetail(PinCode.value);
         }
-        message.success('เชื่อมต่อโปรไฟล์สำเร็จ!');
+        // message.success('เชื่อมต่อโปรไฟล์สำเร็จ!');
     })
 }
 async function getProgram(PinCode: string) {
