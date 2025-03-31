@@ -252,9 +252,11 @@
                                 <a-col :xs="11" :sm="11" :md="18" :lg="18" :xl="18" class="self-center">
                                     <div class="flex justify-start items-center space-x-3">
                                         <div>
-                                            <h1 class="dark:text-white text-white text-4xl font-bold space-y-1">RESUME</h1>
+                                            <h1 class="dark:text-white text-white text-4xl font-bold space-y-1">RESUME
+                                            </h1>
                                             <br />
-                                            <h1 class="dark:text-white text-white text-xl font-bold space-y-1">TATCHAKORN CHOMYONG
+                                            <h1 class="dark:text-white text-white text-xl font-bold space-y-1">
+                                                TATCHAKORN CHOMYONG
                                             </h1>
                                         </div>
                                     </div>
@@ -385,7 +387,8 @@
                                             <template #header>
                                                 <div class="flex items-center">
                                                     <StarOutlined class="text-amber-600" />&nbsp;
-                                                    <span class="dark:text-white text-white">{{ dmd.User_Detail }}</span>
+                                                    <span class="dark:text-white text-white">{{ dmd.User_Detail
+                                                        }}</span>
                                                 </div>
                                             </template>
                                             <div>
@@ -440,7 +443,13 @@
                                 <span class="text-sm font-medium mt-1">Vercel</span>
                             </div>
 
-                            <div class="flex flex-col items-center mx-4">
+                            <div class="flex flex-col items-center mx-1">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Vue.png"
+                                    class="w-16 h-14 mb-2 rounded-md" />
+                                <span class="text-sm font-medium mt-1">Vue.js</span>
+                            </div>
+
+                            <div class="flex flex-col items-center mx-1">
                                 <img src="https://logos-world.net/wp-content/uploads/2020/11/GitHub-Logo.png"
                                     class="w-32 h-16 mb-2 rounded-md" />
                                 <span class="text-sm font-medium mt-1">GitHub</span>
