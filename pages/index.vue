@@ -302,15 +302,15 @@
                 <a-row :gutter="[0, 15]" class="m-5">
                     <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                         <a-divider><span class="dark:text-white text-white">โปรแกรมที่เคยพัฒนา</span></a-divider>
-                        <a-row :gutter="[0, 50]">
-                            <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12"
+                        <a-row :gutter="[0, 25]">
+                            <a-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12"
                                 class="flex justify-center items-center">
                                 <a-button class="" type="primary" shape="round" size="middle"
                                     @click="idDesignProgram = 1;">
                                     รูปแบบ 1 (แนวตั้ง)
                                 </a-button>
                             </a-col>
-                            <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12"
+                            <a-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12"
                                 class="flex justify-center items-center">
                                 <a-button class="bg-green-600" type="primary" shape="round" size="middle"
                                     @click="idDesignProgram = 2;">
@@ -533,7 +533,6 @@
             @cancel="openExam = false">
             <a-row :gutter="[0, 105]">
                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-
                     <a-divider class="m-2" />
 
                     <ExamJobsMaps v-if="idExamJobs === 0" />
@@ -541,6 +540,7 @@
                     <UserEncrypt v-if="idExamJobs === 2" />
                     <JJSaleAsset v-if="idExamJobs === 3" />
                     <WInsurance v-if="idExamJobs === 4" />
+
                 </a-col>
             </a-row>
             <template #footer></template>
