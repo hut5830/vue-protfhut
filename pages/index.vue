@@ -21,7 +21,7 @@
             </a-col>
         </a-row>
 
-        <a-row class="justify-center">
+        <a-row class="justify-center !overflow-hidden">
             <a-col :xs="24" :sm="24" :md="24" :lg="15" :xl="15" v-if="isHidden">
                 <a-page-header style="align-content: center;width: 100%;" :class="{ 'hidden': isHidden }">
                     <template #title>
