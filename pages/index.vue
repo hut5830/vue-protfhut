@@ -45,7 +45,7 @@
                     <div class="img">
                         <div v-if="activeApple"
                             class="fade-in-active-profile z-[2] absolute top-[-80px] left-[-70px] animate-pulse w-full h-full flex items-center justify-center">
-                            <CheckCircleFilled class="text-green-500 bg-green-500 text-3xl"
+                            <CheckCircleFilled class="text-green-500 bg-green-500 text-[2.1rem]"
                                 style="border-radius: 100%;" />
                         </div>
                         <img src="/image/436464547_25506951142252229_7027954772834418892_n.jpg" class="img-profile"
@@ -280,7 +280,6 @@
                                         </a-button>
                                     </template>
                                     <template #default>
-
                                         <a-timeline>
                                             <a-timeline-item v-for="(event, index) in dataTimeLine" :key="index">
                                                 <h3 class="font-bold">{{ event.Year }}</h3>
@@ -316,7 +315,7 @@
                                 </template>
                                 <template #extra>
                                     <a-button
-                                        @click="isLoading = true; moreDetail = dmp.ID_Auto; handleCardClick(PinCode, dmp.ID_Auto)"
+                                        @click="isLoading = true; moreDetail = dmp.ID_Auto; handleCardClick(PinCode, dmp.ID_Auto, dmp)"
                                         type="primary" shape="round" size="middle">
                                         ดูรายละเอียด
                                     </a-button>
@@ -330,6 +329,11 @@
                                     </span>
                                 </template>
                             </a-card>
+                        </div>
+                    </a-col>
+                    <a-col :xs="24" :sm="12" :md="12" :lg="8" :xl="8" class=" content-center justify-items-center">
+                        <div class="p-2 dark:text-white text-2xl">
+                            <p>CommingSoon...</p>
                         </div>
                     </a-col>
                 </a-row>
@@ -352,6 +356,11 @@
                         <a-col :xs="24" :sm="12" :md="12" :lg="10" :xl="10" style="align-content: center;" class="mb-9">
                             <div class="img-program-detail-main">
                                 <img :src="dmp.Program_Image" class="img-program-detail" alt="User Image" />
+                            </div>
+                            <div id="chart">
+                                <apexchart v-if="data.series[0].data.length > 0" type="bar" height="230"
+                                    :options="data.chartOptions" :series="data.series">
+                                </apexchart>
                             </div>
                         </a-col>
                         <a-col :xs="24" :sm="12" :md="12" :lg="14" :xl="14">
@@ -465,7 +474,9 @@
         </a-row>
 
 
-        <a-modal v-model:visible="openExam" width="750px" title="***แสดงเป็นข้อมูลประกอบ ให้เห็นการทำงานบางส่วนของระบบ*** (ข้อมูลเพื่อประกอบเท่านั้น)" @cancel="openExam = false">
+        <a-modal v-model:visible="openExam" width="750px"
+            title="***แสดงเป็นข้อมูลประกอบ ให้เห็นการทำงานบางส่วนของระบบ*** (ข้อมูลเพื่อประกอบเท่านั้น)"
+            @cancel="openExam = false">
             <a-row :gutter="[0, 105]">
                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
 
@@ -478,10 +489,10 @@
                     <WInsurance v-if="idExamJobs === 4" />
                 </a-col>
             </a-row>
-
             <template #footer></template>
         </a-modal>
 
+        <Welcome v-if="dataMyself.length > 0" />
         <Analytics />
         <NotiBasic v-if="activeApple && dataMyself.length > 0" />
         <Loading :isLoading="isLoading" />
@@ -498,7 +509,10 @@ import Caldebt from '~/components/ExamJobs/Caldebt.vue';
 import UserEncrypt from '~/components/ExamJobs/UserEncrypt.vue';
 import JJSaleAsset from '~/components/ExamJobs/JJSaleAsset.vue';
 import WInsurance from '~/components/ExamJobs/WInsurance.vue';
+import VueApexCharts from "vue3-apexcharts";
+import ApexCharts from "apexcharts";
 
+const apexchart = VueApexCharts;
 const base_url = useRuntimeConfig().public.apiBaseUrl;
 const dataMyself = ref<any>([])
 const dataMyselfProgram = ref<any>([])
@@ -540,7 +554,86 @@ const moreDetail = ref<number>(0)
 const isHidden = ref(false);
 const openExam = ref(false);
 const idExamJobs = ref<number>();
-
+const data: any = {
+    series: [{
+        data: []
+    }],
+    chartOptions: {
+        chart: {
+            type: 'bar',
+            height: 300,
+            toolbar: {
+                show: false
+            },
+        },
+        plotOptions: {
+            bar: {
+                barHeight: '100%',
+                distributed: true,
+                horizontal: true,
+                dataLabels: {
+                    position: 'bottom'
+                },
+            }
+        },
+        colors: ['#33b2df', '#d4526e', '#13d8aa', '', '#A5978B', '#2b908f', '#f9a3a4', '#90ee7e',
+            '#f48024', '#69d2e7'
+        ],
+        dataLabels: {
+            enabled: true,
+            textAnchor: 'start',
+            style: {
+                colors: ['#fff']
+            },
+            formatter: function (val: any, opt: any) {
+                return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val + '%'
+            },
+            offsetX: 0,
+            dropShadow: {
+                enabled: true
+            }
+        },
+        stroke: {
+            width: 1,
+            colors: ['#fff']
+        },
+        xaxis: {
+            categories: [],
+            labels: {
+                show: true,
+                style: {
+                    colors: ['#fff'],
+                    fontSize: '12px',
+                    fontFamily: 'Helvetica, Arial, sans-serif',
+                    fontWeight: 400,
+                    cssClass: 'apexcharts-xaxis-label'
+                }
+            },
+        },
+        legend: {
+            show: false
+        },
+        yaxis: {
+            labels: {
+                show: false
+            }
+        },
+        tooltip: {
+            enabled: false,
+            theme: 'dark',
+            x: {
+                show: false
+            },
+            y: {
+                title: {
+                    formatter: function () {
+                        return ''
+                    }
+                }
+            }
+        }
+    },
+}
 
 async function getCongrat() {
     isLoading.value = true
@@ -586,7 +679,9 @@ async function getDetail(PinCode: string, IdMore: number = 1) {
     })
     isLoading.value = false
 }
-const handleCardClick = async (PinCode: string, id: number) => {
+const handleCardClick = async (PinCode: string, id: number, items: any) => {
+    await updateTimeLineChart(items);
+
     await getDetail(PinCode, id).then(() => {
         // const isMobile = window.innerWidth <= 768; // คำสั่งนี้ เอาไว้เช็คขนาดหน้าจอได้
         const element = document.getElementById(`scrollTo`);
@@ -597,6 +692,13 @@ const handleCardClick = async (PinCode: string, id: number) => {
             });
         }
     })
+}
+async function updateTimeLineChart(items: any) {
+    console.log(items);
+    data.series[0].data = [100, 100, 100]
+    data.chartOptions.xaxis.categories = [items.Program_Name + ': ' + 'DEV',items.Program_Name + ': ' +  'UAT',items.Program_Name + ': ' +  'PRODUCT']
+    console.log(data.series[0]);
+    return data;
 }
 function hideElement() {
     isHidden.value = true;
