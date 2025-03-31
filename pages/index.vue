@@ -242,14 +242,14 @@
 
 
                             <a-row :gutter="[15, 15]" class="pt-5">
-                                <a-col :xs="13" :sm="13" :md="6" :lg="6" :xl="6">
+                                <a-col :xs="13" :sm="13" :md="13" :lg="6" :xl="6">
                                     <div class="flex justify-end items-center space-x-3 cursor-pointer"
                                         @click="winOpen('https://drive.google.com/file/d/1RMsJuvjAFWkGqGsUQCiAyXGd0cCVK6vR/view?usp=drive_link')">
                                         <img src="https://static-00.iconduck.com/assets.00/pdf-icon-2048x2048-dfwtelfn.png"
                                             class="resume-pdf" alt="PDF Icon" />
                                     </div>
                                 </a-col>
-                                <a-col :xs="11" :sm="11" :md="18" :lg="18" :xl="18" class="self-center">
+                                <a-col :xs="11" :sm="11" :md="11" :lg="18" :xl="18" class="self-center">
                                     <div class="flex justify-start items-center space-x-3">
                                         <div>
                                             <h1 class="dark:text-white text-white text-4xl font-bold space-y-1">RESUME
@@ -265,7 +265,7 @@
                         </template>
                     </a-col>
 
-                    <a-col :xs="24" :sm="24" :md="6" :lg="6" :xl="6">
+                    <a-col :xs="24" :sm="24" :md="24" :lg="6" :xl="6">
                         <a-row :gutter="[0, 15]">
                             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                                 <a-card class="shadow-md" hoverable>
@@ -320,20 +320,21 @@
                         </a-row>
                         <a-row v-if="dataMyselfProgram.length > 0 && idDesignProgram === 1" :gutter="[15, 15]"
                             class="pt-5 fade-in-myprogram">
-                            <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6" v-for="program in dataMyselfProgram"
+                            <a-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8" v-for="program in dataMyselfProgram"
                                 :key="program.ID_Auto">
-                                <a-card hoverable class="shadow-md">
+                                <a-card hoverable class="shadow-md edit-card-horizontal">
                                     <template #cover>
                                         <img :src="program.Program_Image" alt="Program Icon"
                                             class="w-32 h-72 my-2 mr-2 rounded-md object-cover" />
                                     </template>
                                     <template #default>
-                                        <h3 class="text-lg font-bold">{{ program.Program_Name }}</h3>
+                                        <h3 class="text-lg font-bold edit-card-content-head">{{
+                                            program.Program_Name }}</h3>
                                         <p class="text-sm edit-card-content-horizontal ">{{ program.Program_Description
-                                            }}</p>
+                                        }}</p>
                                     </template>
                                     <template #actions>
-                                        <a class="text-sm text-blue-500"
+                                        <a class="text-base text-blue-500"
                                             @click="isLoading = true; moreDetail = program.ID_Auto; handleCardClick(PinCode, program.ID_Auto, program)"
                                             type="primary" shape="round" size="middle">
                                             รายละเอียด...
@@ -433,7 +434,7 @@
                                                 <div class="flex items-center">
                                                     <StarOutlined class="text-amber-600" />&nbsp;
                                                     <span class="dark:text-white text-white">{{ dmd.User_Detail
-                                                        }}</span>
+                                                    }}</span>
                                                 </div>
                                             </template>
                                             <div>
@@ -749,10 +750,8 @@ const handleCardClick = async (PinCode: string, id: number, items: any) => {
     })
 }
 async function updateTimeLineChart(items: any) {
-    console.log(items);
     data.series[0].data = [100, 100, 100]
     data.chartOptions.xaxis.categories = [items.Program_Name + ': ' + 'DEV', items.Program_Name + ': ' + 'UAT', items.Program_Name + ': ' + 'PRODUCT']
-    console.log(data.series[0]);
     return data;
 }
 function hideElement() {
@@ -812,10 +811,24 @@ onMounted(() => {
     overflow: hidden;
 }
 
+.edit-card-horizontal {
+    /* background-color: #f0f2f5; */
+    /* height: 500px; */
+    /* max-height: 500px; */
+    overflow: hidden;
+}
+
+.edit-card-content-head {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .edit-card-content-horizontal {
     display: -webkit-box;
-    -webkit-line-clamp: 5;
-    line-clamp: 5;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    text-indent: 25px;
     /* จำนวนบรรทัดที่ต้องการ */
     -webkit-box-orient: vertical;
     overflow: hidden;
