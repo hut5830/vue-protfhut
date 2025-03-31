@@ -106,11 +106,11 @@
                                         {{ new Date(dm.BirthDay).toLocaleDateString('en-GB') }}
                                     </span>
                                 </a-col>
-                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
+                                <!-- <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
                                     <CreditCardOutlined class="text-green-500" />&nbsp; บัตรประชาชน: <span>
                                         {{ dm.IDCard }}
                                     </span>
-                                </a-col>
+                                </a-col> -->
                             </a-row>
 
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
@@ -179,7 +179,7 @@
                             </div>
 
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
-                                <span class="dark:text-white text-white">ติดต่อ</span></a-divider>
+                                <span class="dark:text-white text-white">ติดต่อส่วนตัว</span></a-divider>
 
                             <a-row :gutter="[10, 10]">
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
@@ -209,7 +209,7 @@
                             </a-row>
 
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
-                                <span class="dark:text-white text-white">Resume</span>
+                                <span class="dark:text-white text-white">ประวัติ (Resume)</span>
                             </a-divider>
 
                             <a-row>
@@ -302,10 +302,55 @@
                 <a-row :gutter="[0, 15]" class="m-5">
                     <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                         <a-divider><span class="dark:text-white text-white">โปรแกรมที่เคยพัฒนา</span></a-divider>
+                        <a-row :gutter="[0, 50]">
+                            <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12"
+                                class="flex justify-center items-center">
+                                <a-button class="" type="primary" shape="round" size="middle"
+                                    @click="idDesignProgram = 1;">
+                                    รูปแบบ 1 (แนวตั้ง)
+                                </a-button>
+                            </a-col>
+                            <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12"
+                                class="flex justify-center items-center">
+                                <a-button class="bg-green-600" type="primary" shape="round" size="middle"
+                                    @click="idDesignProgram = 2;">
+                                    รูปแบบ 2 (แนวนอน)
+                                </a-button>
+                            </a-col>
+                        </a-row>
+                        <a-row v-if="dataMyselfProgram.length > 0 && idDesignProgram === 1" :gutter="[15, 15]"
+                            class="pt-5 fade-in-myprogram">
+                            <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6" v-for="program in dataMyselfProgram"
+                                :key="program.ID_Auto">
+                                <a-card hoverable class="shadow-md">
+                                    <template #cover>
+                                        <img :src="program.Program_Image" alt="Program Icon"
+                                            class="w-32 h-72 my-2 mr-2 rounded-md object-cover" />
+                                    </template>
+                                    <template #default>
+                                        <h3 class="text-lg font-bold">{{ program.Program_Name }}</h3>
+                                        <p class="text-sm edit-card-content-horizontal ">{{ program.Program_Description
+                                            }}</p>
+                                    </template>
+                                    <template #actions>
+                                        <a class="text-sm text-blue-500"
+                                            @click="isLoading = true; moreDetail = program.ID_Auto; handleCardClick(PinCode, program.ID_Auto, program)"
+                                            type="primary" shape="round" size="middle">
+                                            รายละเอียด...
+                                        </a>
+                                    </template>
+                                </a-card>
+                            </a-col>
+                            <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6"
+                                class=" justify-items-center content-center">
+                                <p class="text-2xl dark:text-white text-white edit-card-content-horizontal">Comming
+                                    Soon...</p>
+                            </a-col>
+                        </a-row>
                     </a-col>
                 </a-row>
 
-                <a-row v-if="dataMyselfProgram.length > 0">
+                <a-row v-if="dataMyselfProgram.length > 0 && idDesignProgram === 2" class="fade-in-myprogram">
                     <a-col v-for="dmp, i in dataMyselfProgram" :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
                         <div class="p-2">
                             <a-card class="shadow-md edit-card" style="border-top: 5px solid #0064ffa3;" hoverable>
@@ -526,6 +571,7 @@ const base_url = useRuntimeConfig().public.apiBaseUrl;
 const dataMyself = ref<any>([])
 const dataMyselfProgram = ref<any>([])
 const dataMyselfDetail = ref<any>([])
+const idDesignProgram = ref<number>(1)
 const dataTimeLine = ref<any>([
     {
         Year: 'ปี 2568 - ปัจจุบัน',
@@ -705,7 +751,7 @@ const handleCardClick = async (PinCode: string, id: number, items: any) => {
 async function updateTimeLineChart(items: any) {
     console.log(items);
     data.series[0].data = [100, 100, 100]
-    data.chartOptions.xaxis.categories = [items.Program_Name + ': ' + 'DEV',items.Program_Name + ': ' +  'UAT',items.Program_Name + ': ' +  'PRODUCT']
+    data.chartOptions.xaxis.categories = [items.Program_Name + ': ' + 'DEV', items.Program_Name + ': ' + 'UAT', items.Program_Name + ': ' + 'PRODUCT']
     console.log(data.series[0]);
     return data;
 }
@@ -761,6 +807,15 @@ onMounted(() => {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     line-clamp: 3;
+    /* จำนวนบรรทัดที่ต้องการ */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.edit-card-content-horizontal {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
     /* จำนวนบรรทัดที่ต้องการ */
     -webkit-box-orient: vertical;
     overflow: hidden;
