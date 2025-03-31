@@ -1,7 +1,7 @@
 <template>
     <div class="WelcomeStart"
-        style="position: fixed; top: -3%; left: 0%; transform: translate(-50%, -50%); width: 100%;height: 100%; z-index: 9999;">
-        <p>ยินดีต้อนรับเข้าสู่เว็บไซต์ (Portfolio)</p>
+        style="position: fixed; top: -3%; left: 0%; z-index: 9999;">
+        <p class="WelcomeStartText">ยินดีต้อนรับเข้าสู่เว็บไซต์ (Portfolio)</p>
     </div>
 </template>
 
@@ -14,18 +14,13 @@
     font-size: 2rem;
     font-weight: bold;
     color: #ffffff;
-    /* Gray-700 */
-    text-align: center;
+
     margin-top: 20px;
     margin-bottom: 20px;
-    padding: 10px;
-    border-radius: 8px;
     background-color: #909090ac;
     /* Gray-100 */
     display: flex;
     justify-content: center;
-    top: 40%;
-    left: 35%;
     z-index: 1000;
     width: 100%;
     height: 100%;
@@ -45,9 +40,36 @@
     pointer-events: none;
     /* Disable interactions while animating */
 }
+.WelcomeStartText{
+    animation: fadeInWelcomeText 1s ease-in-out, fadeOutWelcomeText 1s ease-in-out 1s;
+    animation-delay: 0s, 2s;
+    animation-fill-mode: forwards, forwards;
+    pointer-events: none;
+    /* Disable interactions while animating */
+}
 
 
 @keyframes fadeInWelcome {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOutWelcome {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeInWelcomeText {
     0% {
         opacity: 0;
         transform: translateX(-450px);
@@ -59,7 +81,7 @@
     }
 }
 
-@keyframes fadeOutWelcome {
+@keyframes fadeOutWelcomeText {
     0% {
         opacity: 1;
         transform: translateX(0px);
