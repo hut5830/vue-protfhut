@@ -5,10 +5,10 @@
                 <a-page-header v-if="dataMyself.length > 0" style="border-bottom: 2px solid aliceblue;
                 border-bottom-right-radius: 15%;">
                     <template #title>
-                        <h1 class="text-2xl font-bold dark:text-white">{{ `Portfolio` }}</h1>
+                        <h1 class="text-2xl font-bold dark:text-white text-white">{{ `Portfolio` }}</h1>
                     </template>
                     <template #subTitle>
-                        <span class="text-sm typing-text dark:text-white">{{ displayText }}</span>
+                        <span class="text-sm typing-text dark:text-white text-white">{{ displayText }}</span>
                     </template>
                     <template #avatar>
                         <img src="https://cdn-icons-png.flaticon.com/512/2210/2210153.png" alt="Avatar"
@@ -25,10 +25,10 @@
             <a-col :xs="24" :sm="24" :md="24" :lg="15" :xl="15" v-if="isHidden">
                 <a-page-header style="align-content: center;width: 100%;" :class="{ 'hidden': isHidden }">
                     <template #title>
-                        <h1 class="text-2xl font-bold dark:text-white">{{ `Portfolio` }}</h1>
+                        <h1 class="text-2xl font-bold dark:text-white text-white">{{ `Portfolio` }}</h1>
                     </template>
                     <template #subTitle>
-                        <span class="text-sm typing-text dark:text-white">{{ displayText }}</span>
+                        <span class="text-sm typing-text dark:text-white text-white">{{ displayText }}</span>
                     </template>
                     <template #avatar>
                         <img @animationend="hideElement" src="https://cdn-icons-png.flaticon.com/512/2210/2210153.png"
@@ -40,7 +40,7 @@
             <a-col :xs="24" :sm="24" :md="9" :lg="5" :xl="5" class="shadow-2xl"
                 :class="{ 'fade-in-connect': dataMyself.length > 0 }" style="border-right: 2px solid aliceblue;
                     border-top-right-radius:5%;">
-                <a-layout-sider class="dark:text-white"
+                <a-layout-sider class="dark:text-white text-white"
                     :class="{ 'fade-in-image': activeApple, 'fade-out-image bg-blue-000': !activeApple }" width="100%">
                     <div class="img">
                         <div v-if="activeApple"
@@ -83,7 +83,7 @@
                         <div v-for="dm in dataMyself">
                             <legend class="px-2 pt-5">My Profile</legend>
                             <a-divider v-if="dataMyself.length > 0" class="mt-5">
-                                <span class="text-sm dark:text-white">ข้อมูลส่วนตัว</span>
+                                <span class="text-sm dark:text-white text-white">ข้อมูลส่วนตัว</span>
                             </a-divider>
                             <a-row :gutter="[10, 10]">
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
@@ -114,7 +114,7 @@
                             </a-row>
 
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
-                                <span class="text-sm dark:text-white">พื้นฐานความสามารถ</span>
+                                <span class="text-sm dark:text-white text-white">พื้นฐานความสามารถ</span>
                             </a-divider>
 
                             <div>
@@ -125,7 +125,7 @@
                                 <a-tag color="cyan" class="m-1">MySQL</a-tag>
                             </div>
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
-                                <span class="text-sm dark:text-white">Framework&UI ที่ใช้ในการพัฒนา</span>
+                                <span class="text-sm dark:text-white text-white">Framework&UI ที่ใช้ในการพัฒนา</span>
                             </a-divider>
                             <a-tag color="green" class="m-1">
                                 Nuxt.JS
@@ -147,7 +147,7 @@
                                 Tailwind CSS
                             </a-tag>
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
-                                <span class="text-sm dark:text-white">ภาษาที่ใช้ในการพัฒนา (FrontEnd)</span>
+                                <span class="text-sm dark:text-white text-white">ภาษาที่ใช้ในการพัฒนา (FrontEnd)</span>
                             </a-divider>
                             <div>
                                 <a-tag color="black" class="m-1 !text-white">
@@ -164,7 +164,7 @@
                                 </a-tag>
                             </div>
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
-                                <span class="text-sm dark:text-white">ภาษาที่ใช้ในการพัฒนา (BackEnd)</span>
+                                <span class="text-sm dark:text-white text-white">ภาษาที่ใช้ในการพัฒนา (BackEnd)</span>
                             </a-divider>
                             <div>
                                 <a-tag color="black" class="m-1 !text-yellow-300">
@@ -179,7 +179,7 @@
                             </div>
 
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
-                                <span class="dark:text-white">ติดต่อ</span></a-divider>
+                                <span class="dark:text-white text-white">ติดต่อ</span></a-divider>
 
                             <a-row :gutter="[10, 10]">
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="flex items-center">
@@ -209,7 +209,7 @@
                             </a-row>
 
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
-                                <span class="dark:text-white">Resume</span>
+                                <span class="dark:text-white text-white">Resume</span>
                             </a-divider>
 
                             <a-row>
@@ -230,7 +230,7 @@
 
             <a-col v-if="dataMyself.length > 0" :xs="24" :sm="24" :md="15" :lg="19" :xl="19"
                 :class="{ 'fade-in-myprogram': dataMyself.length > 0 }">
-                <a-row :gutter="[0, 15]" class="m-5 dark:text-white">
+                <a-row :gutter="[0, 15]" class="m-5 dark:text-white text-white">
                     <a-col :xs="24" :sm="24" :md="18" :lg="18" :xl="18" class="flex flex-col justify-between">
                         <template #default>
                             <p class="text-lg font-bold">
@@ -252,9 +252,9 @@
                                 <a-col :xs="11" :sm="11" :md="18" :lg="18" :xl="18" class="self-center">
                                     <div class="flex justify-start items-center space-x-3">
                                         <div>
-                                            <h1 class="dark:text-white text-4xl font-bold space-y-1">RESUME</h1>
+                                            <h1 class="dark:text-white text-white text-4xl font-bold space-y-1">RESUME</h1>
                                             <br />
-                                            <h1 class="dark:text-white text-xl font-bold space-y-1">TATCHAKORN CHOMYONG
+                                            <h1 class="dark:text-white text-white text-xl font-bold space-y-1">TATCHAKORN CHOMYONG
                                             </h1>
                                         </div>
                                     </div>
@@ -299,7 +299,7 @@
 
                 <a-row :gutter="[0, 15]" class="m-5">
                     <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                        <a-divider><span class="dark:text-white">โปรแกรมที่เคยพัฒนา</span></a-divider>
+                        <a-divider><span class="dark:text-white text-white">โปรแกรมที่เคยพัฒนา</span></a-divider>
                     </a-col>
                 </a-row>
 
@@ -332,7 +332,7 @@
                         </div>
                     </a-col>
                     <a-col :xs="24" :sm="12" :md="12" :lg="8" :xl="8" class=" content-center justify-items-center">
-                        <div class="p-2 dark:text-white text-2xl">
+                        <div class="p-2 dark:text-white text-white text-2xl">
                             <p>CommingSoon...</p>
                         </div>
                     </a-col>
@@ -348,7 +348,7 @@
                 </a-row>
 
                 <a-divider id="scrollTo" v-if="moreDetail > 0">
-                    <span class="dark:text-white">ข้อมูลระบบ</span>
+                    <span class="dark:text-white text-white">ข้อมูลระบบ</span>
                 </a-divider>
 
                 <div v-for="dmp, i in dataMyselfProgram" :key="dmp.ID_Auto">
@@ -377,7 +377,7 @@
                             </span>
                             <div>
                                 <a-divider v-if="moreDetail > 0" class="mt-5"><span
-                                        class="dark:text-white">ส่วนเสริมที่ใช้ในระบบ</span></a-divider>
+                                        class="dark:text-white text-white">ส่วนเสริมที่ใช้ในระบบ</span></a-divider>
 
                                 <div class="p-2" v-if="moreDetail > 0">
                                     <a-collapse v-model:activeKey="activeKey" class="dark:bg-gray-500">
@@ -385,7 +385,7 @@
                                             <template #header>
                                                 <div class="flex items-center">
                                                     <StarOutlined class="text-amber-600" />&nbsp;
-                                                    <span class="dark:text-white">{{ dmd.User_Detail }}</span>
+                                                    <span class="dark:text-white text-white">{{ dmd.User_Detail }}</span>
                                                 </div>
                                             </template>
                                             <div>
@@ -401,7 +401,7 @@
 
                 <a-row :gutter="[0, 15]" class="m-5">
                     <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                        <a-divider><span class="dark:text-white">เครื่องมือที่ใช้พัฒนา
+                        <a-divider><span class="dark:text-white text-white">เครื่องมือที่ใช้พัฒนา
                                 สำหรับเว็บไซต์นี้</span></a-divider>
                     </a-col>
                 </a-row>
