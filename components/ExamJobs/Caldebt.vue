@@ -1,13 +1,15 @@
 <template>
     <div class="overflow-auto whitespace-nowrap">
         <table class="table-auto border-solid border border-gray-400 w-full text-left">
-            <tr>
-                <th class="text-center">ลำดับ</th>
-                <th class="text-center">วันที่ชำระ</th>
-                <th class="text-center">งวด</th>
-                <th class="text-center">ยอดชำระ</th>
-                <th class="text-center">ยอดค้างชำระ</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th class="text-center">ลำดับ</th>
+                    <th class="text-center">วันที่ชำระ</th>
+                    <th class="text-center">งวด</th>
+                    <th class="text-center">ยอดชำระ</th>
+                    <th class="text-center">ยอดค้างชำระ</th>
+                </tr>
+            </thead>
             <tr v-for="r, i in tableData" :key="i" class="border-solid border-t border-b border-gray-400 text-xs">
                 <td class="border-solid border-l border-gray-400">{{ i + 1 }}</td>
                 <td class="border-solid border-l border-gray-400">{{ r.date_pay }}</td>

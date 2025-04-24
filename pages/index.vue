@@ -60,10 +60,20 @@
 
                     <div class="m-5">
                         <a-input-group compact>
-                            <a-button style="width: 100%;" type="primary"
+                            <a-button style="width: 100%;" type="primary" shape="round" size="middle" 
                                 :class="{ 'bg-green-600': dataMyself.length > 0 }" :loading="isLoading"
                                 @click="activeApple = true; getCongrat()">
                                 {{ dataMyself.length > 0 ? 'เชื่อมต่อสำเร็จ (Reconnect..)' : 'เชื่อมต่อ..' }}</a-button>
+                        </a-input-group>
+                    </div>
+
+                    <div class="m-5" v-if="dataMyself.length > 0">
+                        <a-input-group compact>
+                            <a-button shape="round" size="middle" class="btn-ai" @click="activeAI = !activeAI;">
+                                <span v-if="activeAI === false">🤖🚀 AI ติดต่อด้วยข้อความ <span class="text-red-700 text-base font-bold ml-2">NEW</span></span>
+                                <span v-if="activeAI === true">🤖🚀 รายละเอียดข้อมูล</span>
+                                
+                            </a-button>
                         </a-input-group>
                     </div>
 
@@ -233,12 +243,13 @@
                 <a-row :gutter="[0, 15]" class="m-5 dark:text-white text-white">
                     <a-col :xs="24" :sm="24" :md="18" :lg="18" :xl="18" class="flex flex-col justify-between">
                         <template #default>
-                            <p class="text-lg font-bold">
+                            <p v-if="activeAI === false" class="text-lg font-bold">
                                 สิ่งที่ชอบในการเขียนโปรแกรม
                             </p>
-                            <span class="mt-5 text-base" style="text-indent: 1rem;">
+                            <span v-if="activeAI === false" class="mt-5 text-base" style="text-indent: 1rem;">
                                 {{ displayTextContain }}
                             </span>
+                            <AI v-if="dataMyself.length > 0 && activeAI === true" class="text-blue-500" />
 
 
                             <a-row :gutter="[15, 15]" class="pt-5">
@@ -331,7 +342,7 @@
                                         <h3 class="text-lg font-bold edit-card-content-head">{{
                                             program.Program_Name }}</h3>
                                         <p class="text-sm edit-card-content-horizontal ">{{ program.Program_Description
-                                        }}</p>
+                                            }}</p>
                                     </template>
                                     <template #actions>
                                         <a class="text-base text-blue-500"
@@ -434,7 +445,7 @@
                                                 <div class="flex items-center">
                                                     <StarOutlined class="text-amber-600" />&nbsp;
                                                     <span class="dark:text-white text-white">{{ dmd.User_Detail
-                                                    }}</span>
+                                                        }}</span>
                                                 </div>
                                             </template>
                                             <div>
@@ -566,6 +577,7 @@ import JJSaleAsset from '~/components/ExamJobs/JJSaleAsset.vue';
 import WInsurance from '~/components/ExamJobs/WInsurance.vue';
 import VueApexCharts from "vue3-apexcharts";
 import ApexCharts from "apexcharts";
+import { RobotOutlined } from '@ant-design/icons-vue';
 
 const apexchart = VueApexCharts;
 const base_url = useRuntimeConfig().public.apiBaseUrl;
@@ -609,6 +621,7 @@ const isLoading = ref<boolean>(false)
 const moreDetail = ref<number>(0)
 const isHidden = ref(false);
 const openExam = ref(false);
+const activeAI = ref(false);
 const idExamJobs = ref<number>();
 const data: any = {
     series: [{
@@ -1032,4 +1045,19 @@ onMounted(() => {
     }
 
 }
+
+a-button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(0, 201, 255, 0.6);
+}
+.btn-ai {
+    width: 100%;
+      background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
+      color: #000;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0, 201, 255, 0.4);
+      border: none;
+      transition: all 0.3s ease;
+}
+
 </style>
