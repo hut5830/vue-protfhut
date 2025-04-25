@@ -1,18 +1,21 @@
 <template>
     <div>
-        <p class="text-lg font-bold text-white">
-            AI Chatbot (เฉพาะข้อมูลบุคคล)
+        <p class="text-xl font-bold text-white">
+            AI ข้อความตอบกลับ (เฉพาะข้อมูลบุคคล)
         </p>
         <div class="m-2"
             style="border: 1px solid #ccc; border-radius: 10px;  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
             <div v-if="messageChatbotArray.length > 0"
-                style="height: 400px; overflow-y: auto; border-bottom: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+                style="height: 400px; overflow-y: auto; border-bottom: 1px solid #ccc; padding: 10px; margin-bottom: 10px;"
+                ref="chatContainer">
                 <div v-for="(message, index) in messageChatbotArray" :key="index">
                     <div v-if="message.question" class="message-box user-message">
-                        <strong>You:</strong> {{ message.question }}
+                        <strong>You: </strong> <span>{{ message.question }}</span> <span style="font-size: 0.6rem;"> {{ message.time }}</span>
                     </div>
                     <div v-if="message.answer" class="message-box ai-message">
-                        <strong>AI:</strong> {{ message.answer }}
+
+                        <!-- <strong>AI:</strong> -->
+                        <span v-html="formatText(message.answer)" />
                     </div>
                 </div>
             </div>
@@ -20,14 +23,16 @@
                 style="height: 400px; overflow-y: auto; border-bottom: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
                 <div class="message-box ai-message">
                     <strong>AI:</strong> คุณต้องการสอบถามข้อมูลบุคคลหรือไม่ เช่น (<a-button size="small"
-                        @click="messageChatbot = 'ข้อมูลส่วนตัว',chatbot()">ข้อมูลส่วนตัว</a-button>, <a-button size="small"
-                        @click="messageChatbot = 'ประวัติการทำงาน',chatbot()">ประวัติการทำงาน</a-button>,<a-button size="small"
-                        @click="messageChatbot = 'การศึกษา',chatbot()">การศึกษา</a-button> และอื่นๆ) หรือไม่?
+                        @click="messageChatbot = 'ข้อมูลส่วนตัว', chatbot()">ข้อมูลส่วนตัว</a-button>, <a-button
+                        size="small"
+                        @click="messageChatbot = 'ประวัติการทำงาน', chatbot()">ประวัติการทำงาน</a-button>,<a-button
+                        size="small" @click="messageChatbot = 'การศึกษา', chatbot()">การศึกษา</a-button> และอื่นๆ)
+                    หรือไม่?
                 </div>
             </div>
             <div style="display: flex; gap: 10px; padding: 10px;">
                 <a-input type="text" @keyup.enter="chatbot" v-model:value="messageChatbot"
-                    placeholder="Type your message..."
+                    placeholder="เริ่มต้นพิมพ์สอบถามข้อมูล..."
                     style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" />
                 <button @click="chatbot" class="color-ai">
                     Send
@@ -40,17 +45,19 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const messageChatbotArray: any = ref([
-]);
+const messageChatbotArray: any = ref([]);
 const messageChatbot: any = ref('');
-const userInput: any = ref('');
+const chatContainer = ref<HTMLElement | null | any>(null);
 const index: any = ref(0);
 async function chatbot() {
     if (!messageChatbot.value || messageChatbot.value.trim() === '') return;
 
-    messageChatbotArray.value.push({ answer: '', question: '' });
+    const timeHH = new Date().toLocaleTimeString('th-TH', { hour12: false });
+    messageChatbotArray.value.push({ answer: '', question: '', time: timeHH });
     messageChatbotArray.value[index.value]['question'] = messageChatbot.value;
     messageChatbot.value = '';
+
+    messageChatbotArray.value[index.value]['answer'] = 'AI:' + ' กำลังตอบกลับ...';
 
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -100,6 +107,9 @@ async function chatbot() {
                             const jsonString = line.replace('data:', '').trim();
                             if (jsonString === "[DONE]") break;
                             const json = JSON.parse(jsonString);
+                            if (messageChatbotArray.value[index.value]['answer'] === '') {
+                                messageChatbotArray.value[index.value]['answer'] = 'AI: ';
+                            }
                             messageChatbotArray.value[index.value]['answer'] += json.answer ? json.answer : '';
                         }
                     }
@@ -111,9 +121,29 @@ async function chatbot() {
         }
     });
 }
+
+function formatText(input: string): string {
+    return input
+        .trim() // ตัดช่องว่างหน้าหลังสุด
+        .replace(/\r\n|\r|\n/g, '<br>') // เปลี่ยนทุกบรรทัดเป็น <br>
+        .replace(/\*([^*]+)\*/g, '<strong>$1</strong>') // *ตัวหนา*
+        .replace(/_([^_]+)_/g, '<i>$1</i>') // _ตัวเอียง_
+        .replace(/(^|<br>)\s*([^\s<:\n-][^:<]*?):/g, '$1<strong>$2:</strong>') // ครอบหัวข้อ: ที่ไม่ใช่ - list
+        .replace(/<br>\s*- /g, '<br>&nbsp;&nbsp;- '); // เพิ่ม indent หน้า list item
+}
+// ทำให้ไหลลงล่างเมื่อข้อความเพิ่ม
+watch(messageChatbotArray.value, async () => {
+    await nextTick(); // รอให้ข้อความ render เสร็จก่อน
+    if (chatContainer.value) {
+        chatContainer.value.scrollTo({
+            top: chatContainer.value.scrollHeight,
+            behavior: 'smooth',
+        });
+    }
+});
 onMounted(() => {
-    chatbot
-})
+    chatbot();
+});
 </script>
 
 
