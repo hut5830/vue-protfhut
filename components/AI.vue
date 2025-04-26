@@ -134,7 +134,7 @@ async function chatbot() {
                                 messageChatbotArray.value[index.value]['answer'] += json.data.text ? json.data.text : json.data.outputs && json.data.outputs.text ? json.data.outputs.text : '';
                             } else {
                                 // Chatbot จะตอบกลับเป็น answer
-                                messageChatbotArray.value[index.value]['answer'] += json.answer ? json.answer : '';
+                                messageChatbotArray.value[index.value]['answer'] += json.answer ? json.answer : json.data.outputs && json.data.outputs.text ? json.data.outputs.text : '';
                             }
                         }
                     }
