@@ -7,7 +7,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiBaseUrl: process.env.API_BASE_URL
+      apiBaseUrl: process.env.API_BASE_URL,
+      CHAT_BOT_API_KEY: process.env.CHAT_BOT_API_KEY,
+      CHAT_BOT_AUTH: process.env.CHAT_BOT_AUTH
     }
   },
   ssr: false

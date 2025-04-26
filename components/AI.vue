@@ -10,7 +10,8 @@
                 ref="chatContainer">
                 <div v-for="(message, index) in messageChatbotArray" :key="index">
                     <div v-if="message.question" class="message-box user-message">
-                        <strong>You: </strong> <span>{{ message.question }}</span> <span style="font-size: 0.6rem;"> {{ message.time }}</span>
+                        <strong>You: </strong> <span>{{ message.question }}</span> <span style="font-size: 0.6rem;"> {{
+                            message.time }}</span>
                     </div>
                     <div v-if="message.answer" class="message-box ai-message">
 
@@ -44,6 +45,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+const publicEnv = useRuntimeConfig().public;
 
 const messageChatbotArray: any = ref([]);
 const messageChatbot: any = ref('');
@@ -61,15 +63,26 @@ async function chatbot() {
 
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", "Bearer app-RXM8b2R8O3kNu2iFlNzVePBr");
+    myHeaders.append("Authorization", `${publicEnv.CHAT_BOT_AUTH}`);
 
-    const raw = JSON.stringify({
-        "inputs": {},
-        "query": messageChatbotArray.value[index.value]['question'],
-        "response_mode": "streaming",
-        "conversation_id": "",
-        "user": "TATH-5830"
-    });
+    const raw = JSON.stringify(
+        publicEnv.CHAT_BOT_API_KEY == 'workflows/run' ?
+            {
+                "inputs": {
+                    "query": messageChatbotArray.value[index.value]['question']
+                },
+                "response_mode": "streaming",
+                "conversation_id": "",
+                "user": "TATH-5830"
+            } :
+            {
+                "inputs": {},
+                "query": messageChatbotArray.value[index.value]['question'],
+                "response_mode": "streaming",
+                "conversation_id": "",
+                "user": "TATH-5830"
+            }
+    );
 
     const requestOptions: any = {
         method: "POST",
@@ -78,7 +91,12 @@ async function chatbot() {
         redirect: "follow"
     };
 
-    const response = await fetch("https://api.dify.ai/v1/chat-messages", requestOptions);
+    const baseEndPoint = publicEnv.CHAT_BOT_API_KEY || 'workflows/run'
+    const response = await fetch(`https://api.dify.ai/v1/${baseEndPoint}`, requestOptions);
+    if (!response.ok) {
+        messageChatbotArray.value[index.value]['answer'] = 'AI: ' + 'เกิดข้อผิดพลาดในการเชื่อมต่อกับ AI';
+        return;
+    }
     const reader = response.body?.getReader();
     const decoder = new TextDecoder("utf-8");
     let buffer = '';
@@ -110,7 +128,13 @@ async function chatbot() {
                             if (messageChatbotArray.value[index.value]['answer'] === '') {
                                 messageChatbotArray.value[index.value]['answer'] = 'AI: ';
                             }
-                            messageChatbotArray.value[index.value]['answer'] += json.answer ? json.answer : '';
+                            if (baseEndPoint === 'workflows/run') {
+                                // Workflow จะตอบกลับเป็น data.text
+                                messageChatbotArray.value[index.value]['answer'] += json.data.text ? json.data.text : '';
+                            } else {
+                                // Chatbot จะตอบกลับเป็น answer
+                                messageChatbotArray.value[index.value]['answer'] += json.answer ? json.answer : '';
+                            }
                         }
                     }
                     controller.enqueue(value);
