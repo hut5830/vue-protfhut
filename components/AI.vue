@@ -128,9 +128,10 @@ async function chatbot() {
                             if (messageChatbotArray.value[index.value]['answer'] === '') {
                                 messageChatbotArray.value[index.value]['answer'] = 'AI: ';
                             }
+                            console.log(json.data);
                             if (baseEndPoint === 'workflows/run') {
                                 // Workflow จะตอบกลับเป็น data.text
-                                messageChatbotArray.value[index.value]['answer'] += json.data.text ? json.data.text : '';
+                                messageChatbotArray.value[index.value]['answer'] += json.data.text ? json.data.text : json.data.outputs && json.data.outputs.text ? json.data.outputs.text : '';
                             } else {
                                 // Chatbot จะตอบกลับเป็น answer
                                 messageChatbotArray.value[index.value]['answer'] += json.answer ? json.answer : '';
