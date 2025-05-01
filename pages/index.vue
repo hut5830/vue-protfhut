@@ -1,9 +1,9 @@
 <template>
     <div>
-        <a-row :class="{ 'shadow-4xl bg-gray-800': dataMyself.length > 0, 'fadein-to-header': dataMyself.length == 0 }">
+        <a-row
+            :class="{ 'shadow-4xl bg-gray-800 border-b-2 border-aliceblue rounded-b-[25%]': dataMyself.length > 0, 'fadein-to-header': dataMyself.length == 0 }">
             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                <a-page-header v-if="dataMyself.length > 0" style="border-bottom: 2px solid aliceblue;
-                border-bottom-right-radius: 15%;">
+                <a-page-header v-if="dataMyself.length > 0" style="justify-self: center">
                     <template #title>
                         <h1 class="text-2xl font-bold dark:text-white text-white">{{ `Portfolio` }}</h1>
                     </template>
@@ -60,7 +60,7 @@
 
                     <div class="m-5">
                         <a-input-group compact>
-                            <a-button style="width: 100%;" type="primary" shape="round" size="middle" 
+                            <a-button style="width: 100%;" type="primary" shape="round" size="middle"
                                 :class="{ 'bg-green-600': dataMyself.length > 0 }" :loading="isLoading"
                                 @click="activeApple = true; getCongrat()">
                                 {{ dataMyself.length > 0 ? 'เชื่อมต่อสำเร็จ (Reconnect..)' : 'เชื่อมต่อ..' }}</a-button>
@@ -70,14 +70,14 @@
                     <div class="m-5" v-if="dataMyself.length > 0">
                         <a-input-group compact>
                             <a-button shape="round" size="middle" class="btn-ai" @click="activeAI = !activeAI;">
-                                <span v-if="activeAI === false">🤖🚀 AI ติดต่อด้วยข้อความ <span class="text-red-700 text-base font-bold ml-2">NEW</span></span>
+                                <span v-if="activeAI === false">🤖🚀 AI ติดต่อด้วยข้อความ <span
+                                        class="text-red-700 text-base font-bold ml-2">NEW</span></span>
                                 <span v-if="activeAI === true">🤖🚀 รายละเอียดข้อมูล</span>
-                                
                             </a-button>
                         </a-input-group>
                     </div>
 
-                    <a-row :gutter="[0, 15]" class="m-5" v-if="isLoading === true && dataMyself.length == 0">
+                    <a-row :gutter="[0, 15]" class="m-5" v-if="isHidden === true && dataMyself.length == 0">
                         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                             <a-skeleton active />
                         </a-col>
@@ -250,7 +250,8 @@
                                 {{ displayTextContain }}
                             </span>
                             <AI v-if="dataMyself.length > 0 && activeAI === true" class="text-blue-500" />
-
+                            <a-divider v-if="dataMyself.length > 0 && activeAI === true" class="mt-5"><span
+                                    class="dark:text-white text-white">RESUME</span></a-divider>
 
                             <a-row :gutter="[15, 15]" class="pt-5">
                                 <a-col :xs="13" :sm="13" :md="13" :lg="6" :xl="6">
@@ -289,7 +290,14 @@
                                     </template>
                                     <template #extra>
                                         <a-button type="primary" shape="round" size="middle">
-                                            1 ปี 11 เดือน
+                                            {{ moment.duration(moment(new Date()).diff(moment('2023-05-22'))).years()
+                                            }}
+                                            ปี
+                                            {{ moment.duration(moment(new Date()).diff(moment('2023-05-22'))).months() }}
+                                            เดือน
+                                            {{ moment.duration(moment(new Date()).diff(moment('2023-05-22'))).days()
+                                            }}
+                                            วัน
                                         </a-button>
                                     </template>
                                     <template #default>
@@ -342,7 +350,7 @@
                                         <h3 class="text-lg font-bold edit-card-content-head">{{
                                             program.Program_Name }}</h3>
                                         <p class="text-sm edit-card-content-horizontal ">{{ program.Program_Description
-                                            }}</p>
+                                        }}</p>
                                     </template>
                                     <template #actions>
                                         <a class="text-base text-blue-500"
@@ -445,7 +453,7 @@
                                                 <div class="flex items-center">
                                                     <StarOutlined class="text-amber-600" />&nbsp;
                                                     <span class="dark:text-white text-white">{{ dmd.User_Detail
-                                                        }}</span>
+                                                    }}</span>
                                                 </div>
                                             </template>
                                             <div>
@@ -578,6 +586,7 @@ import WInsurance from '~/components/ExamJobs/WInsurance.vue';
 import VueApexCharts from "vue3-apexcharts";
 import ApexCharts from "apexcharts";
 import { RobotOutlined } from '@ant-design/icons-vue';
+import moment from 'moment';
 
 const apexchart = VueApexCharts;
 const base_url = useRuntimeConfig().public.apiBaseUrl;
@@ -1050,14 +1059,14 @@ a-button:hover {
     transform: scale(1.03);
     box-shadow: 0 6px 20px rgba(0, 201, 255, 0.6);
 }
+
 .btn-ai {
     width: 100%;
-      background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
-      color: #000;
-      font-weight: bold;
-      box-shadow: 0 4px 15px rgba(0, 201, 255, 0.4);
-      border: none;
-      transition: all 0.3s ease;
+    background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
+    color: #000;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 201, 255, 0.4);
+    border: none;
+    transition: all 0.3s ease;
 }
-
 </style>

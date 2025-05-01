@@ -1,43 +1,54 @@
 <template>
     <div>
-        <p class="text-xl font-bold text-white">
-            AI ข้อความตอบกลับ (เฉพาะข้อมูลบุคคล)
-        </p>
-        <div class="m-2"
-            style="border: 1px solid #ccc; border-radius: 10px;  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <div class="mr-2"
+            style="border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);background-color: #0d4560;">
+            <div class="text-center text-lg font-bold text-white p-1 mb-2 shadow-lg">{{ iconChatAI }} AI Chatbot</div>
             <div v-if="messageChatbotArray.length > 0"
-                style="height: 400px; overflow-y: auto; border-bottom: 1px solid #ccc; padding: 10px; margin-bottom: 10px;"
+                style="height: 400px; overflow-y: auto; border-bottom: 1px solid #ccc; padding: 10px; margin-bottom: 10px;background-color: #0d4560;"
                 ref="chatContainer">
                 <div v-for="(message, index) in messageChatbotArray" :key="index">
-                    <div v-if="message.question" class="message-box user-message">
-                        <strong>You: </strong> <span>{{ message.question }}</span> <span style="font-size: 0.6rem;"> {{
-                            message.time }}</span>
+                    <!-- คน สอบถาม -->
+                    <div v-if="message.question">
+                        <div style="display: flex; gap: 10px;">
+                            <div class="message-box user-message text-end">
+                                <span>{{ message.question }}</span>
+                                <br />
+                                <span style="font-size: 0.7rem;">{{ message.time }}</span>
+                            </div>
+                            <span class="text-2xl">{{ iconUser }}</span>
+                        </div>
                     </div>
-                    <div v-if="message.answer" class="message-box ai-message">
-
-                        <!-- <strong>AI:</strong> -->
-                        <span v-html="formatText(message.answer)" />
+                    <!-- AI ตอบกลับ -->
+                    <div v-if="message.answer" style="display: flex; gap: 10px;">
+                        <span class="text-2xl">{{ iconChatAI }}</span>
+                        <div class="message-box ai-message">
+                            <span v-html="formatText(message.answer)" />
+                        </div>
                     </div>
                 </div>
             </div>
             <div v-else
                 style="height: 400px; overflow-y: auto; border-bottom: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-                <div class="message-box ai-message">
-                    <strong>AI:</strong> คุณต้องการสอบถามข้อมูลบุคคลหรือไม่ เช่น (<a-button size="small"
-                        @click="messageChatbot = 'ข้อมูลส่วนตัว', chatbot()">ข้อมูลส่วนตัว</a-button>, <a-button
-                        size="small"
-                        @click="messageChatbot = 'ประวัติการทำงาน', chatbot()">ประวัติการทำงาน</a-button>,<a-button
-                        size="small" @click="messageChatbot = 'การศึกษา', chatbot()">การศึกษา</a-button> และอื่นๆ)
-                    หรือไม่?
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span class="text-2xl">{{ iconChatAI }}</span>
+                    <div class="message-box ai-message">
+                        คุณต้องการสอบถามข้อมูลบุคคลหรือไม่ เช่น (<a-button size="small"
+                            @click="messageChatbot = 'สอบถามเรื่อง ข้อมูลส่วนตัว', chatbot()">ข้อมูลส่วนตัว</a-button>,
+                        <a-button size="small"
+                            @click="messageChatbot = 'สอบถามเรื่อง ประวัติการทำงาน', chatbot()">ประวัติการทำงาน</a-button>,<a-button
+                            size="small"
+                            @click="messageChatbot = 'สอบถามเรื่อง การศึกษา', chatbot()">การศึกษา</a-button>
+                        และอื่นๆ)
+                        หรือไม่?
+                    </div>
                 </div>
             </div>
             <div style="display: flex; gap: 10px; padding: 10px;">
                 <a-input type="text" @keyup.enter="chatbot" v-model:value="messageChatbot"
-                    placeholder="เริ่มต้นพิมพ์สอบถามข้อมูล..."
-                    style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" />
-                <button @click="chatbot" class="color-ai">
-                    Send
-                </button>
+                    placeholder="เริ่มต้นพิมพ์สอบถามข้อมูล..." />
+                <a-button @click="chatbot" class="color-ai">
+                    ส่ง
+                </a-button>
             </div>
         </div>
     </div>
@@ -50,7 +61,10 @@ const publicEnv = useRuntimeConfig().public;
 const messageChatbotArray: any = ref([]);
 const messageChatbot: any = ref('');
 const chatContainer = ref<HTMLElement | null | any>(null);
+const iconChatAI = '🤖'
+const iconUser = '👩‍💻'
 const index: any = ref(0);
+
 async function chatbot() {
     if (!messageChatbot.value || messageChatbot.value.trim() === '') return;
 
@@ -59,7 +73,7 @@ async function chatbot() {
     messageChatbotArray.value[index.value]['question'] = messageChatbot.value;
     messageChatbot.value = '';
 
-    messageChatbotArray.value[index.value]['answer'] = 'AI:' + ' กำลังตอบกลับ...';
+    messageChatbotArray.value[index.value]['answer'] = ' กำลังตอบกลับ...';
 
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -94,7 +108,7 @@ async function chatbot() {
     const baseEndPoint = publicEnv.CHAT_BOT_API_KEY || 'workflows/run'
     const response = await fetch(`https://api.dify.ai/v1/${baseEndPoint}`, requestOptions);
     if (!response.ok) {
-        messageChatbotArray.value[index.value]['answer'] = 'AI: ' + 'เกิดข้อผิดพลาดในการเชื่อมต่อกับ AI';
+        messageChatbotArray.value[index.value]['answer'] = 'เกิดข้อผิดพลาดในการเชื่อมต่อกับ AI';
         return;
     }
     const reader = response.body?.getReader();
@@ -119,22 +133,20 @@ async function chatbot() {
                         return;
                     }
 
-
                     for (const line of chunks(value)) {
                         if (line.startsWith('data:')) {
                             const jsonString = line.replace('data:', '').trim();
                             if (jsonString === "[DONE]") break;
                             const json = JSON.parse(jsonString);
-                            if (messageChatbotArray.value[index.value]['answer'] === '') {
-                                messageChatbotArray.value[index.value]['answer'] = 'AI: ';
-                            }
-                            console.log(json);
+                            // if (messageChatbotArray.value[index.value]['answer'] === '') {
+                            //     messageChatbotArray.value[index.value]['answer'] = iconChatAI + ': ';
+                            // }
                             if (baseEndPoint === 'workflows/run') {
                                 // Workflow จะตอบกลับเป็น data.text
                                 messageChatbotArray.value[index.value]['answer'] += json.data.text ? json.data.text : json.data.outputs && json.data.outputs.text ? json.data.outputs.text : '';
                             } else {
                                 // Chatbot จะตอบกลับเป็น answer
-                                messageChatbotArray.value[index.value]['answer'] += json.answer ? json.answer :  '';
+                                messageChatbotArray.value[index.value]['answer'] += json.answer ? json.answer : '';
                             }
                         }
                     }
@@ -166,6 +178,7 @@ watch(messageChatbotArray.value, async () => {
         });
     }
 });
+
 onMounted(() => {
     chatbot();
 });
@@ -179,10 +192,9 @@ onMounted(() => {
     animation: rainbow 5s ease infinite;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 0px 30px;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -192,10 +204,9 @@ onMounted(() => {
     animation: rainbow 5s ease infinite;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 0px 40px;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -205,10 +216,9 @@ onMounted(() => {
     animation: rainbow 5s ease infinite;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 0px 30px;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -228,8 +238,8 @@ onMounted(() => {
 }
 
 .ai-message {
-    background-color: #f1f1f1;
-    color: #333;
+    background: linear-gradient(90deg, #3498db, #995cb3);
+    color: #fff;
     align-self: flex-start;
 }
 
