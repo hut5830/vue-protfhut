@@ -6,8 +6,6 @@
                 <a-page-header v-if="dataMyself.length > 0" style="justify-self: center">
                     <template #title>
                         <h1 class="text-2xl font-bold dark:text-white text-white">{{ `Portfolio` }}</h1>
-                    </template>
-                    <template #subTitle>
                         <span class="text-sm typing-text dark:text-white text-white">{{ displayText }}</span>
                     </template>
                     <template #avatar>
