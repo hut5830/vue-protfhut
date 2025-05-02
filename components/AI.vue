@@ -37,6 +37,7 @@
                 </div>
                 <div v-else class="md:h-[100px] lg:h-[100px] xl:h-[400px] 2xl:h-[400px] sm:h-[12rem] h-[400px]"
                     style="overflow-y: auto; border-bottom: 1px solid #ccc; margin-bottom: 10px;">
+                    {{ checkCssAI }}
                     <WelcomeAI v-if="checkCssAI === false" @animationCompleted="handleAnimationCompleted" />
                     <div v-else style="display: flex; align-items: center; gap: 10px;">
                         <span class="text-2xl">{{ iconChatAI }}</span>
@@ -200,8 +201,8 @@ watch(messageChatbotArray.value, async () => {
     }
 });
 
-const handleAnimationCompleted = () => {
-    return checkCssAI.value = true;
+function handleAnimationCompleted() {
+    checkCssAI.value = true;
 }
 onMounted(() => {
     chatbot();
