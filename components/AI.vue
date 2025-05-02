@@ -200,7 +200,6 @@ watch(messageChatbotArray.value, async () => {
 });
 
 function handleAnimationCompleted() {
-    console.log('Animation completed emitted!')
     checkCssAI.value = true;
 }
 onMounted(() => {
