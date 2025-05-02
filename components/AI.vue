@@ -1,69 +1,90 @@
 <template>
-    <div>
-        <div class="mr-2"
-            style="border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);background-color: #0d4560;">
-            <div class="text-center text-lg font-bold text-white p-1 mb-2 shadow-lg">{{ iconChatAI }} AI Chatbot</div>
-            <div v-if="messageChatbotArray.length > 0"
-                style="height: 400px; overflow-y: auto; border-bottom: 1px solid #ccc; padding: 10px; margin-bottom: 10px;background-color: #0d4560;"
-                ref="chatContainer">
-                <div v-for="(message, index) in messageChatbotArray" :key="index">
-                    <!-- คน สอบถาม -->
-                    <div v-if="message.question">
-                        <div style="display: flex; gap: 10px;">
-                            <div class="message-box user-message text-end">
-                                <span>{{ message.question }}</span>
-                                <br />
-                                <span style="font-size: 0.7rem;">{{ message.time }}</span>
+    <div class="text">
+        <div :class="{ 'hidden': activeAI === false }" class="z-[99] fixed right-[1rem] 
+        w-[18rem] 
+        sm:w-[18rem] sm:top-[1rem] md:top-[5.5rem] lg:top-[5.5rem] xl:top-[5.5rem] 2xl:top-[16rem] 
+        md:w-[30rem] lg:w-[30rem] xl:w-[30rem] 2xl:w-[30rem] 
+        bottom-[6.5rem] self-end">
+            <div class="mr-2"
+                style="border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);background-color: #0d4560;">
+                <div class="text-center text-lg font-bold text-white p-1 mb-2 shadow-lg">{{ iconChatAI }} AI Chatbot
+                </div>
+
+                <div v-if="messageChatbotArray.length > 0"
+                    class="md:h-[100px] lg:h-[100px] xl:h-[400px] 2xl:h-[400px] sm:h-[12rem] h-[400px]"
+                    style="overflow-y: auto; border-bottom: 1px solid #ccc; padding: 10px; margin-bottom: 10px;background-color: #0d4560;"
+                    ref="chatContainer">
+                    <div v-for="(message, index) in messageChatbotArray" :key="index">
+                        <!-- คน สอบถาม -->
+                        <div v-if="message.question">
+                            <div style="display: flex; gap: 10px;">
+                                <div class="message-box user-message text-end">
+                                    <span>{{ message.question }}</span>
+                                    <br />
+                                    <span style="font-size: 0.7rem;">{{ message.time }}</span>
+                                </div>
+                                <span class="text-2xl">{{ iconUser }}</span>
                             </div>
-                            <span class="text-2xl">{{ iconUser }}</span>
+                        </div>
+                        <!-- AI ตอบกลับ -->
+                        <div v-if="message.answer" style="display: flex; gap: 10px;">
+                            <span class="text-2xl">{{ iconChatAI }}</span>
+                            <div class="message-box ai-message">
+                                <span v-html="formatText(message.answer)" />
+                            </div>
                         </div>
                     </div>
-                    <!-- AI ตอบกลับ -->
-                    <div v-if="message.answer" style="display: flex; gap: 10px;">
+                </div>
+                <div v-else class="md:h-[100px] lg:h-[100px] xl:h-[400px] 2xl:h-[400px] sm:h-[12rem] h-[400px]"
+                    style="overflow-y: auto; border-bottom: 1px solid #ccc; margin-bottom: 10px;">
+                    <WelcomeAI v-if="checkCssAI === false" @animationCompleted="handleAnimationCompleted" />
+                    <div v-if="checkCssAI === true" style="display: flex; align-items: center; gap: 10px;">
                         <span class="text-2xl">{{ iconChatAI }}</span>
                         <div class="message-box ai-message">
-                            <span v-html="formatText(message.answer)" />
+                            คุณต้องการสอบถามข้อมูลบุคคลหรือไม่ เช่น (<a-button size="small"
+                                @click="messageChatbot = 'สอบถามเรื่อง ข้อมูลส่วนตัว', chatbot()">ข้อมูลส่วนตัว</a-button>,
+                            <a-button size="small"
+                                @click="messageChatbot = 'สอบถามเรื่อง ประวัติการทำงาน', chatbot()">ประวัติการทำงาน</a-button>,<a-button
+                                size="small"
+                                @click="messageChatbot = 'สอบถามเรื่อง การศึกษา', chatbot()">การศึกษา</a-button>
+                            และอื่นๆ)
+                            หรือไม่?
                         </div>
                     </div>
                 </div>
-            </div>
-            <div v-else
-                style="height: 400px; overflow-y: auto; border-bottom: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <span class="text-2xl">{{ iconChatAI }}</span>
-                    <div class="message-box ai-message">
-                        คุณต้องการสอบถามข้อมูลบุคคลหรือไม่ เช่น (<a-button size="small"
-                            @click="messageChatbot = 'สอบถามเรื่อง ข้อมูลส่วนตัว', chatbot()">ข้อมูลส่วนตัว</a-button>,
-                        <a-button size="small"
-                            @click="messageChatbot = 'สอบถามเรื่อง ประวัติการทำงาน', chatbot()">ประวัติการทำงาน</a-button>,<a-button
-                            size="small"
-                            @click="messageChatbot = 'สอบถามเรื่อง การศึกษา', chatbot()">การศึกษา</a-button>
-                        และอื่นๆ)
-                        หรือไม่?
-                    </div>
+                <div style="display: flex; gap: 10px; padding: 10px;">
+                    <a-input type="text" @keyup.enter="chatbot" v-model:value="messageChatbot"
+                        placeholder="เริ่มต้นพิมพ์สอบถามข้อมูล..." />
+                    <a-button @click="chatbot" class="color-ai">
+                        ส่ง
+                    </a-button>
                 </div>
             </div>
-            <div style="display: flex; gap: 10px; padding: 10px;">
-                <a-input type="text" @keyup.enter="chatbot" v-model:value="messageChatbot"
-                    placeholder="เริ่มต้นพิมพ์สอบถามข้อมูล..." />
-                <a-button @click="chatbot" class="color-ai">
-                    ส่ง
-                </a-button>
-            </div>
         </div>
+        <a-float-button @click="activeAI = !activeAI" type="primary" shape="circle" :style="{
+            width: '3rem',
+            height: '3rem',
+        }">
+            <template #icon>
+                <CommentOutlined />
+            </template>
+        </a-float-button>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import Welcome from './Welcome.vue';
 const publicEnv = useRuntimeConfig().public;
 
 const messageChatbotArray: any = ref([]);
 const messageChatbot: any = ref('');
 const chatContainer = ref<HTMLElement | null | any>(null);
+const checkCssAI = ref(false);
 const iconChatAI = '🤖'
 const iconUser = '👩‍💻'
 const index: any = ref(0);
+const activeAI = ref(false);
 
 async function chatbot() {
     if (!messageChatbot.value || messageChatbot.value.trim() === '') return;
@@ -179,6 +200,9 @@ watch(messageChatbotArray.value, async () => {
     }
 });
 
+const handleAnimationCompleted = () => {
+    return checkCssAI.value = true;
+}
 onMounted(() => {
     chatbot();
 });

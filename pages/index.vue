@@ -12,10 +12,10 @@
                         <img src="https://cdn-icons-png.flaticon.com/512/2210/2210153.png" alt="Avatar"
                             class="img-headbar" />
                     </template>
-                </a-page-header>
-                <a-page-header v-else class="pt-[6.75rem]">
-
-                </a-page-header>
+                    
+                    <AI class="text-blue-500" />
+                </a-page-header> 
+                <a-page-header v-else class="pt-[6.75rem]"></a-page-header>
             </a-col>
         </a-row>
 
@@ -60,12 +60,12 @@
                         <a-input-group compact>
                             <a-button style="width: 100%;" type="primary" shape="round" size="middle"
                                 :class="{ 'bg-green-600': dataMyself.length > 0 }" :loading="isLoading"
-                                @click="activeApple = true; getCongrat()">
+                                @click="activeApple = true; getCongrat(); activeAI = false;">
                                 {{ dataMyself.length > 0 ? 'เชื่อมต่อสำเร็จ (Reconnect..)' : 'เชื่อมต่อ..' }}</a-button>
                         </a-input-group>
                     </div>
 
-                    <div class="m-5" v-if="dataMyself.length > 0">
+                    <!-- <div class="m-5" v-if="dataMyself.length > 0">
                         <a-input-group compact>
                             <a-button shape="round" size="middle" class="btn-ai" @click="activeAI = !activeAI;">
                                 <span v-if="activeAI === false">🤖🚀 AI ติดต่อด้วยข้อความ <span
@@ -73,7 +73,7 @@
                                 <span v-if="activeAI === true">🤖🚀 รายละเอียดข้อมูล</span>
                             </a-button>
                         </a-input-group>
-                    </div>
+                    </div> -->
 
                     <a-row :gutter="[0, 15]" class="m-5" v-if="isHidden === true && dataMyself.length == 0">
                         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
@@ -241,14 +241,13 @@
                 <a-row :gutter="[0, 15]" class="m-5 dark:text-white text-white">
                     <a-col :xs="24" :sm="24" :md="18" :lg="18" :xl="18" class="flex flex-col justify-between">
                         <template #default>
-                            <p v-if="activeAI === false" class="text-lg font-bold">
+                            <p class="text-lg font-bold">
                                 สิ่งที่ชอบในการเขียนโปรแกรม
                             </p>
-                            <span v-if="activeAI === false" class="mt-5 text-base" style="text-indent: 1rem;">
+                            <span class="mt-5 text-base" style="text-indent: 1rem;">
                                 {{ displayTextContain }}
                             </span>
-                            <AI v-if="dataMyself.length > 0 && activeAI === true" class="text-blue-500" />
-                            <a-divider v-if="dataMyself.length > 0 && activeAI === true" class="mt-5"><span
+                            <a-divider v-if="dataMyself.length > 0" class="mt-5"><span
                                     class="dark:text-white text-white">RESUME</span></a-divider>
 
                             <a-row :gutter="[15, 15]" class="pt-5">
@@ -291,7 +290,8 @@
                                             {{ moment.duration(moment(new Date()).diff(moment('2023-05-22'))).years()
                                             }}
                                             ปี
-                                            {{ moment.duration(moment(new Date()).diff(moment('2023-05-22'))).months() }}
+                                            {{ moment.duration(moment(new Date()).diff(moment('2023-05-22'))).months()
+                                            }}
                                             เดือน
                                             {{ moment.duration(moment(new Date()).diff(moment('2023-05-22'))).days()
                                             }}
@@ -348,7 +348,7 @@
                                         <h3 class="text-lg font-bold edit-card-content-head">{{
                                             program.Program_Name }}</h3>
                                         <p class="text-sm edit-card-content-horizontal ">{{ program.Program_Description
-                                        }}</p>
+                                            }}</p>
                                     </template>
                                     <template #actions>
                                         <a class="text-base text-blue-500"
@@ -451,7 +451,7 @@
                                                 <div class="flex items-center">
                                                     <StarOutlined class="text-amber-600" />&nbsp;
                                                     <span class="dark:text-white text-white">{{ dmd.User_Detail
-                                                    }}</span>
+                                                        }}</span>
                                                 </div>
                                             </template>
                                             <div>
@@ -730,7 +730,6 @@ async function getCongrat() {
             await getProgram(PinCode.value);
             await getDetail(PinCode.value);
         }
-        // message.success('เชื่อมต่อโปรไฟล์สำเร็จ!');
     })
 }
 async function getProgram(PinCode: string) {
