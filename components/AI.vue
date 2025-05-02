@@ -7,12 +7,17 @@
         bottom-[6.5rem] self-end">
             <div class="mr-2"
                 style="border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);background-color: #0d4560;">
-                <div class="text-center text-lg font-bold text-white p-1 mb-2 shadow-lg">{{ iconChatAI }} AI Chatbot
+                <div class="flex justify-between">
+                    <p class="text-center text-lg text-white p-1 mb-2 shadow-lg">💬 AI Assistant
+                        <span class="text-xs">(สำหรับสอบถาม "ข้อมูลส่วนตัว") </span>
+                    </p>
+                    <span class="text-center text-sm font-bold text-white p-1 mb-2 shadow-lg"><span
+                            class="text-lg w-[10rem] mx-2 px-2 text-white cursor-pointer"
+                            @click="activeAI = !activeAI">-</span></span>
                 </div>
-
                 <div v-if="messageChatbotArray.length > 0"
                     class="md:h-[100px] lg:h-[100px] xl:h-[400px] 2xl:h-[400px] sm:h-[12rem] h-[400px]"
-                    style="overflow-y: auto; border-bottom: 1px solid #ccc; padding: 10px; margin-bottom: 10px;background-color: #0d4560;"
+                    style="overflow-y: auto; padding: 10px; margin-bottom: 10px;background-color: #0d4560;"
                     ref="chatContainer">
                     <div v-for="(message, index) in messageChatbotArray" :key="index">
                         <!-- คน สอบถาม -->
@@ -21,7 +26,7 @@
                                 <div class="message-box user-message text-end">
                                     <span>{{ message.question }}</span>
                                     <br />
-                                    <span style="font-size: 0.7rem;">{{ message.time }}</span>
+                                    <span style="font-size: 0.6rem;">{{ message.time }}</span>
                                 </div>
                                 <span class="text-2xl">{{ iconUser }}</span>
                             </div>
@@ -36,7 +41,7 @@
                     </div>
                 </div>
                 <div v-else class="md:h-[100px] lg:h-[100px] xl:h-[400px] 2xl:h-[400px] sm:h-[12rem] h-[400px]"
-                    style="overflow-y: auto; border-bottom: 1px solid #ccc; margin-bottom: 10px;">
+                    style="overflow-y: auto; margin-bottom: 10px;">
                     <WelcomeAI v-if="checkCssAI === false" @animationend="handleAnimationCompleted" />
                     <div v-else style="display: flex; align-items: center; gap: 10px;">
                         <span class="text-2xl">{{ iconChatAI }}</span>
@@ -53,9 +58,10 @@
                     </div>
                 </div>
                 <div style="display: flex; gap: 10px; padding: 10px;">
-                    <a-input type="text" @keyup.enter="chatbot" v-model:value="messageChatbot"
+                    <a-input type="text" @keyup.enter="chatbot" class="dark:text-white text-white custom-placeholder"
+                        style="background-color: #797979;height: 3rem;" v-model:value="messageChatbot"
                         placeholder="เริ่มต้นพิมพ์สอบถามข้อมูล..." />
-                    <a-button @click="chatbot" class="color-ai">
+                    <a-button @click="chatbot" class="color-ai" style="height: 3rem;">
                         ส่ง
                     </a-button>
                 </div>
@@ -283,5 +289,18 @@ onMounted(() => {
     100% {
         background-position: 0% 50%;
     }
+}
+
+.custom-placeholder::placeholder {
+    color: #ccc;
+    /* เปลี่ยนสีตามต้องการ เช่น ขาว, เทาอ่อน */
+    opacity: 1;
+    /* ทำให้ placeholder มองเห็นได้ชัดเจน */
+    font-size: 0.8rem;
+    /* ขนาดตัวอักษรของ placeholder */
+    font-style: italic;
+    /* ทำให้ตัวอักษรเป็นตัวเอียง */
+    text-align: start;
+    /* จัดตำแหน่งกลาง */
 }
 </style>
