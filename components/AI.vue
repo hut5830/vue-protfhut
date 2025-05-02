@@ -37,8 +37,7 @@
                 </div>
                 <div v-else class="md:h-[100px] lg:h-[100px] xl:h-[400px] 2xl:h-[400px] sm:h-[12rem] h-[400px]"
                     style="overflow-y: auto; border-bottom: 1px solid #ccc; margin-bottom: 10px;">
-                    {{ checkCssAI }}
-                    <WelcomeAI v-if="checkCssAI === false" @animationCompleted="handleAnimationCompleted" />
+                    <WelcomeAI v-if="checkCssAI === false" @animation-completed="handleAnimationCompleted" />
                     <div v-else style="display: flex; align-items: center; gap: 10px;">
                         <span class="text-2xl">{{ iconChatAI }}</span>
                         <div class="message-box ai-message">
@@ -75,7 +74,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import Welcome from './Welcome.vue';
 const publicEnv = useRuntimeConfig().public;
 
 const messageChatbotArray: any = ref([]);
