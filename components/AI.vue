@@ -48,9 +48,9 @@
                         <div class="message-box ai-message">
                             คุณต้องการสอบถามข้อมูลบุคคลหรือไม่ เช่น <br />
                             <a-button size="small" class="chatStyleAI"
-                                @click="messageChatbot = 'สอบถามเรื่อง ข้อมูลส่วนตัว', chatbot()">ข้อมูลส่วนตัว</a-button>
+                                @click="messageChatbot = 'สอบถามเรื่อง ข้อมูลส่วนตัว', chatbot()">ข้อมูลส่วนตัว</a-button>&nbsp;
                             <a-button size="small" class="chatStyleAI"
-                                @click="messageChatbot = 'สอบถามเรื่อง ประวัติการทำงาน', chatbot()">ประวัติการทำงาน</a-button>
+                                @click="messageChatbot = 'สอบถามเรื่อง ประวัติการทำงาน', chatbot()">ประวัติการทำงาน</a-button>&nbsp;
                             <a-button size="small" class="chatStyleAI"
                                 @click="messageChatbot = 'สอบถามเรื่อง การศึกษา', chatbot()">การศึกษา</a-button>
                         </div>
