@@ -23,10 +23,10 @@
                         <!-- คน สอบถาม -->
                         <div v-if="message.question">
                             <div style="display: flex; gap: 10px;">
-                                <div class="message-box user-message text-end">
+                                <div class="message-box user-message text-start">
                                     <span>{{ message.question }}</span>
                                     <br />
-                                    <span style="font-size: 0.6rem;">{{ message.time }}</span>
+                                    <span style="font-size: 0.6rem;">{{ message.time }} <span class="text-blue-600" style="font-size: 0.5rem;">ส่งแล้ว</span></span>
                                 </div>
                                 <span class="text-2xl">{{ iconUser }}</span>
                             </div>
