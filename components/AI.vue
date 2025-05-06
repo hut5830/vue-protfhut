@@ -56,13 +56,17 @@
                         </div>
                     </div>
                 </div>
-                <div style="display: flex; gap: 10px; padding: 10px;">
-                    <a-input type="text" @keyup.enter="chatbot" class="dark:text-white text-white custom-placeholder"
-                        style="background-color: #797979;height: 3rem;" v-model:value="messageChatbot"
-                        placeholder="เริ่มต้นพิมพ์สอบถามข้อมูล..." />
-                    <a-button @click="chatbot" class="color-ai" style="height: 3rem;">
-                        ส่ง
-                    </a-button>
+                <div style="gap: 10px; padding: 10px;">
+                    <p class="text-white" style="font-size: 10px;">ข้อความ {{ messageChatbot.length }}/500</p>
+                    <div class="flex">
+                        <a-input type="text" @keyup.enter="chatbot" :maxlength="500"
+                            class="dark:text-white text-white custom-placeholder"
+                            style="background-color: #797979;height: 3rem;" v-model:value="messageChatbot"
+                            placeholder="เริ่มต้นพิมพ์สอบถามข้อมูล..." />&nbsp;
+                        <a-button @click="chatbot" class="color-ai" style="height: 3rem;">
+                            ส่ง
+                        </a-button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -194,6 +198,7 @@ function formatText(input: string): string {
         .replace(/<br>\s*- /g, '<br>&nbsp;&nbsp;- '); // เพิ่ม indent หน้า list item
 }
 // ทำให้ไหลลงล่างเมื่อข้อความเพิ่ม
+
 watch(messageChatbotArray.value, async () => {
     await nextTick(); // รอให้ข้อความ render เสร็จก่อน
     if (chatContainer.value) {
@@ -305,7 +310,7 @@ onMounted(() => {
 
 .chatStyleAI {
     display: inline-block;
-    background: linear-gradient(135deg, #00f2fe, #4facfe, #9b59b6);
+    background: linear-gradient(135deg, #2bb1b8, #367ebd, #9b59b6);
     color: #ffffff;
     border-radius: 999px;
     font-size: 0.9rem;
@@ -329,7 +334,7 @@ onMounted(() => {
     height: 200%;
     background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 70%);
     transform: rotate(25deg);
-    animation: shine 3s infinite linear;
+    animation: shine 2s infinite linear;
     z-index: 0;
 }
 
