@@ -9,7 +9,7 @@
                 style="border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);background-color: #0d4560;">
                 <div class="flex justify-between">
                     <p class="text-center text-lg text-white p-1 mb-2 shadow-lg">💬 AI Assistant
-                        <span class="text-xs">(สำหรับสอบถาม "ข้อมูลส่วนตัว") </span>
+                        <span class="text-xs">(ข้อมูลส่วนตัว) </span>
                     </p>
                     <span class="text-center text-sm font-bold text-white p-1 mb-2 shadow-lg"><span
                             class="text-lg w-[10rem] mx-2 px-2 text-white cursor-pointer"
@@ -46,14 +46,13 @@
                     <div v-else style="display: flex; align-items: center; gap: 10px;">
                         <span class="text-2xl">{{ iconChatAI }}</span>
                         <div class="message-box ai-message">
-                            คุณต้องการสอบถามข้อมูลบุคคลหรือไม่ เช่น (<a-button size="small"
+                            คุณต้องการสอบถามข้อมูลบุคคลหรือไม่ เช่น <br />
+                            <a-button size="small" class="chatStyleAI"
                                 @click="messageChatbot = 'สอบถามเรื่อง ข้อมูลส่วนตัว', chatbot()">ข้อมูลส่วนตัว</a-button>,
-                            <a-button size="small"
-                                @click="messageChatbot = 'สอบถามเรื่อง ประวัติการทำงาน', chatbot()">ประวัติการทำงาน</a-button>,<a-button
-                                size="small"
+                            <a-button size="small" class="chatStyleAI"
+                                @click="messageChatbot = 'สอบถามเรื่อง ประวัติการทำงาน', chatbot()">ประวัติการทำงาน</a-button>,
+                            <a-button size="small" class="chatStyleAI"
                                 @click="messageChatbot = 'สอบถามเรื่อง การศึกษา', chatbot()">การศึกษา</a-button>
-                            และอื่นๆ)
-                            หรือไม่?
                         </div>
                     </div>
                 </div>
@@ -302,5 +301,57 @@ onMounted(() => {
     /* ทำให้ตัวอักษรเป็นตัวเอียง */
     text-align: start;
     /* จัดตำแหน่งกลาง */
+}
+
+.chatStyleAI {
+    display: inline-block;
+    background: linear-gradient(135deg, #00f2fe, #4facfe, #9b59b6);
+    color: #ffffff;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    padding: 0rem 1rem;
+    margin: 0.2rem 0;
+    box-shadow: 0 0 8px rgba(79, 172, 254, 0.4), 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.chatStyleAI::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 70%);
+    transform: rotate(25deg);
+    animation: shine 3s infinite linear;
+    z-index: 0;
+}
+
+.chatStyleAI:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.6), 0 8px 20px rgba(0, 0, 0, 0.3);
+    color: #d5f7ff;
+}
+
+.chatStyleAI span {
+    position: relative;
+    z-index: 2;
+}
+
+/* Animation for soft light sweep */
+@keyframes shine {
+    0% {
+        transform: rotate(25deg) translate(-100%, -100%);
+    }
+
+    100% {
+        transform: rotate(25deg) translate(100%, 100%);
+    }
 }
 </style>
