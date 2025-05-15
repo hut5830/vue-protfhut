@@ -12,9 +12,9 @@
                         <img src="https://cdn-icons-png.flaticon.com/512/2210/2210153.png" alt="Avatar"
                             class="img-headbar" />
                     </template>
-                    
+
                     <AI class="text-blue-500" />
-                </a-page-header> 
+                </a-page-header>
                 <a-page-header v-else class="pt-[6.75rem]"></a-page-header>
             </a-col>
         </a-row>
@@ -35,8 +35,8 @@
                 </a-page-header>
             </a-col>
 
-            <a-col :xs="24" :sm="24" :md="9" :lg="5" :xl="5" class="shadow-2xl"
-                :class="{ 'fade-in-connect': dataMyself.length > 0 }" style="border-right: 2px solid aliceblue;
+            <a-col :xs="24" :sm="24" :md="9" :lg="5" :xl="5"
+                :class="{ 'fade-in-connect shadow-2xl': dataMyself.length > 0 }" style="
                     border-top-right-radius:5%;">
                 <a-layout-sider class="dark:text-white text-white"
                     :class="{ 'fade-in-image': activeApple, 'fade-out-image bg-blue-000': !activeApple }" width="100%">
