@@ -26,7 +26,8 @@
                                 <div class="message-box user-message text-start">
                                     <span>{{ message.question }}</span>
                                     <br />
-                                    <span style="font-size: 0.6rem;">{{ message.time }} <span class="text-blue-600" style="font-size: 0.5rem;">ส่งแล้ว</span></span>
+                                    <span style="font-size: 0.6rem;">{{ message.time }} <span class="text-blue-600"
+                                            style="font-size: 0.5rem;">ส่งแล้ว</span></span>
                                 </div>
                                 <span class="text-2xl">{{ iconUser }}</span>
                             </div>
@@ -45,7 +46,7 @@
                     <WelcomeAI v-if="checkCssAI === false" @animationend="handleAnimationCompleted" />
                     <div v-else style="display: flex; align-items: center; gap: 10px;">
                         <span class="text-2xl">{{ iconChatAI }}</span>
-                        <div class="message-box ai-message">
+                        <div class="message-box ai-message ai-float-chat-wrapper">
                             คุณต้องการสอบถามข้อมูลบุคคลหรือไม่ เช่น <br />
                             <a-button size="small" class="chatStyleAI"
                                 @click="messageChatbot = 'สอบถามเรื่อง ข้อมูลส่วนตัว', chatbot()">ข้อมูลส่วนตัว</a-button>&nbsp;
@@ -70,10 +71,12 @@
                 </div>
             </div>
         </div>
-        <a-float-button @click="activeAI = !activeAI" type="primary" shape="circle" :style="{
-            width: '3rem',
-            height: '3rem',
-        }">
+        <a-float-button class="ai-float-button-wrapper" @click="activeAI = !activeAI" type="primary" shape="circle"
+            :style="{
+                width: '3rem',
+                height: '3rem',
+                border: '1px solid',
+            }">
             <template #icon>
                 <CommentOutlined />
             </template>
@@ -357,6 +360,35 @@ onMounted(() => {
 
     100% {
         transform: rotate(25deg) translate(100%, 100%);
+    }
+}
+
+/* วงขอบหมุนรอบปุ่ม */
+
+.ai-float-button-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -2.5px;
+    left: -2.5px;
+    right: -2.5px;
+    bottom: -2.5px;
+    border-radius: 50%;
+    background: conic-gradient(#00c6ff, #0072ff, #00c6ff);
+    animation: spin 2s linear infinite;
+    z-index: 0;
+}
+
+div>>>.ant-float-btn-body {
+    background-color: rgb(25, 72, 160);
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
     }
 }
 </style>

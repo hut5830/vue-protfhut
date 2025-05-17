@@ -241,7 +241,7 @@
                 <a-row :gutter="[0, 15]" class="m-5 dark:text-white text-white">
                     <a-col :xs="24" :sm="24" :md="18" :lg="18" :xl="18" class="flex flex-col justify-between">
                         <template #default>
-                            <p class="text-lg font-bold">
+                            <p class="text-lg font-bold pt-2">
                                 สิ่งที่ชอบในการเขียนโปรแกรม
                             </p>
                             <span class="mt-5 text-base" style="text-indent: 1rem;">
@@ -348,7 +348,7 @@
                                         <h3 class="text-lg font-bold edit-card-content-head">{{
                                             program.Program_Name }}</h3>
                                         <p class="text-sm edit-card-content-horizontal ">{{ program.Program_Description
-                                            }}</p>
+                                        }}</p>
                                     </template>
                                     <template #actions>
                                         <a class="text-base text-blue-500"
@@ -451,7 +451,7 @@
                                                 <div class="flex items-center">
                                                     <StarOutlined class="text-amber-600" />&nbsp;
                                                     <span class="dark:text-white text-white">{{ dmd.User_Detail
-                                                        }}</span>
+                                                    }}</span>
                                                 </div>
                                             </template>
                                             <div>
@@ -489,7 +489,7 @@
                             </div>
 
                             <div class="flex flex-col items-center mx-4">
-                                <img src="https://dbdb.io/media/logos/tidb-logo_preview.png"
+                                <img src="https://svgmix.com/uploads/223f89-tidb.svg"
                                     class="w-40 h-16 mb-2 rounded-md" />
                                 <span class="text-sm font-medium mt-1">TiDB</span>
                             </div>
