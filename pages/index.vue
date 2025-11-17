@@ -254,7 +254,7 @@
                                 <a-col :xs="13" :sm="13" :md="13" :lg="6" :xl="6">
                                     <div class="flex justify-end items-center space-x-3 cursor-pointer"
                                         @click="winOpen('https://drive.google.com/file/d/1RMsJuvjAFWkGqGsUQCiAyXGd0cCVK6vR/view?usp=drive_link')">
-                                        <img src="https://static-00.iconduck.com/assets.00/pdf-icon-2048x2048-dfwtelfn.png"
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/977px-PDF_file_icon.svg.png"
                                             class="resume-pdf" alt="PDF Icon" />
                                     </div>
                                 </a-col>
@@ -282,7 +282,7 @@
                                         <div class="card-title">
                                             <img src="https://kentac.org.uk/wp-content/uploads/2016/10/calendar-icon-blue_sm.png"
                                                 class="w-24 my-2 mr-2" style="border-radius: 5%;" />
-                                            <span class="text-lg font-bold">ไทม์ไลน์งาน</span>
+                                            <span class="text-lg font-bold">Timeline</span>
                                         </div>
                                     </template>
                                     <template #extra>
@@ -316,100 +316,193 @@
                     </a-col>
                 </a-row>
 
-                <a-row :gutter="[0, 15]" class="m-5">
-                    <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                        <a-divider><span class="dark:text-white text-white">โปรแกรมที่เคยพัฒนา</span></a-divider>
-                        <a-row :gutter="[0, 25]">
-                            <a-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12"
-                                class="flex justify-center items-center">
-                                <a-button class="" type="primary" shape="round" size="middle"
-                                    @click="idDesignProgram = 1;">
-                                    รูปแบบ 1 (แนวตั้ง)
-                                </a-button>
+                <a-row :gutter="[0, 15]" class="m-5 bg-slate-600 rounded-xl p-5 shadow-md">
+                    <a-tabs v-model:activeKey="idDesignTabsCompany" size="middle" type="card"
+                        :tabBarStyle="{ color: '#ffffff' }">
+                        <a-tab-pane key="1" tab="JMT Network Services">
+                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                                <a-divider><span
+                                        class="dark:text-white text-white">โปรแกรมที่เคยพัฒนา</span></a-divider>
+                                <a-row :gutter="[0, 25]">
+                                    <a-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12"
+                                        class="flex justify-center items-center">
+                                        <a-button class="" type="primary" shape="round" size="middle"
+                                            @click="idDesignProgram = 1;">
+                                            รูปแบบ 1 (แนวตั้ง)
+                                        </a-button>
+                                    </a-col>
+                                    <a-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12"
+                                        class="flex justify-center items-center">
+                                        <a-button class="bg-green-600" type="primary" shape="round" size="middle"
+                                            @click="idDesignProgram = 2;">
+                                            รูปแบบ 2 (แนวนอน)
+                                        </a-button>
+                                    </a-col>
+                                </a-row>
+                                <a-row v-if="dataMyselfProgram.length > 0 && idDesignProgram === 1" :gutter="[15, 15]"
+                                    class="pt-5 fade-in-myprogram">
+                                    <a-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8"
+                                        v-for="program in dataMyselfProgram.filter((program: any) => program.type == 1)"
+                                        :key="program.ID_Auto">
+                                        <a-card hoverable class="shadow-md edit-card-horizontal">
+                                            <template #cover>
+                                                <img :src="program.Program_Image" alt="Program Icon"
+                                                    class="w-32 h-72 my-2 mr-2 rounded-md object-cover" />
+                                            </template>
+                                            <template #default>
+                                                <h3 class="text-lg font-bold edit-card-content-head">{{
+                                                    program.Program_Name }}</h3>
+                                                <p class="text-sm edit-card-content-horizontal ">{{
+                                                    program.Program_Description
+                                                }}</p>
+                                            </template>
+                                            <template #actions>
+                                                <a class="text-base text-blue-500"
+                                                    @click="isLoading = true; moreDetail = program.ID_Auto; handleCardClick(PinCode, program.ID_Auto, program)"
+                                                    type="primary" shape="round" size="middle">
+                                                    รายละเอียด...
+                                                </a>
+                                            </template>
+                                        </a-card>
+                                    </a-col>
+                                    <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6"
+                                        class=" justify-items-center content-center">
+                                        <p class="text-2xl dark:text-white text-white edit-card-content-horizontal">
+                                            Comming
+                                            Soon...</p>
+                                    </a-col>
+                                </a-row>
                             </a-col>
-                            <a-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12"
-                                class="flex justify-center items-center">
-                                <a-button class="bg-green-600" type="primary" shape="round" size="middle"
-                                    @click="idDesignProgram = 2;">
-                                    รูปแบบ 2 (แนวนอน)
-                                </a-button>
-                            </a-col>
-                        </a-row>
-                        <a-row v-if="dataMyselfProgram.length > 0 && idDesignProgram === 1" :gutter="[15, 15]"
-                            class="pt-5 fade-in-myprogram">
-                            <a-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8" v-for="program in dataMyselfProgram"
-                                :key="program.ID_Auto">
-                                <a-card hoverable class="shadow-md edit-card-horizontal">
-                                    <template #cover>
-                                        <img :src="program.Program_Image" alt="Program Icon"
-                                            class="w-32 h-72 my-2 mr-2 rounded-md object-cover" />
-                                    </template>
-                                    <template #default>
-                                        <h3 class="text-lg font-bold edit-card-content-head">{{
-                                            program.Program_Name }}</h3>
-                                        <p class="text-sm edit-card-content-horizontal ">{{ program.Program_Description
-                                        }}</p>
-                                    </template>
-                                    <template #actions>
-                                        <a class="text-base text-blue-500"
-                                            @click="isLoading = true; moreDetail = program.ID_Auto; handleCardClick(PinCode, program.ID_Auto, program)"
-                                            type="primary" shape="round" size="middle">
-                                            รายละเอียด...
-                                        </a>
-                                    </template>
-                                </a-card>
-                            </a-col>
-                            <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6"
-                                class=" justify-items-center content-center">
-                                <p class="text-2xl dark:text-white text-white edit-card-content-horizontal">Comming
-                                    Soon...</p>
-                            </a-col>
-                        </a-row>
-                    </a-col>
-                </a-row>
-
-                <a-row v-if="dataMyselfProgram.length > 0 && idDesignProgram === 2" class="fade-in-myprogram">
-                    <a-col v-for="dmp, i in dataMyselfProgram" :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
-                        <div class="p-2">
-                            <a-card class="shadow-md edit-card" style="border-top: 5px solid #0064ffa3;" hoverable>
-                                <template #title>
-                                    <div class="card-title justify-items-center">
-                                        <img :src="dmp.Program_Image" class="w-32 my-2 mr-2"
-                                            style="border-radius: 50%;" />
+                            <a-row v-if="dataMyselfProgram.length > 0 && idDesignProgram === 2"
+                                class="fade-in-myprogram">
+                                <a-col v-for="dmp, i in dataMyselfProgram" :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
+                                    <div class="p-2">
+                                        <a-card class="shadow-md edit-card" style="border-top: 5px solid #0064ffa3;"
+                                            hoverable>
+                                            <template #title>
+                                                <div class="card-title justify-items-center">
+                                                    <img :src="dmp.Program_Image" class="w-32 my-2 mr-2"
+                                                        style="border-radius: 50%;" />
+                                                </div>
+                                            </template>
+                                            <template #extra>
+                                                <a-button
+                                                    @click="isLoading = true; moreDetail = dmp.ID_Auto; handleCardClick(PinCode, dmp.ID_Auto, dmp)"
+                                                    type="primary" shape="round" size="middle">
+                                                    ดูรายละเอียด
+                                                </a-button>
+                                            </template>
+                                            <template #default>
+                                                <p class="text-base font-bold">
+                                                    Web {{ dmp.Program_Name }}
+                                                </p>
+                                                <span class="edit-card-content mt-5" style="text-indent: 1rem;">
+                                                    {{ dmp.Program_Description }}
+                                                </span>
+                                            </template>
+                                        </a-card>
                                     </div>
-                                </template>
-                                <template #extra>
-                                    <a-button
-                                        @click="isLoading = true; moreDetail = dmp.ID_Auto; handleCardClick(PinCode, dmp.ID_Auto, dmp)"
-                                        type="primary" shape="round" size="middle">
-                                        ดูรายละเอียด
-                                    </a-button>
-                                </template>
-                                <template #default>
-                                    <p class="text-base font-bold">
-                                        Web {{ dmp.Program_Name }}
-                                    </p>
-                                    <span class="edit-card-content mt-5" style="text-indent: 1rem;">
-                                        {{ dmp.Program_Description }}
-                                    </span>
-                                </template>
-                            </a-card>
-                        </div>
-                    </a-col>
-                    <a-col :xs="24" :sm="12" :md="12" :lg="8" :xl="8" class=" content-center justify-items-center">
-                        <div class="p-2 dark:text-white text-white text-2xl">
-                            <p>CommingSoon...</p>
-                        </div>
-                    </a-col>
-                </a-row>
+                                </a-col>
+                                <a-col :xs="24" :sm="12" :md="12" :lg="8" :xl="8"
+                                    class=" content-center justify-items-center">
+                                    <div class="p-2 dark:text-white text-white text-2xl">
+                                        <p>CommingSoon...</p>
+                                    </div>
+                                </a-col>
+                            </a-row>
 
-                <a-row :gutter="[0, 15]" class="m-5" v-else-if="dataMyselfProgram.length == 0 && activeApple">
-                    <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                        <a-skeleton active />
-                    </a-col>
-                    <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                        <a-skeleton active />
-                    </a-col>
+                            <a-row :gutter="[0, 15]" class="m-5"
+                                v-else-if="dataMyselfProgram.length == 0 && activeApple">
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                                    <a-skeleton active />
+                                </a-col>
+                                <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                                    <a-skeleton active />
+                                </a-col>
+                            </a-row>
+                        </a-tab-pane>
+                        <a-tab-pane key="2" tab="PTT Digital">
+                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                                <a-divider><span
+                                        class="dark:text-white text-white">โปรแกรมที่เคยพัฒนา</span></a-divider>
+                                <a-row :gutter="[0, 25]">
+                                    <a-row v-if="dataMyselfProgram.length > 0 && idDesignProgram === 1"
+                                        :gutter="[15, 15]" class="pt-5 fade-in-myprogram">
+                                        <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12"
+                                            v-for="program in dataMyselfProgram.filter((program: any) => program.type == 2)"
+                                            :key="program.ID_Auto">
+                                            <a-card hoverable class="shadow-lg rounded-xl edit-card-horizontal"
+                                                style="border-top:4px solid #0ea5e9; overflow:hidden;"
+                                                v-if="program.type == 2">
+                                                <template #cover>
+                                                    <img :src="program.Program_Image" alt="PTT Digital - Logistics"
+                                                        style="width:100%; height:300px; object-fit:cover;" />
+                                                </template>
+
+                                                <template #title>
+                                                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                                                        <div style="font-weight:700; font-size:1.05rem;">PTT Logistics
+                                                        </div>
+                                                        <a-tag color="cyan">PTT Digital</a-tag>
+                                                    </div>
+                                                </template>
+
+                                                <template #default>
+                                                    <h3 class="text-lg font-bold edit-card-content-head">{{
+                                                        program.Program_Name }}</h3>
+                                                    <p class="text-sm edit-card-content-horizontal ">{{
+                                                        program.Program_Description
+                                                    }}</p>
+                                                    <div
+                                                        style="margin-top:0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+                                                        <a-tag color="blue">Backend</a-tag>
+                                                        <a-tag color="green">Node.js</a-tag>
+                                                        <a-tag color="gold">Express</a-tag>
+                                                        <a-tag color="red">Redis</a-tag>
+                                                        <a-tag color="green">MongoDB</a-tag>
+                                                    </div>
+                                                </template>
+
+                                                <template #actions>
+                                                    <a-button type="primary" shape="round" size="middle"
+                                                        @click="isLoading = true; moreDetail = 999; handleCardClick(PinCode, 999, { Program_Name: 'PTT Logistics', Program_Image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=0b8f0d4b0a6f3f6f2f3b9b6a3b7d8e3a' })">
+                                                        ดูรายละเอียด
+                                                    </a-button>
+                                                </template>
+                                            </a-card>
+                                            <!-- <a-card hoverable class="shadow-md edit-card-horizontal"
+                                                v-if="program.type == 2">
+                                                <template #cover>
+                                                    <img :src="program.Program_Image" alt="Program Icon"
+                                                        class="w-32 h-72 my-2 mr-2 rounded-md object-cover" />
+                                                </template>
+                                                <template #default>
+                                                    <h3 class="text-lg font-bold edit-card-content-head">{{
+                                                        program.Program_Name }}</h3>
+                                                    <p class="text-sm edit-card-content-horizontal ">{{
+                                                        program.Program_Description
+                                                    }}</p>
+                                                </template>
+                                                <template #actions>
+                                                    <a class="text-base text-blue-500"
+                                                        @click="isLoading = true; moreDetail = program.ID_Auto; handleCardClick(PinCode, program.ID_Auto, program)"
+                                                        type="primary" shape="round" size="middle">
+                                                        รายละเอียด...
+                                                    </a>
+                                                </template>
+                                            </a-card> -->
+                                        </a-col>
+                                        <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12"
+                                            class=" justify-items-center content-center">
+                                            <p class="text-2xl dark:text-white text-white edit-card-content-horizontal">
+                                                Comming
+                                                Soon...</p>
+                                        </a-col>
+                                    </a-row>
+                                </a-row>
+                            </a-col>
+                        </a-tab-pane>
+                    </a-tabs>
                 </a-row>
 
                 <a-divider id="scrollTo" v-if="moreDetail > 0">
@@ -451,7 +544,7 @@
                                                 <div class="flex items-center">
                                                     <StarOutlined class="text-amber-600" />&nbsp;
                                                     <span class="dark:text-white text-white">{{ dmd.User_Detail
-                                                    }}</span>
+                                                        }}</span>
                                                 </div>
                                             </template>
                                             <div>
@@ -477,33 +570,33 @@
                         <div
                             class="bg-white shadow-md rounded-xl pt-5 flex flex-wrap justify-around items-center space-y-4 md:space-y-0">
                             <div class="flex flex-col items-center mx-4">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/2048px-Visual_Studio_Code_1.35_icon.svg.png"
+                                <img src="https://cdn.iconscout.com/icon/free/png-256/free-redis-icon-svg-download-png-1175103.png?f=webp"
                                     class="w-14 h-14 mb-2 rounded-md" />
-                                <span class="text-sm font-medium mt-1">VS Code</span>
+                                <span class="text-sm font-medium mt-1">Redis</span>
                             </div>
 
                             <div class="flex flex-col items-center mx-4">
-                                <img src="https://cpl.thalesgroup.com/sites/default/files/inline-images/microsoft-sql_server.png"
-                                    class="w-16 h-16 mb-2 rounded-md" />
-                                <span class="text-sm font-medium mt-1">SQL Server</span>
+                                <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png"
+                                    class="w-24 h-14 mb-2 rounded-md" />
+                                <span class="text-sm font-medium mt-1">Docker</span>
                             </div>
 
                             <div class="flex flex-col items-center mx-4">
-                                <img src="https://svgmix.com/uploads/223f89-tidb.svg"
-                                    class="w-40 h-16 mb-2 rounded-md" />
-                                <span class="text-sm font-medium mt-1">TiDB</span>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg"
+                                    class="w-20 h-14 mb-2 rounded-md" />
+                                <span class="text-sm font-medium mt-1">Kubernetes</span>
                             </div>
 
                             <div class="flex flex-col items-center mx-4">
-                                <img src="https://static-00.iconduck.com/assets.00/heroku-icon-512x144-vka7a0ex.png"
-                                    class="w-36 h-12 mb-2 rounded-md" />
-                                <span class="text-sm font-medium mt-1">Heroku</span>
+                                <img src="https://pngimg.com/uploads/mysql/mysql_PNG17.png"
+                                    class="w-24 h-14 mb-2 rounded-md" />
+                                <span class="text-sm font-medium mt-1">MySQL</span>
                             </div>
 
                             <div class="flex flex-col items-center mx-4">
-                                <img src="https://salesforceventures.com/wp-content/uploads/2022/05/Vercel-e1652981744227.png?w=1024"
-                                    class="w-36 h-10 mb-2 rounded-md" />
-                                <span class="text-sm font-medium mt-1">Vercel</span>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/MongoDB_Logo.svg/2560px-MongoDB_Logo.svg.png"
+                                    class="w-40 h-14 mb-2 rounded-md" alt="MongoDB Logo" />
+                                <span class="text-sm font-medium mt-1">MongoDB</span>
                             </div>
 
                             <div class="flex flex-col items-center mx-1">
@@ -592,23 +685,31 @@ const dataMyself = ref<any>([])
 const dataMyselfProgram = ref<any>([])
 const dataMyselfDetail = ref<any>([])
 const idDesignProgram = ref<number>(1)
+const idDesignTabsCompany = ref<string>('1')
 const dataTimeLine = ref<any>([
     {
-        Year: 'ปี 2568 - ปัจจุบัน',
-        Program_Of_Year: 'เริ่มต้นการทำงานในปีแรก-ปัจจุบัน (1 ปี 11 เดือน)',
+        Year: '(PTT Digital) ปัจจุบัน',
+        Program_Of_Year: 'เริ่มต้นการทำงานในปีปัจจุบัน',
+        Program_Success: [
+            'ขนส่ง Logistics (Backend)'
+        ]
+    },
+    {
+        Year: '(JMT) ปี 2568 - 2568',
+        Program_Of_Year: 'เริ่มต้นการทำงานในปีแรก-ปีสอง (1 ปี 11 เดือน)',
         Program_Success: [
             'กฎหมาย คำนวณหนี้สิน'
         ]
     },
     {
-        Year: 'ปี 2567 - 2568',
-        Program_Of_Year: 'เริ่มต้นการทำงานในปีแรก-สอง',
+        Year: '(JMT) ปี 2567 - 2568',
+        Program_Of_Year: 'เริ่มต้นการทำงานในปีแรก-ปีสอง',
         Program_Success: [
             'UserMonitor', 'Waijai ประกันภัย'
         ]
     },
     {
-        Year: 'ปี 2566 - 2567',
+        Year: '(JMT) ปี 2566 - 2567',
         Program_Of_Year: 'เริ่มต้นการทำงานในปีแรก',
         Program_Success: [
             'Tracking', 'JJ Properties'
