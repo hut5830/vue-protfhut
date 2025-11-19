@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "dotenv -e dev.env -- dotenv -- nuxt dev",
+    "dev:prod": "dotenv -e prod.env -- nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -14,6 +15,7 @@
     "@nuxtjs/tailwindcss": "^6.13.2",
     "@vercel/analytics": "^1.5.0",
     "ant-design-vue": "^4.2.6",
+    "dotenv-cli": "^11.0.0",
     "longdo-map-vue": "^3.1.1",
     "moment": "^2.30.1",
     "nuxt": "^3.16.0",
