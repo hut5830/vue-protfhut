@@ -131,6 +131,9 @@
                                 <a-tag color="blue" class="m-1">Frontend</a-tag>
                                 <a-tag color="orange" class="m-1">Backend</a-tag>
                                 <a-tag color="cyan" class="m-1">MySQL</a-tag>
+                                <a-tag color="green" class="m-1">MQL(NoSQL)</a-tag>
+                                <a-tag color="blue" class="m-1">Docker</a-tag>
+                                <a-tag color="geekblue" class="m-1">Kubernetes</a-tag>
                             </div>
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
                                 <span class="text-sm dark:text-white text-white">Framework&UI ที่ใช้ในการพัฒนา</span>
@@ -184,6 +187,9 @@
                                 <a-tag color="black" class="m-1 !text-red-200">
                                     <DatabaseOutlined /> SQL
                                 </a-tag>
+                                <a-tag color="black" class="m-1 !text-green-200">
+                                    <DatabaseOutlined /> NoSQL
+                                </a-tag>
                             </div>
 
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
@@ -224,7 +230,7 @@
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24"
                                     class="flex justify-left items-left">
                                     <FilePdfOutlined class="text-red-500" />&nbsp; เปิด: &nbsp;
-                                    <a href="https://drive.google.com/file/d/1RMsJuvjAFWkGqGsUQCiAyXGd0cCVK6vR/view?usp=drive_link"
+                                    <a href="https://drive.google.com/file/d/1oKAlsNxphNDcXYJs8ni_urOxuPWHKHY3/view?usp=drive_link"
                                         target="_blank" class="text-red-500">
                                         Resume (PDF)
                                     </a>
@@ -253,7 +259,7 @@
                             <a-row :gutter="[15, 15]" class="pt-5">
                                 <a-col :xs="13" :sm="13" :md="13" :lg="6" :xl="6">
                                     <div class="flex justify-end items-center space-x-3 cursor-pointer"
-                                        @click="winOpen('https://drive.google.com/file/d/1RMsJuvjAFWkGqGsUQCiAyXGd0cCVK6vR/view?usp=drive_link')">
+                                        @click="winOpen('https://drive.google.com/file/d/1oKAlsNxphNDcXYJs8ni_urOxuPWHKHY3/view?usp=drive_link')">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/977px-PDF_file_icon.svg.png"
                                             class="resume-pdf" alt="PDF Icon" />
                                     </div>
@@ -318,7 +324,7 @@
 
                 <a-row :gutter="[0, 15]" class="m-5 bg-slate-600 rounded-xl p-5 shadow-md">
                     <a-tabs v-model:activeKey="idDesignTabsCompany" size="middle" type="card"
-                        :tabBarStyle="{ color: '#ffffff' }">
+                        :tabBarStyle="{ color: '#ffffff' }" @tabClick="moreDetail = 0;">
                         <a-tab-pane key="1" tab="JMT Network Services">
                             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                                 <a-divider><span
@@ -465,7 +471,7 @@
 
                                                 <template #actions>
                                                     <a-button type="primary" shape="round" size="middle"
-                                                        @click="isLoading = true; moreDetail = 999; handleCardClick(PinCode, 999, { Program_Name: 'PTT Logistics', Program_Image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=0b8f0d4b0a6f3f6f2f3b9b6a3b7d8e3a' })">
+                                                        @click="isLoading = true; moreDetail = program.ID_Auto; handleCardClick(PinCode, program.ID_Auto, { Program_Name: 'PTT Logistics', Program_Image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=0b8f0d4b0a6f3f6f2f3b9b6a3b7d8e3a' })">
                                                         ดูรายละเอียด
                                                     </a-button>
                                                 </template>
@@ -525,7 +531,7 @@
                             <h1 class="text-xl font-bold flex items-center">
                                 เว็บไซต์: {{ dmp.Program_Name }}
                                 <CheckCircleFilled class="text-green-500 ml-2 mr-2" />
-                                <a-button @click="openExam = true; idExamJobs = i;" type="primary" shape="round"
+                                <a-button v-if="dmp.ID_Auto < 6" @click="openExam = true; idExamJobs = i;" type="primary" shape="round"
                                     size="middle">
                                     ตัวอย่าง
                                 </a-button>
