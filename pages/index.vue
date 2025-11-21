@@ -230,7 +230,7 @@
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24"
                                     class="flex justify-left items-left">
                                     <FilePdfOutlined class="text-red-500" />&nbsp; เปิด: &nbsp;
-                                    <a href="https://drive.google.com/file/d/1oKAlsNxphNDcXYJs8ni_urOxuPWHKHY3/view?usp=drive_link"
+                                    <a href="https://drive.google.com/file/d/1tKI7DAYKx5YuWmowM8e2Aje5oh0k0Xsm/view?usp=sharing"
                                         target="_blank" class="text-red-500">
                                         Resume (PDF)
                                     </a>
@@ -259,7 +259,7 @@
                             <a-row :gutter="[15, 15]" class="pt-5">
                                 <a-col :xs="13" :sm="13" :md="13" :lg="6" :xl="6">
                                     <div class="flex justify-end items-center space-x-3 cursor-pointer"
-                                        @click="winOpen('https://drive.google.com/file/d/1oKAlsNxphNDcXYJs8ni_urOxuPWHKHY3/view?usp=drive_link')">
+                                        @click="winOpen('https://drive.google.com/file/d/1tKI7DAYKx5YuWmowM8e2Aje5oh0k0Xsm/view?usp=sharing')">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/977px-PDF_file_icon.svg.png"
                                             class="resume-pdf" alt="PDF Icon" />
                                     </div>
