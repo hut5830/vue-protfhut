@@ -134,6 +134,9 @@
                                 <a-tag color="green" class="m-1">MQL(NoSQL)</a-tag>
                                 <a-tag color="blue" class="m-1">Docker</a-tag>
                                 <a-tag color="geekblue" class="m-1">Kubernetes</a-tag>
+                                <a-tag color="blue" class="m-1">PostgreSQL</a-tag>
+                                <a-tag color="purple" class="m-1">Socket.IO</a-tag>
+                                <a-tag color="orange" class="m-1">AWS (WAF, RDS)</a-tag>
                             </div>
                             <a-divider v-if="dataMyselfProgram.length > 0" class="mt-5">
                                 <span class="text-sm dark:text-white text-white">Framework&UI ที่ใช้ในการพัฒนา</span>
@@ -150,6 +153,9 @@
                             </a-tag>
                             <a-tag color="blue" class="m-1">
                                 Vuetify 2 & 3
+                            </a-tag>
+                            <a-tag color="green" class="m-1">
+                                Pinia
                             </a-tag>
                             <a-tag color="red" class="m-1">
                                 Ant Design
@@ -325,6 +331,57 @@
                 <a-row :gutter="[0, 15]" class="m-5 bg-slate-600 rounded-xl p-5 shadow-md">
                     <a-tabs v-model:activeKey="idDesignTabsCompany" size="middle" type="card"
                         :tabBarStyle="{ color: '#ffffff' }" @tabClick="moreDetail = 0;">
+                        <a-tab-pane key="3" tab="SCGJWD">
+                            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                                <a-divider><span
+                                        class="dark:text-white text-white">โปรแกรมที่เคยพัฒนา</span></a-divider>
+                                <a-card class="shadow-lg rounded-xl fade-in-myprogram"
+                                    style="border-top:4px solid #dc2626;">
+                                    <template #title>
+                                        <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                                            <div style="font-weight:700; font-size:1.05rem; white-space:normal;">
+                                                ระบบบริหารลานจอดรถ Isuzu</div>
+                                            <a-tag color="red">SCGJWD</a-tag>
+                                            <a-tag color="blue">ใช้งาน 3 ไซต์</a-tag>
+                                            <a-tag color="green">ตำแหน่ง: Software Developer</a-tag>
+                                            <a-tag color="default">15/01/2569 - ปัจจุบัน</a-tag>
+                                        </div>
+                                    </template>
+                                    <template #default>
+                                        <p class="font-bold mb-2">ความสามารถ</p>
+                                        <ul class="list-disc pl-5 mb-4">
+                                            <li>TypeScript, Node.js API, Nuxt/Vue + Pinia</li>
+                                            <li>PostgreSQL: raw SQL, stored procedure, materialized view, migration,
+                                                จูน query</li>
+                                            <li>Socket.IO (realtime), AWS (WAF, RDS), Docker</li>
+                                            <li>เชื่อมระบบด้วยไฟล์ fixed-width ผ่าน HULFT/SFTP</li>
+                                        </ul>
+                                        <p class="font-bold mb-2">ผลงาน</p>
+                                        <ul class="list-disc pl-5">
+                                            <li>พัฒนาทั้ง API และ Web ตั้งแต่รถเข้าลาน จนรถออกลาน</li>
+                                            <li>ย้ายฐานข้อมูลจาก MSSQL ไป PostgreSQL และทำ ETL ข้อมูลเก่า</li>
+                                            <li>เพิ่มไซต์ใหม่ (MP-D) โดยไล่ logic จากระบบเดิม</li>
+                                            <li>ทำฟีเจอร์ Install Accessories, Status Reversal, Validation Rules
+                                                แบบตั้งค่าได้, Dashboard และรายงาน</li>
+                                            <li>แก้ปัญหาบน production เช่น WAF บล็อก request ใหญ่ (แก้ด้วย gzip),
+                                                socket ใช้ไม่ได้ (แก้ด้วย WebSocket proxy), รายงาน timeout (จูน query)
+                                            </li>
+                                            <li>เทียบเอกสาร SRS กับโค้ดจริง แล้วเขียนเอกสาร flow ให้ทีม</li>
+                                        </ul>
+                                        <div style="margin-top:0.75rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+                                            <a-tag color="blue">TypeScript</a-tag>
+                                            <a-tag color="green">Node.js</a-tag>
+                                            <a-tag color="green">Nuxt/Vue</a-tag>
+                                            <a-tag color="gold">Pinia</a-tag>
+                                            <a-tag color="geekblue">PostgreSQL</a-tag>
+                                            <a-tag color="purple">Socket.IO</a-tag>
+                                            <a-tag color="orange">AWS</a-tag>
+                                            <a-tag color="blue">Docker</a-tag>
+                                        </div>
+                                    </template>
+                                </a-card>
+                            </a-col>
+                        </a-tab-pane>
                         <a-tab-pane key="1" tab="JMT Network Services">
                             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                                 <a-divider><span
@@ -691,10 +748,17 @@ const dataMyself = ref<any>([])
 const dataMyselfProgram = ref<any>([])
 const dataMyselfDetail = ref<any>([])
 const idDesignProgram = ref<number>(1)
-const idDesignTabsCompany = ref<string>('1')
+const idDesignTabsCompany = ref<string>('3')
 const dataTimeLine = ref<any>([
     {
-        Year: '(PTT Digital) ปัจจุบัน',
+        Year: '(SCGJWD) 15/01/2569 - ปัจจุบัน',
+        Program_Of_Year: 'Software Developer',
+        Program_Success: [
+            'ระบบบริหารลานจอดรถ Isuzu (API + Web)'
+        ]
+    },
+    {
+        Year: '(PTT Digital) สิ้นสุด 12/01/2569',
         Program_Of_Year: 'เริ่มต้นการทำงานในปีปัจจุบัน',
         Program_Success: [
             'ขนส่ง Logistics (Backend)'
@@ -823,7 +887,7 @@ async function getCongrat() {
     dataMyself.value = []
     dataMyselfProgram.value = []
     dataMyselfDetail.value = []
-    await $fetch(`${base_url}/portfolio/mySelf`, {
+    await $fetch(`/api/portfolio/mySelf`, {
         method: 'POST',
         body: {
             Username: Username.value
@@ -840,7 +904,7 @@ async function getCongrat() {
     })
 }
 async function getProgram(PinCode: string) {
-    await $fetch(`${base_url}/portfolio/mySelfPrograms`, {
+    await $fetch(`/api/portfolio/mySelfPrograms`, {
         method: 'POST',
         body: {
             PinCode: PinCode
@@ -850,7 +914,7 @@ async function getProgram(PinCode: string) {
     })
 }
 async function getDetail(PinCode: string, IdMore: number = 1) {
-    await $fetch(`${base_url}/portfolio/mySelfDetail`, {
+    await $fetch(`/api/portfolio/mySelfDetail`, {
         method: 'POST',
         body: {
             ID_Auto: IdMore,
