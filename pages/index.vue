@@ -236,9 +236,13 @@
                                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24"
                                     class="flex justify-left items-left">
                                     <FilePdfOutlined class="text-red-500" />&nbsp; เปิด: &nbsp;
-                                    <a href="https://drive.google.com/file/d/1tKI7DAYKx5YuWmowM8e2Aje5oh0k0Xsm/view?usp=sharing"
+                                    <a href="https://drive.google.com/file/d/14aHjxkb_sALyWH-uzY7Fp8LDloXQa_n6/view?usp=sharing"
                                         target="_blank" class="text-red-500">
-                                        Resume (PDF)
+                                        Resume (TH)
+                                    </a>&nbsp;|&nbsp;
+                                    <a href="https://drive.google.com/file/d/1CV6HzUMokevh34UzJLK_x6nDJqcLzExX/view?usp=sharing"
+                                        target="_blank" class="text-red-500">
+                                        Resume (EN)
                                     </a>
                                 </a-col>
                             </a-row>
@@ -265,7 +269,7 @@
                             <a-row :gutter="[15, 15]" class="pt-5">
                                 <a-col :xs="13" :sm="13" :md="13" :lg="6" :xl="6">
                                     <div class="flex justify-end items-center space-x-3 cursor-pointer"
-                                        @click="winOpen('https://drive.google.com/file/d/1tKI7DAYKx5YuWmowM8e2Aje5oh0k0Xsm/view?usp=sharing')">
+                                        @click="winOpen('https://drive.google.com/file/d/14aHjxkb_sALyWH-uzY7Fp8LDloXQa_n6/view?usp=sharing')">
                                         <FilePdfOutlined class="text-red-500" style="font-size: 5rem;" />
                                     </div>
                                 </a-col>
