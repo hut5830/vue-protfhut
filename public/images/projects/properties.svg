@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#3b0764"/></linearGradient></defs>
+<rect width="800" height="500" fill="url(#g)"/>
+<circle cx="700" cy="70" r="140" fill="#fff" opacity=".07"/><circle cx="90" cy="460" r="170" fill="#fff" opacity=".06"/>
+<g>
+<path d="M170 300 L270 220 L370 300 V400 H170Z" fill="#fff" opacity=".85"/><rect x="250" y="340" width="40" height="60" fill="#7c3aed"/>
+<path d="M330 260 L460 150 L590 260 V400 H330Z" fill="#fff"/><path d="M310 270 L460 140 L610 270" fill="none" stroke="#fde68a" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="435" y="320" width="50" height="80" fill="#7c3aed"/><rect x="370" y="285" width="40" height="36" fill="#c4b5fd"/><rect x="510" y="285" width="40" height="36" fill="#c4b5fd"/>
+<rect x="120" y="398" width="560" height="10" rx="5" fill="#fff" opacity=".6"/>
+<circle cx="640" cy="170" r="34" fill="#22c55e"/><text x="640" y="182" font-family="Arial" font-size="34" font-weight="700" fill="#fff" text-anchor="middle">฿</text>
+</g></svg>
